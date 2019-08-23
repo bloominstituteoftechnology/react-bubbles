@@ -17,7 +17,7 @@ const BubblePage = () => {
       setColorList(response.data)
       console.log("in BubblePage useEffect", response.data)
     })
-    .catch(error => {console.log("error in BubblePage useEffect")})
+    .catch(error => {console.log("error in BubblePage useEffect", error)})
 
  }, [])
 

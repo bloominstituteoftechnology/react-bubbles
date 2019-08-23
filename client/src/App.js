@@ -5,14 +5,14 @@ import Login from "./components/Login";
 import "./styles.scss";
 
 //components
-import BubblesPage from './components/BubblePage.js'
+import BubblePage from './components/BubblePage.js'
 
 
 //privateroute
 import PrivateRoute from './components/PrivateRoute.js'
 
 function App() {
-  const [colorList, setColorList] = useState([]);
+
   return (
     <Router>
       <div className="App">
@@ -21,7 +21,7 @@ function App() {
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
-        <PrivateRoute exact path="/protected" component={BubblesPage} />
+        <PrivateRoute exact path="/bubblepage" component={BubblePage} />
       </div>
     </Router>
   );
