@@ -23,11 +23,11 @@ const Login = (props) => {
       .then(res => {
         localStorage.setItem('token', res.data.payload)
         setLogin(initialLogin)
-        props.history.push('/bubble')
+        props.history.push('/bubble-page')
       })
       .catch(err => console.log(err))
   }
-  
+
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
