@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -7,37 +7,48 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  console.log("color test:", colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
-    
   };
 
   const saveEdit = e => {
-  //   e.preventDefault();
-  //   // Make a put request to save your updated color
-  //   // think about where will you get the id from...
-  //   // where is is saved right now?
-  //       axiosWithAuth()
-  //     .put(`http://localhost:5000/api/colors/${color.id}`, color)
-  //     .then(res => setColorList(res.data))
-  //     .catch(err => console.error(err))
+    e.preventDefault();
+    // Make a put request to save your updated color
+    // think about where will you get the id from...
+    // where is is saved right now?
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(rezz => {
+        console.log("saveEdit test:", rezz);
+        updateColors(
+          colors.map(color => {
+            if (color.id === rezz.data.id) {
+              return rezz.data;
+            } else {
+              return color;
+            }
+          })
+        );
+      })
+      .catch(err => console.log(err.response));
   };
 
   const deleteColor = color => {
-  //   // make a delete request to delete this color
-  //       axiosWithAuth()
-  //     .delete(`http://localhost:5000/api/colors/${id}`)
-  //     .then(rez => setColorList(rez.data))
-  //     .catch(err => console.error(err))
-
+    // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(res => {
+        console.log("delete test:", res);
+        updateColors(colors.filter(color => color.id !== res.data));
+      })
+      .catch(err => console.error(err.response));
   };
 
- 
   return (
     <div className="colors-wrap">
       <p>colors</p>

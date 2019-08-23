@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
-// import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-const BubblePage = (props) => {
+const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
   // fetch your colors data from the server when the component mounts
   // set that data to the colorList state property
- useEffect(() => {
-        props.grabColors()
-    }, [])
 
+  useEffect(() => {
+    axiosWithAuth()
+      .get("http://localhost:5000/api/colors")
+      .then(rezz => {
+        console.log("rezz", rezz);
+        setColorList(rezz.data);
+        console.log(setColorList);
+      })
+      .catch(err => console.error(err.response));
+  }, []);
 
   return (
     <>
-     {props.colorList.map((user, id) =>
-      <ColorList key={id} colors={colorList} updateColors={setColorList} />)}
-
+      <ColorList colors={colorList} updateColors={setColorList} />
       <Bubbles colors={colorList} />
     </>
   );
