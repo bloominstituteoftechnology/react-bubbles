@@ -38,7 +38,17 @@ const initialColor = {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
   };
+
 
   return (
     <div className="colors-wrap">
