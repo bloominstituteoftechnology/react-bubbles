@@ -12,8 +12,8 @@ const initialColor = {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
-  console.log(editing)
-  console.log(colorToEdit)
+  // console.log(editing)
+  // console.log(colorToEdit)
 
   const editColor = color => {
     setEditing(true);
@@ -21,7 +21,7 @@ const initialColor = {
   };
 
   const saveEdit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
@@ -37,8 +37,8 @@ const initialColor = {
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
     
+    // make a delete request to delete this color
     axiosWithAuth()
       .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
       .then(response => {
@@ -48,7 +48,6 @@ const initialColor = {
         console.log(error.response)
       })
   };
-
 
   return (
     <div className="colors-wrap">
