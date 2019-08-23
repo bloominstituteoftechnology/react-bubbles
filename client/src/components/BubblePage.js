@@ -13,7 +13,7 @@ useEffect(() => {
   axiosWithAuth()
     .get("http://localhost:5000/api/colors")
     .then(response => {
-      // console.log(response.data);
+      console.log(response.data);
       setColorList(response.data);
 
     })
