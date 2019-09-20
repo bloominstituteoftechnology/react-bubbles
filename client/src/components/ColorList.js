@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+//axiosWithAuth
+import axiosWithAuth from '../utils/axiosWithAuth.js'
+
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  console.log("I am colorList state from BubblePage", colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -21,10 +24,52 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-  };
+
+    console.log("in saveEdit",colorToEdit)
+
+  
+    axiosWithAuth().put(`http://www.localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+
+    .then(response => {
+      // updateColors(
+      //   colors.map(crayon => {
+      //     console.log("in colors.map", crayon)
+      //     if (crayon.id === colorToEdit.id) {
+      //       console.log("in if stmt", colorToEdit.id)
+      //       return response.data
+      //     }
+      //     else {
+      //       return crayon
+      //     }
+      //   })
+
+      // )
+      // setEditing(false)
+      // setColorToEdit(initialColor)
+      console.log("in put response", colorToEdit.id)
+      // updateColors(colorToEdit)
+
+    })
+    // console.log("I am in put req.", response.data)
+   
+    .catch(error => {console.log("error in put req", error)})
+ 
+    window.location.reload()
+
+  
+  //end function here 
+}
+
+
+
+
+
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth().delete(`http://www.localhost:5000/api/colors/${color.id}`, colorToEdit)
+   
+    .catch(error => { console.log("err in del", error)})
+    window.location.reload()
   };
 
   return (
