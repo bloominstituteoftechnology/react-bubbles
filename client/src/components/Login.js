@@ -37,12 +37,12 @@ const Login = ({history}) => {
     <>
       <form onSubmit={handleSubmit}>
       <input type="text"
-             name="username"
+             name="dummyUser"
              placeholder="username"
              onChange={handleChange}
              value={dummy.dummyUser} />
       <input type="password"
-             name="password"
+             name="dummyPass"
              placeholder="password"
              onChange={handleChange}
              value={dummy.dummyPass} />
