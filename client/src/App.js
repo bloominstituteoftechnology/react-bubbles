@@ -7,7 +7,7 @@ import PrivateRoute from "./Routes/PrivateRoute"
 import BubblesPage from "./components/BubblePage"
 
 function App() {
-  const [colorList, setColorList] = useState([]);
+  //const [colorList, setColorList] = useState([]);
   return (
     <Router>
       <div className="App">
