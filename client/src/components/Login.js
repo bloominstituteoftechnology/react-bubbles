@@ -33,10 +33,12 @@ class Login extends React.Component {
   render() {
     return (
       <div>
+        <h1>Bubble Login Page</h1>
         <form onSubmit={this.login}>
           <input
             type="text"
             name="username"
+            placeholder='Username'
             value={this.state.credentials.username}
             onChange={this.handleChange}
           />
@@ -44,6 +46,7 @@ class Login extends React.Component {
           <input
             type="password"
             name="password"
+            placeholder="Password"
             value={this.state.credentials.password}
             onChange={this.handleChange}
           />
