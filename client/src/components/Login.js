@@ -1,60 +1,50 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useState } from "react";
+import axios from 'axios';
 
-const initialLogin = {
-  username: '',
-  password: ''
-}
+// username: Austin breaux
+// password: Austin106444
 
 const Login = (props) => {
-  const [login, setLogin] = useState(initialLogin)
+  // make a post request to retrieve a token from the api
+  // when you have handled the token, navigate to the BubblePage route
 
-  const changeHandler = event => {
-    event.persist()
-    let value = event.target.value
-
-    setLogin({ ...login, [event.target.name]: value })
-  }
+  const [creds, setCreds] = useState({username: "", password: ""});
+  const handleChange = event => {
+      setCreds({...creds, [event.target.name]: event.target.value});
+  };
 
   const handleSubmit = event => {
-    event.preventDefault()
-    axios
-      .post('http://localhost:5000/api/login', login)
-      .then(res => {
-        localStorage.setItem('token', res.data.payload)
-        setLogin(initialLogin)
-        props.history.push('/bubble-page')
-      })
-      .catch(err => console.log(err))
-  }
+      event.preventDefault();
+      axios.post('http://localhost:5000/api/login', creds)
+          .then(res => {
+              console.log(res);
+              localStorage.setItem('token', res.data.payload)
+              props.history.push("/BubblePage");
+          })
+          .catch(err => console.group(err.response));
+  };
 
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
-
-      <legend>Login Here</legend>
+     
 
       <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          name='username'
-          onChange={changeHandler}
-          placeholder='Username'
-          value={login.username}
-        />
-
-        <input
-          type='password'
-          name='password'
-          onChange={changeHandler}
-          placeholder='Password'
-          value={login.password}
-        />
-
-        <button type='submit'>Submit</button>
+          <input type="type"
+                name="username"
+                placeholder="Username"
+                onChange={handleChange}
+                value={creds.username} />
+          <input type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                value={creds.password} />
+          <button type="submit">Log In</button>
       </form>
-    </>
-  )
-}
 
-export default Login
+    </>
+  );
+};
+
+export default Login;
