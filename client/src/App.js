@@ -12,7 +12,7 @@ function App() {
     <Router>
       <div className="App">
         <Route exact path="/" component={Login} />
-        <PrivateRoute exact path="/BubblesPage" component={BubblePage} />
+        <PrivateRoute exact path="/bubblespage" component={BubblePage} />
         {/* 
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
