@@ -47,7 +47,7 @@ const Login = (props) => {
             onChange={handleChanges}
             placeholder="Password"
           />
-          <button hidden />
+          <button />
         </form>
       </div>
     </div>
