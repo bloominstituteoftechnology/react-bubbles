@@ -18,7 +18,7 @@ const ColorList = ({ colors, updateColors }) => {
     axiosAuth()
     .post(`http://localhost:5000/api/colors`,color)
     .then(res=>{
-    //  updateColors(res.data)  
+    //  updateColors(color)  
        
      // setColorToEdit(res.data)
      console.log("COLOR TO EDIT", color)
@@ -33,21 +33,22 @@ const ColorList = ({ colors, updateColors }) => {
     // where is is saved right now?
      const id = colorToEdit.id
     const color =colorToEdit
+    // updateColors(color)
+      setEditing(true)
      console.log("COLOR TO PUT",color)
     // console.log("COLOR", initialColor)
     //  console.log("ID", id)
     axiosAuth()
     .put(`http://localhost:5000/api/colors/${id}`,color)
     .then(res => { console.log("PUT DATA",res.data)
-          setEditing(false);
- 
+          // setEditing(false);
+  
      })
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
-    // e.stopPropogation()
-    const id =color.id
+       const id =color.id
     console.log('ID',id)
     const filtered = colors.filter(e => 
        e.id !== id )
@@ -61,23 +62,14 @@ const ColorList = ({ colors, updateColors }) => {
     .then(res => {
       console.log("DELETE THIS=>",res.data )
       console.log(id)
-      console.log("REZ",res)
+      console.log("REZ-DELETE",res)
       console.log("COLORS",colors)
       console.log("COLOR",color)
       //  setColorToEdit(color)
-       updateColors(filtered)
-       console.log("FILTERED", filtered)
+        console.log("FILTERED", filtered)
        updateColors(filtered)
 
-        // return axiosAuth()
-        // .get(`http://localhost:5000/api/colors/`)
-        // .then(res=> {
-        //   let colors = res.data
-        //   console.log("NEWCOLORS", colors)
-        // })
-        // .catch(err => {
-        //   console.log('ERR', err)
-        // })
+        
 
        
       
@@ -99,7 +91,9 @@ const ColorList = ({ colors, updateColors }) => {
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
-              <span className="delete" onClick={ (e) => deleteColor(color)}>
+              <span className="delete" onClick={() =>
+                // e.stopPropagation,
+                 deleteColor(color)}>
                 x
               </span>{" "}
               {color.color}
