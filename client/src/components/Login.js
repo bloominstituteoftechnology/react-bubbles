@@ -15,7 +15,7 @@ const Login = props => {
         localStorage.setItem('token', res.data.payload)
         props.history.push('/bubblepage')
       })
-      .catch(err => console.log('LogIn: POST:', err))
+      .catch(err => console.log('LogIn: POST:', err, values))
   }
 
   return (
