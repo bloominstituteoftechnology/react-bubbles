@@ -29,29 +29,32 @@ const Login = props => {
   };
 
   return (
-    <>
+    <div className="signin">
+      <h2>Sign In</h2>
       <form className="login-form" onSubmit={login}>
-        <label htmlFor="username">
-          Username
+        <div>
+          <label htmlFor="username">Username</label>
           <input
             name="username"
-            placeholder="Username"
+            placeholder="Enter Username"
             onChange={handleChange}
             value={user.username}
           />
-        </label>
-        <label htmlFor="password">
-          Password
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
           <input
             name="password"
-            placeholder="Password"
+            placeholder="Enter Password"
             onChange={handleChange}
             value={user.password}
           />
-        </label>
-        <button>Login</button>
+        </div>
+        <div>
+          <button className="btn">Login</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 
