@@ -1,30 +1,61 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axiosWithAuth } from '../axiosWithAuth';
+import axios from 'axios';
 
 const initialColor = {
   color: "",
-  code: { hex: "" }
+  code: { hex: "#" }
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  console.log(colors)
   const [editing, setEditing] = useState(false);
+
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
+    console.log(color)
   };
 
-  const saveEdit = e => {
-    e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
-  };
+  // const saveEdit = (e, color) => {
+  //   e.preventDefault();
+  //   axios
+  //     .get(`https://cors-anywhere.herokuapp.com/http://thecolorapi.com/id?hex=${color.code.hex.slice(1)}`)
+  //     .then(res => {
+  //       setColorToEdit({...colorToEdit, color: res.data.name.value })
+  //       // axiosWithAuth()
+  //       //   .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+  //       //   .then(res => {
+  //       //     console.log('ColorList: useEffect: PUT:',res.data)
+  //       //     updateColors(res.data)
+  //       //   })
+  //       //   .catch(err => console.log('ColorList: useEffect: PUT:', err))
+  //     })
+  //     .catch(err => console.log('ColorList: saveEdit: GET:', err))    
+  // };
+
+  const saveEdit = (e, color) => {
+    e.preventDefault()
+    console.log(color.id, color)
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${color.id}`, color)
+      .then(res => updateColors(res.data))
+      .catch(err => console.log('ColorList: useEffect: PUT:', err))
+  }
+
+  // const addColor = color => {
+    // axios
+      // .get()
+  // }
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(res => updateColors(res.data))
+      .catch(err => console.log('ColorList: DELETE:', err))
+
   };
 
   return (
@@ -32,9 +63,13 @@ const ColorList = ({ colors, updateColors }) => {
       <p>colors</p>
       <ul>
         {colors.map(color => (
-          <li key={color.color} onClick={() => editColor(color)}>
+          <li
+            key={color.color}
+            onClick={() => editColor(color)}>
             <span>
-              <span className="delete" onClick={() => deleteColor(color)}>
+              <span
+                className="delete"
+                onClick={() => deleteColor(color)}>
                 x
               </span>{" "}
               {color.color}
@@ -47,7 +82,8 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       {editing && (
-        <form onSubmit={saveEdit}>
+        <form
+          onSubmit={e => saveEdit(e, colorToEdit)}>
           <legend>edit color</legend>
           <label>
             color name:
@@ -76,8 +112,26 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
+      {/* <form
+        onSubmit={e => addColor(e, colorToEdit)}>
+        <legend>add a color</legend>
+        <label>
+          hex code:
+          <input
+            onChange={e =>
+              setColorToEdit({
+                ...colorToEdit,
+                code: { hex: e.target.value }
+              })
+            }
+            value={colorToEdit.code.hex}
+          />
+        </label>
+        <div className="button-row">
+          <button type="submit">save</button>
+          <button onClick={() => setEditing(false)}>cancel</button>
+        </div>
+      </form> */}
     </div>
   );
 };

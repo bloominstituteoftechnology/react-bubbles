@@ -25,3 +25,4 @@ const BubblePage = () => {
 };
 
 export default BubblePage;
+
