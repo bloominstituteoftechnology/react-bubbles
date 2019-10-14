@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // step 1 import your token authorization page
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 
 const initialColor = {
@@ -9,12 +9,13 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log('ColorList colors: ', colors);
+  console.log("ColorList colors: ", colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
+    console.log(colorToEdit);
     setColorToEdit(color);
   };
 
@@ -22,25 +23,38 @@ const ColorList = ({ colors, updateColors }) => {
     e.preventDefault();
     // Make a put request to save your updated color
     axiosWithAuth()
-    .put(`/colors/${colorToEdit.id}`, colorToEdit)
-    // think about where will you get the id from...
-    // where is is saved right now?
-    .then(response => {
-      console.log(response);
-      updateColors();
-    })
-    .catch(error => console.log(error));
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
+      // think about where will you get the id from...
+      // where is is saved right now?
+      .then(response => {
+        console.log(response);
+        updateColors(
+          colors.map(color => {
+            return color.id === response.data.id ? response.data : color
+          })
+        );
+        setEditing(false);
+        setColorToEdit(initialColor);
+      })
+      .catch(error => console.log(error));
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
     axiosWithAuth()
-    .delete(`/colors/${color.id}`)
-    .then(response => {
-      console.log('Delete response: ', response);
-      window.location.reload();
-    })
-    .catch(error => console. log(error));
+      .delete(`/colors/${color.id}`, color)
+      // why do we not/need "color" after color.id?
+      .then(response => {
+        updateColors(
+          colors.filter(color => {
+            return color.id !== response.data;
+          })
+        );
+        setEditing(false);
+        setColorToEdit(initialColor);
+      //   console.log('Delete response: ', response);
+      // window.location.reload();
+      })
+      .catch(error => console.log(error));
   };
 
   return (
