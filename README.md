@@ -38,7 +38,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 * [ ] Describe how web servers work.
 
-  Servers are programs that take requests for resources from a client/computer and process request and return a response if possible to said request.
+  Servers are programs that handle incoming requests for resourceses from a client/computer, process that request and return an approriate response back to the client that requested it.
 
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
 
