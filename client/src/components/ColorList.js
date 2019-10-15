@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import {axiosWithAuth} from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -25,8 +25,17 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(res => {
+        setEditing(false);
+        const newColors = colors.filter(c => {
+          return c.id !== color.id;
+        });
+        updateColors(newColors);
+      });
   };
-
+    
   return (
     <div className="colors-wrap">
       <p>colors</p>
