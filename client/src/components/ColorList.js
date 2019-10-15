@@ -9,7 +9,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log("ColorList colors: ", colors);
+  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -27,34 +27,35 @@ const ColorList = ({ colors, updateColors }) => {
       // think about where will you get the id from...
       // where is is saved right now?
       .then(response => {
-        console.log(response);
-        updateColors(
-          colors.map(color => {
-            return color.id === response.data.id ? response.data : color
-          })
-        );
+      //   updateColors(
+      //             colors.map(color => (color.id !== colorToEdit.id ? color:
+      //             response.data))
+      // );
+      //           setEditing(false);
+      //         })
+      //         .catch(error => {
+      //           console.log(error);
+      //           setEditing(false);
+      //     });
+      //   };
+      
+        updateColors([
+          ...colors.filter(color => color.id !== colorToEdit.id),
+          response.data,
+        ])
         setEditing(false);
-        setColorToEdit(initialColor);
       })
       .catch(error => console.log(error));
   };
 
-  const deleteColor = color => {
+  const deleteColor = colorToDelete => {
     axiosWithAuth()
-      .delete(`/colors/${color.id}`, color)
+      .delete(`/colors/${colorToDelete.id}`)
       // why do we not/need "color" after color.id?
-      .then(response => {
-        updateColors(
-          colors.filter(color => {
-            return color.id !== response.data;
-          })
-        );
-        setEditing(false);
-        setColorToEdit(initialColor);
-      //   console.log('Delete response: ', response);
-      // window.location.reload();
+      .then(() => {
+updateColors(colors.filter(color => color.id !== colorToDelete.id));
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error)); 
   };
 
   return (
