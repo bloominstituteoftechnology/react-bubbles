@@ -13,10 +13,8 @@ const BubblePage = () => {
 
 
   console.log(colorList)
-  
-  useEffect(() => {
-    if(colorList) setColorList(colorList)
-  })
+
+
     
 
 

@@ -7,13 +7,13 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({history, colors, updateColors }) => {
-  console.log(colors);
+const ColorList = ({colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
 
-  // console.log(colorToEdit)
+  console.log(colors)
+  
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -23,8 +23,18 @@ const ColorList = ({history, colors, updateColors }) => {
     e.preventDefault();
     axiosWithAuth()
       .put(`/api/colors/${colorToEdit.id}`, colorToEdit )
-      .then(res => setColorToEdit(res.data))
+      .then(res => 
+        updateColors(colors.map(item => {
+          if(colorToEdit.id === item.id) {
+            return item = res.data
+          } else {
+            return item
+          }
+        })))
       .catch(err => console.log(err))
+
+    
+
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
@@ -35,8 +45,12 @@ const ColorList = ({history, colors, updateColors }) => {
     axiosWithAuth()
       .delete(`/api/colors/${color.id}`)
       .then(res => {
-        updateColors(res.data)
-        history.push('/bubblepage')
+        updateColors(colors.filter(item => {
+          if(res.data !== item.id) {
+            return item
+          }
+        }))
+        
       })
       .catch(err => console.log(err))
   };
