@@ -41,14 +41,14 @@ const ColorList = ({ colors, updateColors }) => {
 
   const addForm = e => {
     axiosWithAuth()
-    .post(``, addColor)
+    .post(`/api/colors`, addColor)
     .then(res => {
       console.log('Add New Color', res.data)
       setter()
     })
     .catch(err => console.log(err))
   }
-  
+
   const setter = () => {
     axiosWithAuth()
     .get('/api/colors')
