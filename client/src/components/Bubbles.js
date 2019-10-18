@@ -4,12 +4,22 @@ import { Svg, Circle } from "@potion/element";
 
 const Bubbles = ({ colors }) => {
   const [bubbleData, setBubbleData] = useState([]);
+
   useEffect(() => {
-    const generateBubbleData = colors.map((_, i) => ({
-      value: Math.floor(Math.random() * (colors.length * 2)) + 1,
-      key: `${i + 1}`
-    }));
-    setBubbleData(generateBubbleData);
+    const generateBubbleData = () => {
+      return colors.map((_, i) => ({
+        value: Math.floor(Math.random() * (colors.length * 2)) + 1,
+        key: `${i + 1}`
+      }));
+    }
+
+    setBubbleData(generateBubbleData())
+    
+    const interval = setInterval(() => {
+      setBubbleData(generateBubbleData());
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, [colors]);
 
   return (
@@ -25,6 +35,8 @@ const Bubbles = ({ colors }) => {
           includeRoot={false}
           nodeEnter={d => ({ ...d, r: 0 })}
           animate
+          springStiffness={150}
+          springDamping={6}
         >
           {nodes =>
             nodes
