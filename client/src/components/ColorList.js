@@ -24,7 +24,12 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+   axiosWithAuth()
+   .delete(`/api/colors/${color.id}`)
+   .then(res => {
+     console.log('Delete Object', res.data)
+   })
+   .catch(err => console.log(err))
   };
 
   return (
@@ -46,6 +51,7 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+      
       {editing && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
@@ -77,7 +83,6 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
     </div>
   );
 };
