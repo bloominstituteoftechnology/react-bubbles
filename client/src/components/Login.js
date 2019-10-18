@@ -41,10 +41,9 @@ const Login = (props) => {
         />
         <input
           type="text"
-          name="username"
+          name="password"
           placeholder="password"
           onChange={handleChanges}
-          value={login.username}
           value={login.password}
         />
         <button type="submit">Login</button>
