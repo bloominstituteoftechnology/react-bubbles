@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-const Login = () => {
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+
+const Login = props => {
   const [formInput, setFormInput] = useState({ username: '', password: '' })
 
   const handleChange = e => {
@@ -14,10 +16,10 @@ const Login = () => {
     e.preventDefault();
 
     axiosWithAuth()
-      .post('{//appendation to API url//', formInput)
+      .post('/login', formInput)
       .then(res => {
         localStorage.setItem('token', res.data.payload)
-        props.history.push('{/*post-login URL*/')
+        props.history.push('/bubbles')
       })
       .catch(err => console.log(err.response))
     // Call Login axios function
@@ -28,6 +30,34 @@ const Login = () => {
     <>
       <h1>Welcome to the Bubble App!</h1>
       <p>Build a login page here</p>
+      <>
+
+        <div>
+
+          <form>
+            <input
+              id="outlined-adornment-username"
+              variant="outlined"
+              label="User Name"
+              name='username'
+              value={formInput.username}
+              onChange={handleChange}
+            />
+            <input
+              id="outlined-adornment-password"
+              variant="outlined"
+              // add hidden text feature
+              name='password'
+              label="Password"
+              value={formInput.password}
+              onChange={handleChange}
+            />
+            <button variant="contained" onClick={handleSubmit}>
+              Login
+            </button>
+          </form>
+        </div>
+      </>
     </>
   );
 };
