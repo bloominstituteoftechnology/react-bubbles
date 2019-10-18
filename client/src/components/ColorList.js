@@ -24,7 +24,7 @@ const ColorList = ({ colors, updateColors }) => {
     .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
       console.log('Saving Edit Data', res.data)
-      
+      setter()
     })
     .catch(err => console.log(err))
   };
@@ -34,10 +34,21 @@ const ColorList = ({ colors, updateColors }) => {
    .delete(`/api/colors/${color.id}`)
    .then(res => {
      console.log('Delete Object', res.data)
+     setter()
    })
    .catch(err => console.log(err))
   };
 
+  const setter = () => {
+    axiosWithAuth()
+    .get('/api/colors')
+    .then(res => {
+      console.log('Update Setter Res', res)
+      updateColors(res.data)
+      setEditing(false)
+    })
+    .catch(err => console.log(err))
+  }
   return (
     <div className="colors-wrap">
       <p>colors</p>
