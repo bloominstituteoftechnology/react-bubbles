@@ -68,7 +68,39 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
-
+      <div>
+      <form >
+          <legend>new color</legend>
+          <label>
+            Color:
+            <input
+            type='text'
+            name='color'
+              onChange={e =>
+                setAddColor({ ...addColor, color: e.target.value })
+              }
+              value={addColor.color}
+            />
+            </label>
+            <label>
+              HexCode:
+            <input
+            type='number'
+            name='hex'
+              onChange={e =>
+                setAddColor({
+                  ...addColor,
+                  code: { hex: e.target.value }
+                })
+              }
+              value={addColor.code.hex}
+            />
+            </label>
+            <div className="button-row">
+            <button type="submit">Add</button>
+            </div>
+        </form> 
+      </div>
       {editing && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
