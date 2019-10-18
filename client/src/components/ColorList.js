@@ -4,6 +4,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth.js';
 const initialColor = {
   color: "",
   code: { hex: "" }
+  
 };
 
 const ColorList = ({ colors, updateColors }) => {
