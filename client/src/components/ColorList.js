@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const initialColor = {
@@ -20,32 +19,33 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
     axiosWithAuth()
       .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
-        const index = colors.findIndex(color => color.id === colorToEdit.id);
-        colors[index] = colorToEdit;
-        updateColors(colors);
+        console.log(res.data);
+        let newColorArr = colors.filter(color => color.id !== res.data.id);
+        newColorArr.push(res.data);
+        console.log('newColorArr', newColorArr);
+        updateColors(newColorArr.sort((x, y) => x.id - y.id));
+        setEditing(false);
       })
-      .catch(err => {
-        console.log(err.response);
-      });
+      .catch(err => console.log(err));
   };
 
-  const deleteColor = color => {
-    // make a delete request to delete this color
+  // Make a put request to save your updated color
+  // think about where will you get the id from...
+  // where is is saved right now?
+
+  const deleteColor = e => {
     axiosWithAuth()
-      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
       .then(res => {
-        const tempColors = colors.filter(item => item.id !== color.id);
-        updateColors(tempColors);
+        console.log(res);
+        let newColorArr = colors.filter(color => color.id !== colorToEdit.id);
+        updateColors(newColorArr);
       })
-      .catch(err => {
-        console.log(err.response);
-      });
+      .catch(err => console.log(err));
+    // make a delete request to delete this color
   };
 
   const addColor = e => {
@@ -111,6 +111,7 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
+      {/* stretch - build another form here to add a color */}
       <form onSubmit={addColor}>
         <legend>add color</legend>
         <label>
@@ -137,7 +138,6 @@ const ColorList = ({ colors, updateColors }) => {
         </div>
       </form>
       <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
     </div>
   );
 };
