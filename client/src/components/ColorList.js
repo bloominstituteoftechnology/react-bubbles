@@ -56,7 +56,7 @@ const ColorList = ({ colors, updateColors }) => {
       console.log('Update Setter Res', res)
       updateColors(res.data)
       setEditing(false)
-      addColor(res.data)
+      setAddColor(res.data)
     })
     .catch(err => console.log(err))
   }
@@ -96,7 +96,7 @@ const ColorList = ({ colors, updateColors }) => {
             <label>
               HexCode:
             <input
-            type='number'
+            type='string'
             name='hex'
               onChange={e =>
                 setAddColor({
