@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Login from "./components/Login";
 import "./styles.scss";
+
+import BubblePage from './components/BubblePage.js';
+import PrivateRoute from './routes/PrivateRoutes.js';
 
 function App() {
   const [colorList, setColorList]=useState([]);
