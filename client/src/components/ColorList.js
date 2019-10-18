@@ -37,6 +37,13 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
+    axiosWithAuth()
+      .delete(`/colors/${color.id}`)
+      .then(res => {
+        console.log(`aWA.delete res`, res)
+        const newList = colors.filter(entry => entry.id !== color.id)
+        updateColors(newList)
+      })
     // make a delete request to delete this color
   };
 
