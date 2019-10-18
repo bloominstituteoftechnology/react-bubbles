@@ -22,13 +22,17 @@ const BubblePage = () => {
         setColorList(res.data);
       })
       .catch(err => {
-        alert(err.response);
+        alert('BubblePage.js .get err: ', err.res);
       });
   };
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
+      <ColorList
+        colors={colorList}
+        updateColors={setColorList}
+        getColors={getColors}
+      />
       <Bubbles colors={colorList} />
     </>
   );
