@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Login = () => {
+const Login = (props) => {
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: ''
+  })
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
+      <div>
       <form onSubmit={login}>
           <input
             type="text"
