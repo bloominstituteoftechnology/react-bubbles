@@ -9,14 +9,14 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log('colorList color prop', colors);
+
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
   const editColor = color => {
     setEditing(!editing);
     setColorToEdit(color);
-    console.log(`colorToEdit`, colorToEdit)
+
   };
 
   const saveEdit = e => {
@@ -24,10 +24,10 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
       .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
-        console.log(res.data)
+
         let newList = colors.filter(entry => entry.id !== colorToEdit.id)
         updateColors([...newList, res.data])
-        // })
+
       })
       .catch(err => console.log(err.response));
     // Make a put request to save your updated color
