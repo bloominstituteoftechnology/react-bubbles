@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const initialColor = {
-  color: "",
-  code: { hex: "" }
+  color: '',
+  code: { hex: '' },
 };
 
 const ColorList = ({ colors, updateColors }) => {
@@ -36,7 +36,7 @@ const ColorList = ({ colors, updateColors }) => {
             <span>
               <span className="delete" onClick={() => deleteColor(color)}>
                 x
-              </span>{" "}
+              </span>{' '}
               {color.color}
             </span>
             <div
@@ -64,7 +64,7 @@ const ColorList = ({ colors, updateColors }) => {
               onChange={e =>
                 setColorToEdit({
                   ...colorToEdit,
-                  code: { hex: e.target.value }
+                  code: { hex: e.target.value },
                 })
               }
               value={colorToEdit.code.hex}
