@@ -1,45 +1,60 @@
-import React, { useState } from "react";
-import axiosWithAuth from "../utils/axiosWithAuth";
+import React from 'react';
 
-const Login = (props) => {
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { Redirect } from 'react-router-dom';
 
-  const [ user, setUser ] = useState({
-    username: '',
-    password: ''
-  })
+class Login extends React.Component {
+  state = {
+    credentials: {
+      username: '',
+      password: ''
+    }
+  };
 
-  const handleChange = e => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value
-    })
-  }
+  handleChange = e => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
 
-  const submitLogin = e => {
+  login = e => {
     e.preventDefault();
     axiosWithAuth()
-    .post('/login', user)
-    .then(res => {
-      localStorage.setItem('token', res.data.payload)
-      props.history.push('/protected')
-    })
-    .catch(err => console.log(err))
+      .post('/login', this.state.credentials)
+      .then(res => {
+        localStorage.setItem('token', res.data.payload);
+        this.props.history.push('/colors');
+      })
+      .catch(err => console.log(err.response));
+  };
+
+  render() {
+    // if (localStorage.getItem('token')) {
+    //   return <Redirect to="protected" />;
+    // }
+    return (
+      <div>
+        <form onSubmit={this.login}>
+          <input
+            type="text"
+            name="username"
+            value={this.state.credentials.username}
+            onChange={this.handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            value={this.state.credentials.password}
+            onChange={this.handleChange}
+          />
+          <button>Log in</button>
+        </form>
+      </div>
+    );
   }
-
-
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
-  return (
-    <div className="login-form">
-      <form onSubmit={submitLogin}>
-        <input text="name" name="username" value={user.username} placeholder="Username" onChange={handleChange} />
-
-        <input text="password" name="password" value={user.password} placeholder="Password" onChange={handleChange} />
-
-        <button>Log In</button>
-      </form>
-    </div>
-  );
-};
+}
 
 export default Login;
