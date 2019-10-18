@@ -39,6 +39,16 @@ const ColorList = ({ colors, updateColors }) => {
    .catch(err => console.log(err))
   };
 
+  const addForm = e => {
+    axiosWithAuth()
+    .post(``, addColor)
+    .then(res => {
+      console.log('Add New Color', res.data)
+      setter()
+    })
+    .catch(err => console.log(err))
+  }
+  
   const setter = () => {
     axiosWithAuth()
     .get('/api/colors')
@@ -46,6 +56,7 @@ const ColorList = ({ colors, updateColors }) => {
       console.log('Update Setter Res', res)
       updateColors(res.data)
       setEditing(false)
+      addColor(res.data)
     })
     .catch(err => console.log(err))
   }
@@ -69,7 +80,7 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       <div>
-      <form >
+      <form onSubmit={addForm}>
           <legend>new color</legend>
           <label>
             Color:
