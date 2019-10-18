@@ -19,12 +19,9 @@ const ColorList = ({ colors, updateColors }, props) => {
 	const saveEdit = e => {
 		e.preventDefault();
 		axiosWithAuth()
-			.put(`/api/colors/:${props.id}`)
+			.put(`/api/colors/${e.id}`, {updateColors} )
 			.then(res => {
-        console.log(res.data.id)
-				props.editColor(res.data.id);
-        props.history.push("/item-list")
-        updateColors(res.data)
+        console.log(res)
 			})
 			.catch(err => console.log(err.response));
 		// Make a put request to save your updated color
@@ -37,10 +34,10 @@ const ColorList = ({ colors, updateColors }, props) => {
 		axiosWithAuth()
 		.delete(`/api/colors/${color.id}`)
 		.then(res => {
-      console.log(res.data)
+      console.log(res)
     props.history.push(`/bubblespage`)
-		props.fetchColors()})
-    .catch(err => console.log(err.res))
+    })
+    .catch(err => console.log(err.response))
     
     
     
