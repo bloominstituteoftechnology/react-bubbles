@@ -29,10 +29,15 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+      Tokens are strings of encrypted data issued by the server and stored by the client for access to private routes and services. To confirm authentication, a token is sent to the server on the request's header and if confirmed, the server responds with private data.
 
+- [ ] What steps can you take in your web apps to keep your data secure?
+    Using tokens to restrict access to private routes and their data helps to keep data more secure than older methods like cookies, which are not stateless and are not mobile-friendly. With tokens, you can authenticate a user by checking their login credentials against the server's data, and then issue a unique token that can only be used by that specific user to request access to private data and routes.
+
+- [ ] Describe how web servers work.
+      "Web servers" can describe both the physical computer that stores website code and the program that runs on that computer. In order to "serve" the webiste data stored on servers to personal computers, computers connected to the internet input the address or URL of the website they're looking for and the server responds with the data. Part of the URL is the domain name, which distinguishes websites from one another.  
+- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+    CRUD stands for "Create, Read, Update, Delete" and maps to the HTTP request methods as follows: Create = POST, Read = GET, Update = PUT, and Delete = DELETE.
 
 ## Project Set Up
 
