@@ -4,7 +4,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-const BubblePage = () => {
+const BubblePage = props => {
 	const [colorList, setColorList] = useState([]);
 
 	const fetchColors = () => {
@@ -24,7 +24,7 @@ const BubblePage = () => {
 
 	return (
 		<>
-			<ColorList colors={colorList} updateColors={setColorList} />
+			<ColorList colors={colorList} updateColors={setColorList} {...props} />
 			<Bubbles colors={colorList} />
 		</>
 	);
