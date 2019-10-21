@@ -97,3 +97,37 @@ form {
     margin-top: 16px;
   }
 }
+
+.signin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20%;
+  transform: translate(-50%, -50%);
+  h2 {
+    font-size: 50px;
+  }
+
+  label {
+    font-size: 20px;
+    margin-left: -40px;
+  }
+
+  input {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .btn {
+    padding: 10px;
+    float: left;
+    background-color: rgb(20, 110, 212);
+    color: white;
+    border-radius: 6px;
+    outline: none;
+  }
+}
