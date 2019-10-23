@@ -28,7 +28,7 @@ class Login extends React.Component {
       .then(response => {
         localStorage.setItem('token', response.data.payload);
         // when you have handled the token, navigate to the BubblePage
-        this.props.history.push("/protected");
+        this.props.history.push("/bubblepage");
       })
       .catch(error => console.log(error));
   };
