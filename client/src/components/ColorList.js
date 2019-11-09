@@ -7,7 +7,7 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors, props }) => {
+const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -22,13 +22,12 @@ const ColorList = ({ colors, updateColors, props }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-    // setEditing(true)
     api().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(() => {
       alert('Color Updated!')
       api().get('/api/colors')
       .then(res => updateColors(res.data))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err))     
     })
     .catch(err => {
       console.log(err)
