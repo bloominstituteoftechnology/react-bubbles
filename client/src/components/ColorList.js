@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import api from "api";
+import api from "../utils/api";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+function ColorList({ colors, updateColors, refresh }) {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -21,35 +21,49 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is it saved right now?
-    api().post("/api/colors/:id", colorToEdit)
+  
+// :id is dynamic - not part of the url.
+
+    api().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(refresh())
       .then(res => {
-        console.log(res.data)
+        console.log(res)
+        setEditing(false)
       })
-      .catch(error => {
-        setEditing(error.res)
+      .catch(err => {
+        console.log(err)
       })
-  };
+  }
 
-  const deleteColor = (e, color, id) => {
+//   api().post('/api/colors', colorToEdit)
+//     .then(res => {
+//       console.log(res.data)
+//     })
+//     .catch(error => {
+//       setEditing(error.res)
+//     })
+// };
+
+
+  const deleteColor = (color) => {
     // make a delete request to delete this color
-      e.preventDefault()
+      // e.preventDefault()
 
-    const listOfColor = colorToEdit.filter(color => color.id === id)
+    // const listOfColor = colorToEdit.filter(color => color.id === id)
 
-      if (window.confirm('Delete color')) {
-        setColorToEdit(colorToEdit.filter(color => color.id !== id))
+      if (window.confirm('Delete color?')) {
+        // setColorToEdit(colorToEdit.filter(color => color.id !== id))
 
-        api().delete(`/api/colors/${id}`)
+        api().delete(`/api/colors/${color.id}`)
+          .then(refresh())
           .then(res => {
             console.log(res)
           })
           .catch(err => {
             console.log(err)
-            setColorToEdit([...colorToEdit, listOfColor])
           })
       }
     }
-  };
 
   return (
     <div className="colors-wrap">
@@ -108,5 +122,5 @@ const ColorList = ({ colors, updateColors }) => {
       {/* stretch - build another form here to add a color */}
     </div>
   );
-
+}
 export default ColorList;

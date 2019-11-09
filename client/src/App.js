@@ -1,11 +1,10 @@
 import React from "react";
-import { Link, withRouter, Route } from "react-router-dom";
+import { Link, BrowserRouter as Router, Route } from "react-router-dom";
 import { getToken } from './utils/api';
 import ProtectedRoute from './components/PrivateRoute';
 import Login from "./components/Login";
 import Logout from './components/Logout';
 import BubblePage from './components/BubblePage';
-import Bubbles from './components/Bubbles';
 import ColorList from './components/ColorList';
 
 import "./styles.scss";
@@ -14,14 +13,13 @@ function App() {
   const signedIn = getToken()
 
   return (
-    <div className="wrapper">
+    <Router>
       <div className="App">
         <nav> 
           <Link to='/'>Home</Link>
           {!signedIn && <Link to="/login">Login</Link>}
           {signedIn && <Link to="/logout">Logout</Link>}
           <Link to='/bubblepage'>Bubble Page</Link>
-          <Link to='/bubbles'>Bubbles</Link>
           <Link to='/colorlist'>Color List</Link>
         </nav>
 
@@ -32,12 +30,11 @@ function App() {
         */}
 
         <ProtectedRoute exact path='/bubblepage' component={BubblePage} />
-        <ProtectedRoute exact path='/bubbles' component={Bubbles} />
         <ProtectedRoute exact path='/colorlist' component={ColorList} />
         <ProtectedRoute exact path="/logout" component={Logout} />
       </div>
-    </div>
+    </Router>
   );
 }
 
-export default withRouter(App);
+export default App;
