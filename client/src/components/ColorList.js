@@ -23,8 +23,25 @@ const ColorList = ({ colors, updateColors }) => {
     // where is is saved right now?
   };
 
-  const deleteColor = color => {
+  const deleteColor = (color) => {
     // make a delete request to delete this color
+      e.preventDefault()
+
+      const list = colorList.filter(color => color.id === id)
+
+      if (window.confirm('Are you sure you want to delete this color?')) {
+        setListFriend(colorList.filter(color => color.id !== id))
+
+        api().delete(`/api/colors/${id}`)
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+            setColorList([...colorList, list])
+          })
+      }
+    }
   };
 
   return (
