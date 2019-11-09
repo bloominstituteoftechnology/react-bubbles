@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "api";
 
 const initialColor = {
   color: "",
@@ -20,17 +20,24 @@ const ColorList = ({ colors, updateColors }) => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
-    // where is is saved right now?
+    // where is it saved right now?
+    api().post("/api/colors/:id", colorToEdit)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(error => {
+        setEditing(error.res)
+      })
   };
 
-  const deleteColor = (color) => {
+  const deleteColor = (e, color, id) => {
     // make a delete request to delete this color
       e.preventDefault()
 
-      const list = colorList.filter(color => color.id === id)
+    const listOfColor = colorToEdit.filter(color => color.id === id)
 
-      if (window.confirm('Are you sure you want to delete this color?')) {
-        setListFriend(colorList.filter(color => color.id !== id))
+      if (window.confirm('Delete color')) {
+        setColorToEdit(colorToEdit.filter(color => color.id !== id))
 
         api().delete(`/api/colors/${id}`)
           .then(res => {
@@ -38,7 +45,7 @@ const ColorList = ({ colors, updateColors }) => {
           })
           .catch(err => {
             console.log(err)
-            setColorList([...colorList, list])
+            setColorToEdit([...colorToEdit, listOfColor])
           })
       }
     }
@@ -101,6 +108,5 @@ const ColorList = ({ colors, updateColors }) => {
       {/* stretch - build another form here to add a color */}
     </div>
   );
-};
 
 export default ColorList;

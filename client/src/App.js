@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { withRouter, Route } from "react-router-dom";
+import React from "react";
+import { Link, withRouter, Route } from "react-router-dom";
 import { getToken } from './utils/api';
 import ProtectedRoute from './components/PrivateRoute';
 import Login from "./components/Login";
@@ -31,10 +31,10 @@ function App() {
           display BubblePage when you're authenticated 
         */}
 
-        <PrivateRoute exact path='/bubblepage' component={BubblePage} />
-        <PrivateRoute exact path='/bubbles' component={Bubbles} />
-        <PrivateRoute exact path='/colorlist' component={ColorList} />
-        <PrivateRoute exact path="/logout" component={Logout} />
+        <ProtectedRoute exact path='/bubblepage' component={BubblePage} />
+        <ProtectedRoute exact path='/bubbles' component={Bubbles} />
+        <ProtectedRoute exact path='/colorlist' component={ColorList} />
+        <ProtectedRoute exact path="/logout" component={Logout} />
       </div>
     </div>
   );
