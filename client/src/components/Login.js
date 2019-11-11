@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import api, { setToken } from "../utilities/axios";
 
 const Login = (props) => {
@@ -33,6 +32,7 @@ const Login = (props) => {
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
+      {error && <div className='delete'>{`${error}`}</div>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
