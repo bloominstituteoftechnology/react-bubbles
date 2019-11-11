@@ -1,5 +1,5 @@
 {
-  "name": "movies",
+  "name": "react-bubbles",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LambdaSchool/SPA-Routing-React"
+    "url": "git+https://github.com/LambdaSchool/react-bubbles"
   },
   "author": "Lambda School",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LambdaSchool/SPA-Routing-React/issues"
+    "url": "https://github.com/LambdaSchool/react-bubbles/issues"
   },
-  "homepage": "hhttps://github.com/LambdaSchool/SPA-Routing-React#readme",
+  "homepage": "https://github.com/LambdaSchool/react-bubbles#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
