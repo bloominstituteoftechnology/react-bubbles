@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../utilitiess/axios";
+import api from "../utilities/axios";
 
 const initialColor = {
   color: "",
