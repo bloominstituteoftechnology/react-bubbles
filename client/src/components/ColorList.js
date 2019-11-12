@@ -10,7 +10,13 @@ function ColorList({ colors, updateColors, refresh }) {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  const [newColor, setNewColor] = useState();
+  const [newColor, setNewColor] = useState({
+    color: '',
+    code: {
+      hex: ''
+    }, 
+    id: ''
+  });
 
   const editColor = color => {
     setEditing(true);
@@ -37,7 +43,7 @@ function ColorList({ colors, updateColors, refresh }) {
   }
 
   const saveNewColor = e => {
-  api().post(`/api/colors/${newColor}`, newColor)
+  api().post('/api/colors', newColor)
     .then(res => {
       console.log(res)
       // setNewColor(true)
@@ -123,17 +129,22 @@ function ColorList({ colors, updateColors, refresh }) {
         <label> 
         new color:
         <input 
-        onChange={e =>
-          setNewColor({ 
-            ...newColor,
-            new: e.target.value
-            })
-          }
-          //  value={newColor.color.new}
+            type="text" name='hex' placeholder="Hex" value={newColor.code.hex}
+            onChange={(e) =>
+              setNewColor({ 
+                ...newColor,
+                code: {hex: e.target.value}
+                })}
+                required
           />
+          <input 
+          type='text' name='color' placeholder='Color' value={newColor.color}
+            onChange={(e) => 
+              setNewColor({ ...newColor, color: e.target.value })
+            } />
           </label>
           <div className="btn-add">
-          <button onClick={() => setNewColor(true)}>add</button>
+          <button type="submit">add</button>
           </div>
         </form>
     </div>

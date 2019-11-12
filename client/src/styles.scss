@@ -105,11 +105,13 @@ form {
 .btn-add {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 30px;
+  padding-bottom: 10px 30px;
 
   button { 
   border-radius: 4px;
   background-color: aquamarine;
   color: black;
+  padding: 10px;
+  border: 2px solid gray;
   }
 }
