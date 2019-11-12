@@ -10,6 +10,7 @@ function ColorList({ colors, updateColors, refresh }) {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [newColor, setNewColor] = useState();
 
   const editColor = color => {
     setEditing(true);
@@ -35,24 +36,22 @@ function ColorList({ colors, updateColors, refresh }) {
       })
   }
 
-//   api().post('/api/colors', colorToEdit)
-//     .then(res => {
-//       console.log(res.data)
-//     })
-//     .catch(error => {
-//       setEditing(error.res)
-//     })
-// };
-
+  const saveNewColor = e => {
+  api().post(`/api/colors/${newColor}`, newColor)
+    .then(res => {
+      console.log(res)
+      // setNewColor(true)
+    })
+    .catch(error => {
+      setEditing(error)
+    })
+  }
 
   const deleteColor = (color) => {
     // make a delete request to delete this color
       // e.preventDefault()
 
-    // const listOfColor = colorToEdit.filter(color => color.id === id)
-
       if (window.confirm('Delete color?')) {
-        // setColorToEdit(colorToEdit.filter(color => color.id !== id))
 
         api().delete(`/api/colors/${color.id}`)
           .then(refresh())
@@ -120,6 +119,23 @@ function ColorList({ colors, updateColors, refresh }) {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+       <form onSubmit={saveNewColor}>
+        <label> 
+        new color:
+        <input 
+        onChange={e =>
+          setNewColor({ 
+            ...newColor,
+            new: e.target.value
+            })
+          }
+          //  value={newColor.color.new}
+          />
+          </label>
+          <div className="btn-add">
+          <button onClick={() => setNewColor(true)}>add</button>
+          </div>
+        </form>
     </div>
   );
 }
