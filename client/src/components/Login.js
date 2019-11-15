@@ -28,10 +28,10 @@ const Login = () => {
   
       //axios
       axioswithAuth
-      // .get(`${props.match.params.id}`)
+      // .get(`/api/${props.match.params.id}`)
       .then(res => setLogin(res.data))
       .catch(err => console.log(err.response));
-      //  console.log()
+      console.log(props.match.params.id)
 
   }, [ props.match.params.id]);
 
