@@ -1,0 +1,21 @@
+Explain what a token is used for.
+
+a token is used to access data from an api or database 
+
+
+ What steps can you take in your web apps to keep your data secure?
+
+
+You can add a protected route and token
+
+
+ Describe how web servers work.
+
+
+The server carries the data needed for a program or computer 
+
+
+ Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+Crud stands for create (post),read(get),update(put) and delete (delete)
+
