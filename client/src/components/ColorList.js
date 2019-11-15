@@ -23,9 +23,19 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
 
- 
+  //   useEffect(() => {
+    
+  //     axios
+  //     .get(`http://localhost:5000/api/colors/${props.match.params.id}`)
+  //     .then(res => setColorToEdit(res.data))
+  //     .catch(err => console.log(err.response));
+  //      console.log(props.match.params.id)
+
+  // }, [ props.match.params.id]);
+
+
   //   axios
-  // // .put(`http://localhost:5000/api/colors/:id"${colorToEdit.id}`, colorToEdit)
+  //  .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
   //   console.log(colorToEdit)
   //   .then(res => {  
   //     props.history.push('/');
@@ -39,13 +49,13 @@ const ColorList = ({ colors, updateColors }) => {
   const deleteColor = color => {
     // make a delete request to delete this color
 
-    //  axios
-    //   .delete(`http://localhost:5000/api/colors/${color.id}`)     
-    //   .then(res => {
-    //   // console.log(res.data)       
-    //   color.history.push('/');
-    //   })
-    //   .catch(err => console.log(err));
+     axios
+      .delete(`http://localhost:5000/api/colors/${color.id}`)     
+      .then(res => {
+      // console.log(res.data)  
+      color.history.push('/');
+      })
+      .catch(err => console.log(err));
    };
 
   return (

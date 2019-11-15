@@ -7,6 +7,7 @@ import "./styles.scss";
 import PrivateRoute from './components/PrivateRoute';
 import BubblePage from './components/BubblePage';
 
+
 function App() {
   return (
     <Router>
@@ -17,9 +18,9 @@ function App() {
           display BubblePage when you're authenticated 
         */}
     <PrivateRoute path="/protected">
-        <BubblePage/>
+    <BubblePage/>
     </PrivateRoute>
-
+    {/* <BubblePage/> */}
       </div>
     </Router>
   );
