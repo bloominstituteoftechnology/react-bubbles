@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { fetchData, updateColor, deleteColor } from "../actions/axiosActions";
+import {
+  fetchData,
+  updateColor,
+  deleteColor,
+  addingColor
+} from "../actions/axiosActions";
 
 const initialColor = {
   color: "",
@@ -12,6 +17,8 @@ const ColorList = props => {
   console.log(props);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [adding, setAdding] = useState(false);
+  const [coloradding, setColorAdding] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
@@ -28,6 +35,13 @@ const ColorList = props => {
   const deleteColor = del => {
     props.deleteColor(del);
     props.setChangeData(true);
+  };
+
+  const addingColor = event => {
+    event.preventDefault();
+    props.addingColor(coloradding);
+    props.setChangeData(true);
+    setAdding(false);
   };
 
   return (
@@ -85,7 +99,32 @@ const ColorList = props => {
           </div>
         </form>
       )}
+      <button onClick={() => setAdding(true)}>add Color</button>
+      {adding && (
+        <form>
+          <label htmlFor="name">Color Name: </label>
+          <input
+            name="name"
+            id="name"
+            placeholder="color name"
+            onChange={e =>
+              setColorAdding({ ...coloradding, color: e.target.value })
+            }
+          />
+          <label htmlFor="code">Code Hex: </label>
+          <input
+            name="code"
+            placeholder="code hex"
+            onChange={e =>
+              setColorAdding({ ...coloradding, code: { hex: e.target.value } })
+            }
+          />
+          <button onClick={addingColor}>add</button>
+          <button onClick={() => setAdding(false)}>cancel</button>
+        </form>
+      )}
       <div className="spacer" />
+
       {/* stretch - build another form here to add a color */}
     </div>
   );
@@ -100,5 +139,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   fetchData,
   updateColor,
-  deleteColor
+  deleteColor,
+  addingColor
 })(ColorList);

@@ -31,12 +31,18 @@ export const fetchData = () => dispatch => {
 export const updateColor = color => dispatch => {
   const authAxios = axiosWithAuth();
   authAxios.put(`http://localhost:5000/api/colors/${color.id}`, color);
-  // .then(dispatch({ type: COLOR_EDITE, payload: color }));
 };
 
 export const deleteColor = del => dispatch => {
   const authAxios = axiosWithAuth();
 
   authAxios.delete(`http://localhost:5000/api/colors/${del.id}`);
-  // .then(dispatch({ type: COLOR_DELETE, payload: del }));
+};
+
+export const addingColor = coloradding => dispatch => {
+  const authAxios = axiosWithAuth();
+
+  authAxios
+    .post(`http://localhost:5000/api/colors`, coloradding)
+    .then(respo => console.log(respo));
 };
