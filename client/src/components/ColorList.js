@@ -23,10 +23,10 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
 
-  //   console.log(colorToEdit)
+ 
   //   axios
   // // .put(`http://localhost:5000/api/colors/:id"${colorToEdit.id}`, colorToEdit)
-  
+  //   console.log(colorToEdit)
   //   .then(res => {  
   //     props.history.push('/');
   //   })
@@ -38,6 +38,7 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+
     //  axios
     //   .delete(`http://localhost:5000/api/colors/${color.id}`)     
     //   .then(res => {

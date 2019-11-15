@@ -11,15 +11,23 @@ const BubblePage = () => {
   // fetch your colors data from the server when the component mounts
   // set that data to the colorList state property
 
-  // fetchColor = id => {
-  //   //axios
-  //   axiosWithAuth
-  //     // .get(`"/api/colors"/${id}`)
-  //     .then(res => this.setState({ color: res.data }))
-  //     .catch(err => console.log(err.response));
-  // };
 
+  axiosWithAuth()
+  .get ('/api/colors')
+  .then(res => {
+    setColorList(res.data)
+      console.log(res.data,'color list')
+      
+  })
+  .catch(err => {
+      console.log(err)
+  });
 
+  if(colorList === []) {
+    return(
+        <p>loading...</p>
+    )
+    }
 
   return (
     <>
