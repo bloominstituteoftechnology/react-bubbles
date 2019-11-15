@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 // { colors }
 const Bubbles = props => {
-  console.log(props.colors);
   const [bubbleData, setBubbleData] = useState([]);
   useEffect(() => {
     const generateBubbleData = props.colors.map((_, i) => ({

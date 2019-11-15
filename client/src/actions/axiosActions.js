@@ -8,7 +8,9 @@ export const DATA_LOADING = "DATA_LOADING";
 export const DATA_FETCH = "DATA_FETCH";
 export const DATA_FAILED = "DATA_FAILED";
 
-export const COLOR_DELETE = "DATA_FETCH";
+export const COLOR_EDITE = "COLOR_EDITE ";
+
+export const COLOR_DELETE = "COLOR_DELETE ";
 
 export const loginAuth = values => dispatch => {
   dispatch({ type: LOGIN_LOADING });
@@ -28,15 +30,13 @@ export const fetchData = () => dispatch => {
 
 export const updateColor = color => dispatch => {
   const authAxios = axiosWithAuth();
-  authAxios
-    .put(`http://localhost:5000/api/colors/${color.id}`, color)
-    .then(respo => console.log(respo));
+  authAxios.put(`http://localhost:5000/api/colors/${color.id}`, color);
+  // .then(dispatch({ type: COLOR_EDITE, payload: color }));
 };
 
 export const deleteColor = del => dispatch => {
   const authAxios = axiosWithAuth();
-  authAxios
-    .delete(`http://localhost:5000/api/colors/${del.id}`)
-    .then(respo => console.log(respo));
-  // .then(respo => dispatch({ type: COLOR_DELETE, payload: respo.data }));
+
+  authAxios.delete(`http://localhost:5000/api/colors/${del.id}`);
+  // .then(dispatch({ type: COLOR_DELETE, payload: del }));
 };

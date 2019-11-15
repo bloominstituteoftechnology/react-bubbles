@@ -19,17 +19,15 @@ const ColorList = props => {
   };
 
   const saveEdit = e => {
-    console.log(colorToEdit);
     e.preventDefault();
     props.updateColor(colorToEdit);
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    props.setChangeData(true);
+    setEditing(false);
   };
 
   const deleteColor = del => {
     props.deleteColor(del);
-    // make a delete request to delete this color
+    props.setChangeData(true);
   };
 
   return (

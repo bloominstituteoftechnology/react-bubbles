@@ -5,6 +5,7 @@ import {
   DATA_LOADING,
   DATA_FETCH,
   DATA_FAILED,
+  COLOR_EDITE,
   COLOR_DELETE
 } from "../actions/axiosActions";
 
@@ -15,6 +16,7 @@ const initiallstate = {
   token: null
 };
 export const rootReducer = (state = initiallstate, actions) => {
+  console.log(state);
   switch (actions.type) {
     case LOGIN_LOADING:
       return {
@@ -25,7 +27,7 @@ export const rootReducer = (state = initiallstate, actions) => {
 
     case LOGIN_FETCH:
       sessionStorage.setItem("token", actions.payload.payload);
-      console.log(actions.payload);
+
       return {
         ...state,
         token: actions.payload.payload,
@@ -47,7 +49,7 @@ export const rootReducer = (state = initiallstate, actions) => {
       };
 
     case DATA_FETCH:
-      console.log(actions.payload);
+      console.log(state);
       return {
         ...state,
         data: actions.payload,
@@ -60,12 +62,6 @@ export const rootReducer = (state = initiallstate, actions) => {
         isloading: false,
         error: actions.payload
       };
-    case COLOR_DELETE:
-      console.log(state.data.filter(item => item.id !== actions.payload.id));
-      return {
-        ...state
-      };
-    // data: state.data.filter(item => item.id !== actions.payload.id)
 
     default:
       return state;
