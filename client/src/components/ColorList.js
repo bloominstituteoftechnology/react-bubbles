@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import {
+  fetchData,
+  updateColor,
+  deleteColor,
+  addingColor
+} from "../actions/axiosActions";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
-
-const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+// { colors, updateColors }
+const ColorList = props => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [adding, setAdding] = useState(false);
+  const [coloradding, setColorAdding] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
@@ -18,28 +26,38 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    props.updateColor(colorToEdit);
+    props.setChangeData(true);
+    setEditing(false);
   };
 
-  const deleteColor = color => {
-    // make a delete request to delete this color
+  const deleteColor = del => {
+    props.deleteColor(del);
+    props.setChangeData(true);
+  };
+
+  const addingColor = event => {
+    event.preventDefault();
+    props.addingColor(coloradding);
+    props.setChangeData(true);
+    setAdding(false);
   };
 
   return (
     <div className="colors-wrap">
       <p>colors</p>
       <ul>
-        {colors.map(color => (
+        {props.colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
-              <span className="delete" onClick={e => {
-                    e.stopPropagation();
-                    deleteColor(color)
-                  }
-                }>
-                  x
+              <span
+                className="delete"
+                onClick={e => {
+                  e.stopPropagation();
+                  deleteColor(color);
+                }}
+              >
+                x
               </span>{" "}
               {color.color}
             </span>
@@ -80,10 +98,46 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
+      <button onClick={() => setAdding(true)}>add Color</button>
+      {adding && (
+        <form>
+          <label htmlFor="name">Color Name: </label>
+          <input
+            name="name"
+            id="name"
+            placeholder="color name"
+            onChange={e =>
+              setColorAdding({ ...coloradding, color: e.target.value })
+            }
+          />
+          <label htmlFor="code">Code Hex: </label>
+          <input
+            name="code"
+            placeholder="code hex"
+            onChange={e =>
+              setColorAdding({ ...coloradding, code: { hex: e.target.value } })
+            }
+          />
+          <button onClick={addingColor}>add</button>
+          <button onClick={() => setAdding(false)}>cancel</button>
+        </form>
+      )}
       <div className="spacer" />
+
       {/* stretch - build another form here to add a color */}
     </div>
   );
 };
 
-export default ColorList;
+const mapStateToProps = state => {
+  return {
+    colors: state.data
+  };
+};
+
+export default connect(mapStateToProps, {
+  fetchData,
+  updateColor,
+  deleteColor,
+  addingColor
+})(ColorList);

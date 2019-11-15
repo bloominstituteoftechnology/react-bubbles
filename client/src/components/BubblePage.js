@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { connect } from "react-redux";
+import { fetchData, updateColor, deleteColor } from "../actions/axiosActions";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-const BubblePage = () => {
-  const [colorList, setColorList] = useState([]);
-  // fetch your colors data from the server when the component mounts
-  // set that data to the colorList state property
+const BubblePage = props => {
+  const [colorList, setColorList] = useState(props.data);
 
+  const [changeData, setChangeData] = useState(false);
+  useEffect(() => {
+    props.fetchData();
+    setChangeData(false);
+  }, [changeData]);
+  const logOut = () => {
+    sessionStorage.clear();
+    props.history.push("/");
+  };
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
+      <button onClick={logOut}>LogOut</button>
+      <ColorList
+        colors={colorList}
+        updateColors={setColorList}
+        setChangeData={setChangeData}
+      />
       <Bubbles colors={colorList} />
     </>
   );
 };
 
-export default BubblePage;
+export default connect(state => state, { fetchData })(BubblePage);
