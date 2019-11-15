@@ -13,9 +13,13 @@ const BubblePage = props => {
     props.fetchData();
     setChangeData(false);
   }, [changeData]);
-  console.log(changeData);
+  const logOut = () => {
+    sessionStorage.clear();
+    props.history.push("/");
+  };
   return (
     <>
+      <button onClick={logOut}>LogOut</button>
       <ColorList
         colors={colorList}
         updateColors={setColorList}

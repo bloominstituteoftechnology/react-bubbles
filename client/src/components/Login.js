@@ -5,8 +5,8 @@ import { loginAuth } from "../actions/axiosActions";
 const Login = props => {
   console.log(props);
   const [values, setValues] = useState({
-    username: "Lambda School",
-    password: "i<3Lambd4"
+    username: "",
+    password: ""
   });
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
@@ -32,14 +32,14 @@ const Login = props => {
           name="username"
           id="username"
           onChange={onChange}
-          value="Lambda School"
+          value={values.username}
         />
         <label htmlFor="password">Password: </label>
         <input
           name="password"
           id="password"
           onChange={onChange}
-          value="i<3Lambd4"
+          value={values.password}
         />
         <button>Login</button>
       </form>

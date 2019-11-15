@@ -16,7 +16,6 @@ const initiallstate = {
   token: null
 };
 export const rootReducer = (state = initiallstate, actions) => {
-  console.log(state);
   switch (actions.type) {
     case LOGIN_LOADING:
       return {
@@ -49,7 +48,6 @@ export const rootReducer = (state = initiallstate, actions) => {
       };
 
     case DATA_FETCH:
-      console.log(state);
       return {
         ...state,
         data: actions.payload,
