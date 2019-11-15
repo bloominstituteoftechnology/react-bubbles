@@ -1,89 +1,82 @@
 import React from "react";
-// import axios from 'axios';
-import axioswithAuth from '../utils/AxioswithAuth';
+//import axios from 'axios';
+import axiosWithAuth from '../utils/AxioswithAuth';
 
-const initialLogin= {
-  username: '',
-  password: ''
-}
+///////////////////////////////////////////////////////////
 
-
-
-const Login = () => {
+//const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
 
-  const [login, setLogin] = useState(initialLogin);
-  const changeHandler = e => {
-    e.persist();
-    let value = e.target.value;
+// ////////////////////////////////////////////////////////////////////////////
 
-    setLogin({
-      ...login,
-      [e.target.name]: value
+class Login extends React.Component {
+
+  state = {
+    credentials: {
+      username: '',
+      password: ''
+    }
+  };
+  
+  handleChange = e => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
     });
   };
 
-  useEffect(() => {
-  
-      //axios
-      axioswithAuth
-      // .get(`/api/${props.match.params.id}`)
-      .then(res => setLogin(res.data))
-      .catch(err => console.log(err.response));
-      console.log(props.match.params.id)
-
-  }, [ props.match.params.id]);
-
-  const handleSubmit = e => {
-    // PUT request
+  login = e => {
     e.preventDefault();
-    console.log(login)
-    axios
-      // .put(`http://localhost:5000/api/colors/:id"${login.id}`, login)
-      
-      .then(res => {  
-        props.history.push('/');
+      //axios
+      axiosWithAuth()
+      .post("/api/login", this.state.credentials)
+      .then(res => {
+        localStorage.setItem('token', res.data.payload);
+        console.log(res.data.payload)
+        // redirect to the apps main page
+        this.props.history.push('/protected');
       })
       .catch(err => console.log(err));
+      console.log('Login error')
   };
 
 
-
+render() {
 
   return (
 
     <div  className='LoginForm'>
 
     <h1>Welcome to the Bubble App!</h1>
-    {/* <p>Build a login page here</p> */}
+    <p>Build a login page here</p>
     
-    <form onSubmit={handleSubmit}>
-      <input className='input'
-        type="text"
-        name="username"
-        onChange={changeHandler}
-        placeholder="Username"
-        value={login.username}
-      />
+      <form onSubmit={this.login}>
+        <input className='input'
+          type="text"
+          name="username"
+          onChange={this.handleChange}
+          placeholder="Username"
+          value={this.state.credentials.username}
+        />
 
-      <input className='input'
-        type="text"
-        name="password"
-        onChange={changeHandler}
-        placeholder="Password"
-        value={login.password}
-      />
+        <input className='input'
+          type="text"
+          name="password"
+          onChange={this.handleChange}
+          placeholder="Password"
+          value={this.state.credentials.password}
+        />
 
+        <button>Log in</button>
 
       </form>
-
-      </div>
-      
-
-    
+    </div> 
     
   );
+ }
 };
 
 export default Login;
