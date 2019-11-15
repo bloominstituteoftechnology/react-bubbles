@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import { fetchData, updateColor, deleteColor } from "../actions/axiosActions";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
-
-const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+// { colors, updateColors }
+const ColorList = props => {
+  console.log(props);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -17,13 +19,16 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const saveEdit = e => {
+    console.log(colorToEdit);
     e.preventDefault();
+    props.updateColor(colorToEdit);
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
   };
 
-  const deleteColor = color => {
+  const deleteColor = del => {
+    props.deleteColor(del);
     // make a delete request to delete this color
   };
 
@@ -31,15 +36,17 @@ const ColorList = ({ colors, updateColors }) => {
     <div className="colors-wrap">
       <p>colors</p>
       <ul>
-        {colors.map(color => (
+        {props.colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
-              <span className="delete" onClick={e => {
-                    e.stopPropagation();
-                    deleteColor(color)
-                  }
-                }>
-                  x
+              <span
+                className="delete"
+                onClick={e => {
+                  e.stopPropagation();
+                  deleteColor(color);
+                }}
+              >
+                x
               </span>{" "}
               {color.color}
             </span>
@@ -86,4 +93,14 @@ const ColorList = ({ colors, updateColors }) => {
   );
 };
 
-export default ColorList;
+const mapStateToProps = state => {
+  return {
+    colors: state.data
+  };
+};
+
+export default connect(mapStateToProps, {
+  fetchData,
+  updateColor,
+  deleteColor
+})(ColorList);
