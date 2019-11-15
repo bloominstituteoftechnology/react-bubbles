@@ -1,8 +1,8 @@
 import React from "react";
 // import axios from 'axios';
+import axioswithAuth from '../utils/AxioswithAuth';
 
 const initialLogin= {
-
   username: '',
   password: ''
 }
@@ -13,22 +13,23 @@ const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
 
-  const [loginA, setLoginA] = useState(initialLogin);
+  const [login, setLogin] = useState(initialLogin);
   const changeHandler = e => {
     e.persist();
     let value = e.target.value;
 
-    setLoginA({
-      ...loginA,
+    setLogin({
+      ...login,
       [e.target.name]: value
     });
   };
 
   useEffect(() => {
   
-      axios
-      // .get(`http://localhost:5000/api/${props.match.params.id}`)
-      .then(res => setLoginA(res.data))
+      //axios
+      axioswithAuth
+      // .get(`${props.match.params.id}`)
+      .then(res => setLogin(res.data))
       .catch(err => console.log(err.response));
       //  console.log()
 
@@ -37,9 +38,9 @@ const Login = () => {
   const handleSubmit = e => {
     // PUT request
     e.preventDefault();
-    //console.log()
+    console.log(login)
     axios
-      // .put(`http://localhost:5000/api/${movie.id}`, movie)
+      // .put(`http://localhost:5000/api/colors/:id"${login.id}`, login)
       
       .then(res => {  
         props.history.push('/');
@@ -63,7 +64,7 @@ const Login = () => {
         name="username"
         onChange={changeHandler}
         placeholder="Username"
-        value={loginA.username}
+        value={login.username}
       />
 
       <input className='input'
@@ -71,7 +72,7 @@ const Login = () => {
         name="password"
         onChange={changeHandler}
         placeholder="Password"
-        value={loginA.password}
+        value={login.password}
       />
 
 
