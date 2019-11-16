@@ -9,7 +9,7 @@ const Login = (props) => {
   // when you have handled the token, navigate to the BubblePage route
 
   const [form, setForm] = useState({username: '', password: ''})
-  const [isLoading, setIsLoading ] = useState(false)
+ 
 
 
  const handleChange = e => {
@@ -19,12 +19,12 @@ const Login = (props) => {
 
  const handleSubmit = e => {
    e.preventDefault();
-   setIsLoading(true)
+  
     axiosWithAuth()
-    .post('/login', form)
+    .post('api/login', form)
     .then( res => {
      localStorage.setItem('token', res.data.payload)
-     props.histroy.push(`/bubbles`)
+     props.history.push('/bubble-page')
     })
     .catch(error => console.log(error))
  }
@@ -34,9 +34,10 @@ const Login = (props) => {
       <h1>Welcome to the Bubble App!</h1>
       <form onSubmit={handleSubmit}>
           <input type ='text' name ='username' value={form.username}  onChange={handleChange} />    
-          <input type ='password' name ='password' value={form.password}  onChange={handleChange} />    
+          <input type ='password' name ='password' value={form.password}  onChange={handleChange} />  
+          <button type ='submit'>Login</button> 
       </form>
-      <button>Login</button> 
+      
     </>
   );
 };
