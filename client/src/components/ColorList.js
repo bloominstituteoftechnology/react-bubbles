@@ -31,20 +31,28 @@ const ColorList = ({ colors, updateColors }) => {
         console.log('kd:colorlist:axios.put: editing error', error));
   };
 
-  const deleteColor = color => {
+  const deleteColor = removeColor => {
     // make a delete request to delete this color
+    console.log('kd:colorList:deletecolor:color')
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${removeColor.id}`)
+      .then (()=> {
+        updateColors (colors.filter(color => color.id !== removeColor.id))
+      })
+      .catch (error => 
+        console.log('kd:colorlist:axios.delete:error', error));
   };
 
   return (
     <div className="colors-wrap">
-      <p>colors</p>
+      <p>COLORS</p>
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
-                    deleteColor(color)
+                    deleteColor(color.id)
                   }
                 }>
                   x
@@ -60,9 +68,9 @@ const ColorList = ({ colors, updateColors }) => {
       </ul>
       {editing && (
         <form onSubmit={saveEdit}>
-          <legend>edit color</legend>
+          <legend>Edit color</legend>
           <label>
-            color name:
+            Color name:
             <input
               onChange={e =>
                 setColorToEdit({ ...colorToEdit, color: e.target.value })
@@ -71,7 +79,7 @@ const ColorList = ({ colors, updateColors }) => {
             />
           </label>
           <label>
-            hex code:
+            Hex code:
             <input
               onChange={e =>
                 setColorToEdit({
@@ -83,8 +91,9 @@ const ColorList = ({ colors, updateColors }) => {
             />
           </label>
           <div className="button-row">
-            <button type="submit">save</button>
+            <button type="submit">Save edit</button>
             <button onClick={() => setEditing(false)}>cancel</button>
+            <button onClick={() => deleteColor}>Delete color</button>
           </div>
         </form>
       )}
