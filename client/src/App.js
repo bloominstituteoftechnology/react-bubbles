@@ -21,5 +21,6 @@ function App() {
     </Router>
   );
 }
+[/* Updates */]
 
 export default App;
