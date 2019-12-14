@@ -33,7 +33,7 @@ body,
 .colors-wrap {
   height: 100%;
   width: 300px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
   ul {
     list-style: none;
@@ -96,4 +96,19 @@ form {
     padding: 3px 8px;
     margin-top: 16px;
   }
+}
+
+.login-btn {
+  background-color:teal;
+  padding:2%;
+  font-size:16px;
+  border-radius:5%;
+  box-shadow: 2px 2px 2px black;
+}
+
+.input {
+  width: 80%;
+  margin-left:10%;
+  padding:2%;
+
 }

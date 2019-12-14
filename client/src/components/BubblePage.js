@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-const ColorList = styled.div`
+const ColorWrap = styled.div`
 width: 20%;
 height: 67.5%;
 margin-left:25%;
@@ -14,7 +14,7 @@ margin-top:3%;
 box-shadow: 5px 5px 5px green;
 `
 
-const Bubbles = styled.div`
+const BubbleWrap = styled.div`
   padding: 2%;
   height: 50%;
   width: 22%;
@@ -40,12 +40,17 @@ const BubblePage = () => {
       .catch (error => {
         console.log('kd:Bubblepage:axios.catch:error', error)
       });
-  }. []);
+  }, []);
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
-      <Bubbles colors={colorList} />
+      <ColorWrap className = 'colorwrap-div'>
+          <ColorList colors={colorList} updateColors={setColorList} />
+      </ColorWrap>
+
+      <BubbleWrap className = "bubblewrap">
+          <Bubbles colors={colorList} />
+      </BubbleWrap>
     </>
   );
 };

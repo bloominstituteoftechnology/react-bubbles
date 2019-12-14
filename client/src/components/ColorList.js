@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import axiosWithAuth from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
+const Container = styled.div`
+border: .1px dashed lightgrey;
+padding-bottom: 8%;
+`
+
 const initialColor = {
   color: "",
   code: { hex: "" }
@@ -23,8 +28,7 @@ const ColorList = ({ colors, updateColors }) => {
       .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then (result => {
         updateColors ([
-          ...colors.filter
-          (color => color.id !== colorToEdit.id), result.data]);
+          ...colors.filter(color => color.id !== colorToEdit.id), result.data]);
           setEditing(false);
       })
       .catch (error => 
@@ -67,6 +71,7 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       {editing && (
+        <Container>
         <form onSubmit={saveEdit}>
           <legend>Edit color</legend>
           <label>
@@ -96,6 +101,7 @@ const ColorList = ({ colors, updateColors }) => {
             <button onClick={() => deleteColor}>Delete color</button>
           </div>
         </form>
+        </Container>
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}

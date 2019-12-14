@@ -3,13 +3,17 @@ import axiosWithAuth from '../utils/axiosWithAuth'
 import styled from 'styled-components';
 
 const Container = styled.div`
-  border: .5px solid grey;
-  margin-left:45%;
-  margin-top:10%;
-  padding:1%;
-  height:20%;
-  width: 10%;
+  border: .5px dashed teal;
+  margin-left:35%;
+  margin-top:2%;
+  padding:3%;
+  height:30%;
+  width: 30%;
+  align-items: center;
+  box-shadow: 5px 5px 5px teal;
 `
+
+
 
 const Login = (props) => {
   // make a post request to retrieve a token from the api
@@ -48,7 +52,8 @@ const Login = (props) => {
     <Container>
      <h2>Log In to Bubbles</h2>
     <form onSubmit = {onSubmit}>
-        <input
+     
+        <input className = "input"
           type = 'text'
           name = 'username'
           placeholder = '* username'
@@ -58,17 +63,18 @@ const Login = (props) => {
         <br></br>
         <br></br>
 
-      <input  
+      <input  className = "input"
         type = 'password'
         name = 'password'
         placeholder = '* password'
         value = {credentials.password}
         onChange = {handleChange}
         />
+        
         <br></br>
         <br></br>
 
-        <button> Log In </button>
+        <button className = 'login-btn'> Log In </button>
       </form>
     </Container>
     
