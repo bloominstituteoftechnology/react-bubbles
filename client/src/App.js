@@ -7,6 +7,12 @@ import Login from "./components/Login";
 import PrivateRoute from './components/PrivateRoute'
 import "./styles.scss";
 
+const WrapHeadings = styled.div`
+  font-size: 16px;
+  color:green;
+  background-color:grey;
+`
+
 function App() {
   return (
     <>
@@ -27,6 +33,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+    </>
   );
 }
 
