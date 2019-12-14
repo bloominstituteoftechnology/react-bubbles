@@ -46,7 +46,7 @@ const Login = (props) => {
   return (
     <>
     <Container>
-      <h2>Log In to Bubbles</h2>
+     <h2>Log In to Bubbles</h2>
     <form onSubmit = {onSubmit}>
         <input
           type = 'text'
@@ -60,7 +60,7 @@ const Login = (props) => {
 
       <input  
         type = 'password'
-        name = 'passowrd'
+        name = 'password'
         placeholder = '* password'
         value = {credentials.password}
         onChange = {handleChange}
