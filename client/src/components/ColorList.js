@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosAuth from '../axiosAuth';
 
 const initialColor = {
   color: "",
@@ -11,6 +11,8 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
+  const [colorAdde, setColorAdded] = useState();
+
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -21,11 +23,39 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    axiosAuth()
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res =>{
+        const newColors = [...colors];
+        newColors[colors.findIndex((color) => color.id === res.data.id)] =
+          res.data;
+        updateColors(newColors);
+      })
+      .catch(err =>{
+        console.log(err)
+      })
   };
 
-  const deleteColor = color => {
+  const deleteColor = ({id}) => {
     // make a delete request to delete this color
+    axiosAuth()
+    .delete(`/colors/${id}`)
+    .then((res) => {
+      updateColors(colors.filter((color) => color.id !== res.data));
+    })
+    .catch((error) => console.log(error));
   };
+
+  const addColor = () => {
+    axiosAuth()
+    .post('/colors')
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
 
   return (
     <div className="colors-wrap">
@@ -80,7 +110,11 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
+
+          <form>
+
+          </form>
+      <div className="spacer"/>
       {/* stretch - build another form here to add a color */}
     </div>
   );
