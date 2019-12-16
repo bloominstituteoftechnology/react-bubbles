@@ -23,7 +23,7 @@ const WrapHeadings = styled.div`
 
 const Wrap = styled.span`
   // size: 4px;
-  box-shadow: 2px 2px 2px teal;
+  box-shadow: 1px 1px 1px teal;
   padding:1%;
  
   `
