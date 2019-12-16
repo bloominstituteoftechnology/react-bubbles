@@ -7,7 +7,7 @@ import ColorList from "./ColorList";
 
 const ColorWrap = styled.div`
 width: 20%;
-height: 67.5%;
+height: 80%;
 margin-left:25%;
 margin-top:3%;
 
@@ -51,6 +51,7 @@ const BubblePage = () => {
       <BubbleWrap className = "bubblewrap">
           <Bubbles colors={colorList} />
       </BubbleWrap>
+
     </>
   );
 };

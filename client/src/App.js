@@ -1,12 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import axiosWithAuth from './utils/axiosWithAuth';
-import styled from 'styled-components'
+import axiosWithAuth from "./utils/axiosWithAuth";
+import BubbleContext from './components/BubbleContext';
 
 import Login from "./components/Login";
 import PrivateRoute from './components/PrivateRoute'
 import BubblePage from './components/BubblePage';
 import "./styles.scss";
+import styled from 'styled-components'
 
 const WrapHeadings = styled.div`
   font-family: Cherryla Script;
@@ -28,6 +29,15 @@ const Wrap = styled.span`
   `
 
 function App() {
+
+  const addColor = newColor => {
+    axiosWithAuth()
+      .post('/colors', newColor)
+      .then(result => {console.log('kd:app:axios.post:addColor:newColor', result)})
+      .catch(error => console.log('kd:addColor:catch error', error));
+  };
+
+
   return (
     <>
     <br></br>
@@ -37,6 +47,7 @@ function App() {
       </WrapHeadings>
 
     <Router>
+        <BubbleContext.Provider value = {{addColor}}>
       <div className="App">
         <Switch>
           <PrivateRoute exact path = '/bubblepage' component = {BubblePage} />
@@ -44,9 +55,10 @@ function App() {
           <PrivateRoute exact path = '/'component = {Login} />
         </Switch>
       </div>
+      </BubbleContext.Provider>
     </Router>
     </>
   );
-}
+};
 
 export default App;

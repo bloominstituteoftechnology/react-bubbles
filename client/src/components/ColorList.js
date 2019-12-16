@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import axiosWithAuth from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+import AddColorForm from './AddColorForm';
 
 const Container = styled.div`
 border: .1px dashed lightgrey;
 padding-bottom: 8%;
+height: 20%;
 `
+
+// const ColorFormWrap = styled.div`
+// margin-left:1%;
+// `
 
 const initialColor = {
   color: "",
@@ -101,10 +107,13 @@ const ColorList = ({ colors, updateColors }) => {
             <button onClick={() => deleteColor}>Delete color</button>
           </div>
         </form>
+              <AddColorForm />
+    
         </Container>
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+      
     </div>
   );
 };
