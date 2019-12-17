@@ -50,7 +50,7 @@ const Login = (props) => {
   return (
     <>
     <Container>
-     <h2>Log In to Bubbles</h2>
+     <h2>Log In for Bubbles</h2>
     <form onSubmit = {onSubmit}>
      
         <input className = "input"

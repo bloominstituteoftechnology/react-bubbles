@@ -41,7 +41,7 @@ const ColorList = ({ colors, updateColors }) => {
     // make a delete request to delete this color
     console.log('kd:colorList:deletecolor:color')
     axiosWithAuth()
-      .delete(`http://localhost:6000/api/colors/${removeColor.id}`)
+      .delete(`http://localhost:5000/api/colors/${removeColor.id}`)
       .then (()=> {
         updateColors (colors.filter(color => color.id !== removeColor.id))
       })

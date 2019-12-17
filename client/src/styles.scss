@@ -201,6 +201,22 @@ body {
   opacity: 0;
 }
 
+#bubbleSmall5 {
+  overflow: visible;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  background: orange;
+  border: 1px solid orange;
+  border-radius: 65%;
+  top: 430px;
+  left: 400px;
+  z-index: 15;
+  animation: up 11.2s 1s infinite;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
 .container #bubbleContainer1 {
   position: relative;
   overflow: visible;
