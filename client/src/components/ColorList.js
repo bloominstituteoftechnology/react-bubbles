@@ -10,11 +10,24 @@ const initialColor = {
 const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [addColor, setAddColor] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
   };
+
+  const renewColors = () => {
+    axiosWithAuth()
+      .get("colors")
+      .then(res => {
+        updateColors(res.data);
+      })
+      .catch(err => {
+        console.log("Error: ", err);
+      });
+  };
+
 
   const saveEdit = e => {
     e.preventDefault();
@@ -47,14 +60,24 @@ const ColorList = ({ colors, updateColors }) => {
       .then(res => {
         setColorToEdit(initialColor);
         setEditing(false);
-        axiosWithAuth()
-          .get("colors")
-          .then(res => {
-            updateColors(res.data);
-          })
-          .catch(err => {
-            console.log("Error: ", err);
-          });
+        renewColors();
+      })
+      .catch(err => {
+        console.log("Error: ", err);
+      });
+  };
+
+  const handleAddColor = e => {
+    e.preventDefault();
+    const newColor = {
+      ...addColor,
+      id: Date.now()
+    };
+    axiosWithAuth()
+      .post("colors", newColor)
+      .then(res => {
+        renewColors();
+        setAddColor(initialColor);Add
       })
       .catch(err => {
         console.log("Error: ", err);
