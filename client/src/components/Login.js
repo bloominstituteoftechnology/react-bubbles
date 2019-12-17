@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { axiosWithAuth } from '../authWithAxios';
+import { authWithAxios } from './authWithAxios';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({});
@@ -10,7 +10,7 @@ const Login = () => {
 
   const login = e => {
     e.preventDefault();
-    axiosWithAuth().post('login/endpoint', credentials)
+    authWithAxios().post('login/endpoint', credentials)
       .then(res => {
         localStorage.setItem('token', res.data.token);
         this.props.history.push('/');
@@ -18,11 +18,13 @@ const Login = () => {
   }
 
   const handleChange = e => {
-    setCredentials: {
-      ...credentials,
-      [e.target.name]: e.target.value,
-    }
-  } 
+    this.setCredentials({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    });
+  }
 
   return ( 
     <>
