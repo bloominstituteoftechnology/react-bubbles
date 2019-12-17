@@ -15,7 +15,10 @@ function App() {
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
-        <PrivateRoute path='/components/BubblesPage' component={BubblePage} />
+        <PrivateRoute 
+          path='/components/BubblesPage' 
+          component={BubblePage} 
+        />
       </div>
     </Router>
   );
