@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth.js";
+import { props } from "bluebird";
 
 const initialColor = {
   color: "",
@@ -40,7 +41,24 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    // make a delete request to delete this 
+    axiosWithAuth()
+      .delete(`colors/${color.id}`)
+      .then(res => {
+        setColorToEdit(initialColor);
+        setEditing(false);
+        axiosWithAuth()
+          .get("colors")
+          .then(res => {
+            updateColors(res.data);
+          })
+          .catch(err => {
+            console.log("Error: ", err);
+          });
+      })
+      .catch(err => {
+        console.log("Error: ", err);
+      });
   };
 
   return (
