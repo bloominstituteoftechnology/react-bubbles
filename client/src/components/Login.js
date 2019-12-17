@@ -2,7 +2,7 @@ import React from "react";
 import axiosWithAuth from "../utils/axiosWithAuth.js";
 
 const Login = props => {
-  const credentials = { username: "Lambda School", password: "i<3Lambd4" };
+  const credentials = { username: "Lambda School", password: "password" };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const Login = props => {
         <label htmlFor="username">Username:</label>
         <input type="text" name="username" placeholder="Lambda School" />
         <label htmlFor="password">Password:</label>
-        <input type="password" name="password" placeholder="i<3Lambd4" />
+        <input type="password" name="password" placeholder="password" />
         <button type="submit">Login</button>
       </form>
     </div>
