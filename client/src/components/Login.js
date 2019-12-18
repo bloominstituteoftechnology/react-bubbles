@@ -2,12 +2,11 @@ import React from "react";
 import axiosWithAuth from "../utils/axiosWithAuth.js";
 
 const Login = props => {
-  const credentials = { username: "Lambda School", password: "password" };
-
+  
   const handleSubmit = e => {
     e.preventDefault();
     axiosWithAuth()
-    .post("login", credentials)
+    .post("login")
       .then(res => {
         localStorage.setItem("token", res.data.payload);
         props.history.push("/bubbles");
