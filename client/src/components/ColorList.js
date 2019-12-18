@@ -77,7 +77,7 @@ const ColorList = ({ colors, updateColors }) => {
       .post("colors", newColor)
       .then(res => {
         renewColors();
-        setAddColor(initialColor);Add
+        setAddColor(initialColor);
       })
       .catch(err => {
         console.log("Error: ", err);
