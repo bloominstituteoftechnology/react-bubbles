@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Navigation from './components/Navigation';
 import BubblePage from './components/BubblePage';
 import PrivateRoute from './utils/PrivateRoute';
 import Login from "./components/Login";
 import "./styles.scss";
 
 function App() {
-  return (
+  return (  
     <Router>
       <div className="App">
         <Switch>
