@@ -6,14 +6,26 @@ import "./styles.scss";
 
 function App() {
 
-  const [items, setItems] = useState([]);
+  const [colors, setColors] = useState([]);
   useEffect(() => {
     axios
       .get('http://localhost:3333/items')
-      .then(res => setItems(res.data))
-      .catch(error => console.log(error));
+      .then(res => setColors(res.data))
+      .catch(error => console.log('get err', error));
+
+    axios
+      .post('http://localhost:3333/items')
+      .then(res => setColors(res.data))
+      .catch(error => console.log('post er', error));
+
+    axios
+      .delete('http://localhost:3333/items')
+      .then(res => setColors(res.data))
+      .catch(error => console.log('delete err', error));
   }, []);
+
   
+
   return (
     <Router>
       <div className="App">
