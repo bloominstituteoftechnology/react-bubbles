@@ -28,34 +28,46 @@ In this project you will create a login page and request a token from the server
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+- [X] Explain what a token is used for.
+
+It is a security measure that is typically used to pass identity of authenticated users between an identity provider and a service provider. For example, a server could generate a token that has the claim "logged in as admin" and provide that to a client. The client could then use that token to prove that it is logged in as admin.
+
+- [X] What steps can you take in your web apps to keep your data secure?
+
+You can require authentication in order to access that data. For example, make users login with a username and password that establishes and confirms their identity, thus keeping their information more secure. There are of course multiple levels of authentication depending on how sensitive the data may be.
+
+- [X] Describe how web servers work.
+
+A web server is a program that uses HTTP to serve the files that form web pages to users in response to their requests, which are forwarded by their computers' HTTP clients. The files that are stored on web servers are read by browsers which convert these files into images and text for you to view. Your browser communicates with web servers to bring you information from the internet.
+
+- [X] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+PUT can map to Create and Update, POST maps to Create and sometimes Update, GET retrieves a resource, and DELETE deletes a resource. There is also a PATCH which can update or modify.
+
 
 
 ## Project Set Up
 
 Follow these steps to set up and work on your project:
 
-- [ ] Create a forked copy of this project.
-- [ ] Add PM as collaborator on Github.
-- [ ] Clone your OWN version of Repo (Not Lambda's by mistake!).
-- [ ] Create a new Branch on the clone: git checkout -b `<firstName-lastName>`.
-- [ ] Implement the project on this Branch, committing changes regularly.
-- [ ] Push commits: git push origin `<firstName-lastName>`.
-- [ ] **RUN** `yarn install or npm install` at the root to retrieve all the dependencies for the node server. You will not need to create any react apps here nor will you need to install any other dependencies. You should have all you need in this repo.
-- [ ] **LOOK** at all the files you've been given for this project. One important file to note is `server.js`. This file contains an **API** that you are going to be interfacing with. Below is documentation on how to interact with the **API**.
-- [ ] **RUN** `yarn start or npm start` to get your API up and running on `http://localhost:5000`. This is the **URL** you're going to need to use within your React app in order to make AJAX requests for data.
-- [ ] **LOOK** at your `client` directory and notice it's just a plain ol' React App that we've built using `create-react-app`.
-- [ ] **cd** into `client` and run `yarn install or npm install` to retrieve the client side dependencies.
-- [ ] **RUN** `yarn start or npm start` to fire up your React application.
+- [X] Create a forked copy of this project.
+- [X] Add PM as collaborator on Github.
+- [X] Clone your OWN version of Repo (Not Lambda's by mistake!).
+- [X] Create a new Branch on the clone: git checkout -b `<firstName-lastName>`.
+- [X] Implement the project on this Branch, committing changes regularly.
+- [X] Push commits: git push origin `<firstName-lastName>`.
+- [X] **RUN** `yarn install or npm install` at the root to retrieve all the dependencies for the node server. You will not need to create any react apps here nor will you need to install any other dependencies. You should have all you need in this repo.
+- [X] **LOOK** at all the files you've been given for this project. One important file to note is `server.js`. This file contains an **API** that you are going to be interfacing with. Below is documentation on how to interact with the **API**.
+- [X] **RUN** `yarn start or npm start` to get your API up and running on `http://localhost:5000`. This is the **URL** you're going to need to use within your React app in order to make AJAX requests for data.
+- [X] **LOOK** at your `client` directory and notice it's just a plain ol' React App that we've built using `create-react-app`.
+- [X] **cd** into `client` and run `yarn install or npm install` to retrieve the client side dependencies.
+- [X] **RUN** `yarn start or npm start` to fire up your React application.
 
 Follow these steps for completing your project:
 
-- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo).
-- [ ] Add your Project Manager as a Reviewer on the Pull-request
-- [ ] PM then will count the HW as done by  merging the branch back into master.
+- [X] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo).
+- [X] Add your Project Manager as a Reviewer on the Pull-request
+- [X] PM then will count the HW as done by  merging the branch back into master.
 
 ## Minimum Viable Product
 
@@ -65,10 +77,10 @@ The MVP of this project will be broken up between 2 stages. Follow each step.
 
 Build a login form to authenticate your users.
 
-- [ ] Construct an AXIOS request to retrieve a token from the server. You'll use this token to interact with the API
-- [ ] Save the token to localStorage
-- [ ] Build a `axiosWithAuth` module to create an instance of axios with the authentication header
-- [ ] Build a `PrivateRoute` component and use it to protect a route that renders the `BubblesPage` component
+- [X] Construct an AXIOS request to retrieve a token from the server. You'll use this token to interact with the API
+- [X] Save the token to localStorage
+- [X] Build a `axiosWithAuth` module to create an instance of axios with the authentication header
+- [X] Build a `PrivateRoute` component and use it to protect a route that renders the `BubblesPage` component
 
 ### Stage 2 - Consuming the API
 
