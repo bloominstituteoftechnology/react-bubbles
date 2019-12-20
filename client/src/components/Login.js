@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AxiosWithAuth from "../utilz/AxiosWithAuth";
 
-const Login = (e) => {
+const Login = (props) => {
 
   const [credentials, setCredentials] = useState({
     username: '',
@@ -18,7 +18,7 @@ const Login = (e) => {
     .post('/login', credentials)
     .then(res => {
       localStorage.setItem('token', res.data.payload);
-      PaymentResponse.history.push('/')
+      props.history.push('/protected')
     })
     .catch(err => console.log(err))
   }
