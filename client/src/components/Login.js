@@ -10,7 +10,9 @@ const Login = (props) => {
 
   const [isFetching, setIsFetching] = useState(false)
 
-
+  const handleChange = e => {
+    setCredentials({...credentials, [e.target.name]: e.target.value})
+}
   const login = e => {
     e.preventDefault();
     setIsFetching(true);
@@ -18,7 +20,7 @@ const Login = (props) => {
     .post('/login', credentials)
     .then(res => {
       localStorage.setItem('token', res.data.payload);
-      props.history.push('/protected')
+      props.history.push('/private')
     })
     .catch(err => console.log(err))
   }
@@ -29,8 +31,11 @@ const Login = (props) => {
   // when you have handled the token, navigate to the BubblePage route
   return (
     <>
-      <h1>Welcome to the Bubble App!</h1>
-      <p>Build a login page here</p>
+     <form onSubmit={login}>
+     <input type="text" name="username" onChange={handleChange} placeholder="username" />
+     <input type="text" name="password" onChange={handleChange} placeholder="password" />
+     <button type="submit">LOGIN</button>
+     </form>
     </>
   );
 };
