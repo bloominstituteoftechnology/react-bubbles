@@ -14,6 +14,7 @@ const BubblePage = () => {
     .get("/colors")
     .then(res => {
       setColorList(res.data);
+      console.log(colorList)
     })
     .catch(err => console.log("sorry, an error has occured while retreiving the bubble page", err))
   }, []);

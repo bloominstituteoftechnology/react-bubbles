@@ -9,7 +9,8 @@ const initialColor = {
 const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  console.log(colors)
+  console.log(colors);
+  console.log(updateColors);
 
   const editColor = color => {
     setEditing(true);
@@ -20,25 +21,28 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is it saved right now?
-    e.preventDefault()
+    // e.preventDefault()
     axiosWithAuth()
     .put(`/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
-      // updateColors(res.data)
-      colors.history.push("/bubble-page")
+      updateColors()
+      // colors.history.push("/bubble-page")
     })
     .catch(err => console.log("sorry, could not edit color", err))
   };
+
 
   const deleteColor = color => {
     // make a delete request to delete this color
     // e.preventDefault()
     axiosWithAuth()
-    .delete(`/colors/${color.id}`)
-    .then(res => {
-      // (res.data)
-      colors.history.push("/bubble-page")
-    })
+    .delete(`/colors/${color.id}`, color)
+    .then(res => console.log("response from .delete", res))
+    document.location.reload(true)
+      // updateColors()
+      // setColorToEdit(res.data)
+      // colors.history.push("/bubble-page")
+    .catch(err => console.log("sorry, could not delete color", err))
   };
 
   return (
