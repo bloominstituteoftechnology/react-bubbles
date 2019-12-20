@@ -18,7 +18,7 @@ const Login = props => {
     e.preventDefault();
     setData({ ...data, isFetching: true });
     axiosWithAuth()
-      .post("/login", data)
+      .post("/login", { username: 'Lambda School', password: 'i<3Lambd4' })
       .then(res => {
         localStorage.setItem("token", res.data.payload);
         props.history.push("/bubble-page");
@@ -43,7 +43,7 @@ const Login = props => {
           />
 
           <input
-          type="text"
+          type="password"
           name="password"
           placeholder="Password"
           value={data.password}
