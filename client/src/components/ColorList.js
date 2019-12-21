@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import axiosWithAuth from '../utilities/axiosWithAuth';
+
 const initialColor = {
   color: "",
   code: { hex: "" }
@@ -34,7 +34,10 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
 
-    
+    axiosWithAuth() .put(`/colors/${colorToEdit.id}`, colorToEdit) 
+    .then((response) => {
+      setEditing(false)
+    })
   };
 
   // const deleteColor = color => {
