@@ -14,14 +14,14 @@ const Login = props => {
   };
 
   const handleSubmit = event => {
-    event.preventDefualt();
+    event.preventDefault();
     axiosWithAuth()
       .post('/api/login', login)
       .then(resp => {
         localStorage.setItem('token', resp.data.payload);
         props.history.push('/bubbles')
       })
-      .catch(err => console.log(err.resp));
+      .catch(err => console.log(err.resp, 'try again'));
   };
 
   return (
