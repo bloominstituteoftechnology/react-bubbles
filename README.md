@@ -29,9 +29,22 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
+
+A token is used for authentication, which ties a user to a specific token. The token allows the user to access areas of the website that only the user is authorized to see. Without the token, the user would only be allowed to access places that do not require a token
+
 - [ ] What steps can you take in your web apps to keep your data secure?
+
+Making sure the token is located within the .env file, so that when the repo is pushed to GH, the token is not public knowledge
+
 - [ ] Describe how web servers work.
+
+A web server is where the data is housed for your website, the domain will point a user to this information and load the information in their browser. The domain is a unique identifier for this data point. These servers are connected to the WWW, which allows users to access the website globally
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+
+The following methods can be mapped to the CRUD acronym: .get, .push. delete, and .post
+
 
 
 ## Project Set Up
