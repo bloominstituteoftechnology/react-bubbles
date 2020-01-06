@@ -12,8 +12,8 @@ const BubblePage = () => {
   useEffect(() => {
     axiosWithAuth()
       .get('http://localhost:5000/api/colors')
-      .then(resp => setColorList(resp.data))
-      .catch(err => console.log(err.resp, 'no bubbles'))
+      .then(response => setColorList(response.data))
+      .catch(error => console.log(error.response, 'no bubbles'))
   })
 
   return (

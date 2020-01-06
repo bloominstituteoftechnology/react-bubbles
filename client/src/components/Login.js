@@ -17,11 +17,11 @@ const Login = props => {
     event.preventDefault();
     axiosWithAuth()
       .post('/api/login', login)
-      .then(resp => {
-        localStorage.setItem('token', resp.data.payload);
+      .then(response => {
+        localStorage.setItem('token', response.data.payload);
         props.history.push('/bubbles')
       })
-      .catch(err => console.log(err.resp, 'try again'));
+      .catch(error => console.log(error.response, 'try again'));
   };
 
   return (
