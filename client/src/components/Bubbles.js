@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Pack } from "@potion/layout";
-import { Svg, Circle } from "@potion/element";
+import React, { useState, useEffect } from 'react';
+import { Pack } from '@potion/layout';
+import { Svg, Circle } from '@potion/element';
 
 const Bubbles = ({ colors }) => {
   const [bubbleData, setBubbleData] = useState([]);
@@ -13,7 +13,7 @@ const Bubbles = ({ colors }) => {
   }, [colors]);
 
   return (
-    <div className="bubble-wrap">
+    <div className='bubble-wrap'>
       <p>bubbles</p>
       <Svg width={400} height={400}>
         <Pack
@@ -24,8 +24,7 @@ const Bubbles = ({ colors }) => {
           size={[400, 400]}
           includeRoot={false}
           nodeEnter={d => ({ ...d, r: 0 })}
-          animate
-        >
+          animate>
           {nodes =>
             nodes
               .map(({ x, y, r, key }, i) => {
