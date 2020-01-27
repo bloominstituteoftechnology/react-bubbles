@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import BubblePage from "./BubblePage";
 
 class Login extends React.Component {
   state = {
@@ -26,6 +27,7 @@ class Login extends React.Component {
       .then(res => {
         console.log(res);
         localStorage.setItem("token", res.data.payload);
+        this.props.history.push("/protected");
       })
       .catch(err => {
         console.log("ERROR", err);

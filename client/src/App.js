@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BubblePage from "./components/BubblePage";
+
 import "./styles.scss";
 
 function App() {
