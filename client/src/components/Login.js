@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import { GetToken } from "../utils/GetToken";
 
 
-const Login = () => {
+const Login = (props) => {
   const [form, setForm] = useState({
     username: '',
     password: ''
@@ -23,6 +23,8 @@ const Login = () => {
       .post("/login" , form)
       .then(response => {
         console.log(response)
+        localStorage.setItem("token", response.data.payload)
+        props.history.push("/protected")
       })
       .catch(error => {
         console.log("ERROR", error)
