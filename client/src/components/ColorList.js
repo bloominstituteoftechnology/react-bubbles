@@ -21,10 +21,27 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-  };
+    axios
+      .put(`http:localHost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {        
+        updateColors(res.data);
+       }) 
+      document.querySelector('form').reset()
+      .catch(err => console.log(err));
+    } 
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axios
+     .delete(`http:localHost:5000/api/colors/${color.id}`)
+     .then(res => {
+        updateColors(colors =>
+          colors.filter(color => {
+            return color.id !== res.data;
+        })
+       );  
+    }) 
+     .catch(err => console.log(err));
   };
 
   return (

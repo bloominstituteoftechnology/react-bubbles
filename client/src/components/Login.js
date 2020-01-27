@@ -15,7 +15,7 @@ const Login = props => {
     .post('/login', data)
     .then(res => {
       localStorage.setItem('token', res.data.payload);
-      props.history.push('/bubble-page');
+      props.history.push('/bubbles');
     })
     .catch(err => console.log('You must be logged in', err));
 
