@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from "react-router-dom";
 
+
+//creates a private route. 
 const PrivateRoute = ({ component: Component, ...rest}) =>{
     return(
         <Route
