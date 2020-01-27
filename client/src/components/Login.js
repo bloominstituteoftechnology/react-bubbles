@@ -8,6 +8,17 @@ const Login = (props) => {
       username:"", password: ""},
       isLoading: false
   })
+
+ const handleChange = (e) => {
+   e.preventDefault()
+   setEntry({
+     ...entry,
+     credentials: {
+       ...entry.credentials,
+       [e.target.name]: e.target.value
+     }
+   });
+ } 
   
  const handleLogin = (e) => {
    e.preventDefault();
@@ -34,9 +45,9 @@ const Login = (props) => {
 
   return (
     <>
-      <h1>Welcome to the Bubble App!</h1>
+      <h1 id="header1">Welcome to the Bubble App!!</h1>
       <form onSubmit={handleLogin}>
-    <label htmlFor='username'>Username</label>
+    <label id="form1" htmlFor='username'>Username</label>
       <input
       type='text'
       name='username'
