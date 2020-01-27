@@ -22,7 +22,7 @@ const ColorList = ({ colors, updateColors, getColors }, props) => {
     // think about where will you get the id from...
     // where is is saved right now?
     GetToken()
-      .put(`/colors/${colorToEdit}`, {...colorToEdit})
+      .put(`/colors/${colorToEdit.id}`, {...colorToEdit})
       .then(response => {
         console.log(response);
         getColors(response);
