@@ -22,7 +22,7 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
     axios
-      .put(`http:localHost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {        
         updateColors(res.data);
        }) 
@@ -33,7 +33,7 @@ const ColorList = ({ colors, updateColors }) => {
   const deleteColor = color => {
     // make a delete request to delete this color
     axios
-     .delete(`http:localHost:5000/api/colors/${color.id}`)
+     .delete(`http://localhost:5000/api/colors/${color.id}`)
      .then(res => {
         updateColors(colors =>
           colors.filter(color => {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { axiosWithAuth } from "./axiosWithAuth";
+import { axiosWithAuth } from "../auth/axiosWithAuth";
+import axios from 'axios';
 
 const Login = props => {
   // make a post request to retrieve a token from the api
@@ -10,12 +11,12 @@ const Login = props => {
   });
 
   
-  const handleSubmit = props => {
-  axiosWithAuth
-    .post('/login', data)
+  const handleSubmit = (data) => {
+  axios
+    .post('http://localhost:5000/api/login', data)
     .then(res => {
       localStorage.setItem('token', res.data.payload);
-      props.history.push('/bubbles');
+      // props.history.push('/dashboard');
     })
     .catch(err => console.log('You must be logged in', err));
 
@@ -29,8 +30,7 @@ const Login = props => {
   return (
     <>
      <form onSubmit={handleSubmit}>
-      <label forHtml='username'></label>
-        <input
+       <input
           type='text'
           name='username'
           placeholder='Username'
