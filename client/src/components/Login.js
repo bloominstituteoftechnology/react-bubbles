@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 
-const Login = () => {
+const Login = (props) => {
   const [form,setForm]=useState({
     username:'',
     password:''
@@ -18,6 +18,7 @@ console.log(form)
             .then(res=>{
                 console.log(res)
                 localStorage.setItem('token',res.data.payload)
+                props.history.push("/Private")
             })
             .catch(err =>{console.log(err)})
         }} >
