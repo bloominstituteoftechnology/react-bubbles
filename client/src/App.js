@@ -10,10 +10,13 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Link to='/login'>Login</Link>
-        <Link to='/bubble-page'>Bubble Page</Link>
-        <Route exact path="/login" component={Login} />
-        {/* 
+        <ul>
+          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/login'>Login</Link></li>
+          <li><Link to='/bubble-page'>Bubble Page</Link></li>
+        </ul>
+         <Route exact path="/login" component={Login} />
+         {/* 
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}

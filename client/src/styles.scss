@@ -14,7 +14,7 @@ body,
   font-family: "Montserrat", sans-serif;
   text-align: center;
   display: flex;
-
+  background: grey;
   svg {
     height: 100%;
   }
@@ -38,6 +38,7 @@ body,
   ul {
     list-style: none;
     text-align: start;
+  
 
     li {
       cursor: pointer;
@@ -45,9 +46,15 @@ body,
       display: flex;
       justify-content: space-between;
       width: 100%;
+      
     }
   }
 }
+
+ul li {
+  list-style: none;
+ }
+
 
 .delete {
   color: rgb(216, 87, 87);

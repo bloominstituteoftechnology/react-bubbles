@@ -23,9 +23,10 @@ const ColorList = ({ colors, updateColors }) => {
     // where is is saved right now?
     axios
       .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
-      .then(res => {        
+      .then((res) => {  
+        console.log(res)      
         updateColors(res.data);
-       }) 
+       })
       document.querySelector('form').reset()
       .catch(err => console.log(err));
     } 
@@ -37,7 +38,7 @@ const ColorList = ({ colors, updateColors }) => {
      .then(res => {
         updateColors(colors =>
           colors.filter(color => {
-            return color.id !== res.data;
+            return color.id !== res.id;
         })
        );  
     }) 

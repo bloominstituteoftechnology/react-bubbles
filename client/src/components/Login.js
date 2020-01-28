@@ -14,9 +14,10 @@ const Login = props => {
   const handleSubmit = (data) => {
   axios
     .post('http://localhost:5000/api/login', data)
-    .then(res => {
+    .then((res) => {
+      console.log(res)
       localStorage.setItem('token', res.data.payload);
-      // props.history.push('/dashboard');
+      props.history.push('/bubble-page');
     })
     .catch(err => console.log('You must be logged in', err));
 
