@@ -8,7 +8,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+ 
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -33,26 +33,28 @@ const ColorList = ({ colors, updateColors }) => {
             return color;
           }));
        }).catch(err => console.log(err));
-      document.querySelector('form').reset()      
+         
     } 
 
   const deleteColor = (color) => {
-    
-    // make a delete request to delete this color
+     // make a delete request to delete this color
     axiosWithAuth()
      .delete(`/api/colors/${color.id}`, color)
-     .then(res => {
+     .then((res) => {
+       console.log(res)
        updateColors(colors.filter(color => {
           if(color.id !== res.data.id) { 
-            return res.data
+            return res.data//params is the correct property for 
+            //.delete. data is for the other methods
           }
           return color;
      }) 
-    );
+   );    
+        
   })    
      .catch(err => console.log(err));
   };
-console.log(colors);
+
   return (
     <div className="colors-wrap">
       <p>colors</p>
