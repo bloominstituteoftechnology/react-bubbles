@@ -11,7 +11,8 @@ const Login = props => {
   });
 
   
-  const handleSubmit = (data) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
   axios
     .post('http://localhost:5000/api/login', data)
     .then((res) => {

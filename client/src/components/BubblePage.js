@@ -13,7 +13,7 @@ const BubblePage = () => {
     axiosWithAuth()
      .get('/api/colors')
      .then(res => //did a console.log & didn't see any data displayed in console
-       setColorList({ colorList: res.data })) //added { colorList: b/c (res.data) didn't render either}
+       setColorList(res.data)) //added { colorList: b/c (res.data) didn't render either}
      .catch(err => console.log(err));
     
   }, []);
