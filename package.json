@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "proxy": "http://0.0.0.0:5000",
   "scripts": {
     "start": "node server.js"
   },
@@ -18,7 +19,7 @@
   "homepage": "hhttps://github.com/LambdaSchool/SPA-Routing-React#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "cors": "^2.8.4",
+    "cors": "^2.8.5",
     "express": "^4.16.2"
   }
 }
