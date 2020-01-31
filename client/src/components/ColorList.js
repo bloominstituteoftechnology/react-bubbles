@@ -33,7 +33,7 @@ const ColorList = ({ colors, updateColors }) => {
       for (let i = 0; i < colors.length; i++)
       {
         if (colors[i].id === colorToEdit.id)
-        { updatedColors = [...updatedColors, colorToEdit]; }
+          { updatedColors = [...updatedColors, colorToEdit]; }
         else
           { updatedColors = [...updatedColors, colors[i]]; }
       }
