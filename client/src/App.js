@@ -16,22 +16,16 @@ function App() {
     <Router>
       <div className="App">
         <div>
-        <ul>
-          <li>
             <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/bubblepage">Bubbles</Link>
-          </li>
-        </ul>
         </div>
 
-        <Route exact path="/" component={Login} />
+        <Route exact path="/login" component={Login} />
         {/* 
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
         <PrivateRoute path="/bubblepage" component={BubblePage} />
+        {/* PrivateRoute for Edit? */}
       </div>
     </Router>
   );

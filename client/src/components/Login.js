@@ -6,27 +6,25 @@ const Body = styled.div`
 margin: 5%;
 display: flex;
 flex-direction: column;
-justify-content: center;
-align-content: baseline;
+align-items: center;
 width: 100%;
-// border: purple solid 2px;
 `
 
 const Form = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: center;
-width: 70%;
-// border: blue 3px solid;
+width: 50%;
+padding 2%;
 `
 
 const FormContent = styled.div`
 border-top: 2px solid #282c34;
 display: flex;
 flex-direction: column;
-justify-content: flex-start; 
+text-align: left;
 width: 100%;
-// border: green solid 3px;
+
 `
 
 const Button = styled.button`
@@ -35,7 +33,7 @@ width: 100px;
 display: inline;
 background-color: #282c34;
 color: white;
-padding: 2%;
+padding: 5px;
 border-radius: 8px;
 `
 
