@@ -2,6 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Pack } from "@potion/layout";
 import { Svg, Circle } from "@potion/element";
 
+import styled from "styled-components";
+
+const StyledCircle = styled(Circle)`
+
+  position: absolute;
+  top: 50px;
+  left: 50px;
+
+  background-color: red;
+  border: 2px solid black;
+
+`;
+
 const Bubbles = ({ colors }) => {
   const [bubbleData, setBubbleData] = useState([]);
   useEffect(() => {
@@ -31,13 +44,21 @@ const Bubbles = ({ colors }) => {
               .map(({ x, y, r, key }, i) => {
                 if (i < colors.length) {
                   return (
-                    <Circle
+                    // <Circle
+                    //   key={key}
+                    //   cx={x}
+                    //   cy={y}
+                    //   r={r}
+                    //   fill={colors[i].code.hex}
+                    // />
+                    <StyledCircle
                       key={key}
                       cx={x}
                       cy={y}
                       r={r}
                       fill={colors[i].code.hex}
                     />
+
                   );
                 }
                 return null;
