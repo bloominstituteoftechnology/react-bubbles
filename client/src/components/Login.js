@@ -21,7 +21,7 @@ const Login = (props) => {
     axios.post('http://localhost:5000/api/login', credentials)
     .then(res => {
     window.localStorage.setItem('token', res.data.payload)
-    console.log('Logged in:', res)
+    console.log('Logged In Response:', res)
     // props.history.push('/friends')
     })
   .catch(err => console.log(err));
