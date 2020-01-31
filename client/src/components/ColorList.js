@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -14,17 +15,30 @@ const ColorList = ({ colors, updateColors }) => {
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
+    console.log(color)
   };
 
+console.log(`UPDATE ${updateColors}`)
   const saveEdit = e => {
-    e.preventDefault();
+    //e.preventDefault();
+    console.log(`EDIT${colorToEdit.id}`)
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    axiosWithAuth().put(`/colors/${colorToEdit.id}`, colorToEdit)
+    
   };
 
-  const deleteColor = color => {
-    // make a delete request to delete this color
+  const deleteColor = (color,e) => {
+  // make a delete request to delete this color
+    console.log(`DEL${colorToEdit.id}`)
+    axiosWithAuth().delete(`/colors/${colorToEdit.id}`)
+    .then((res)=>{
+      console.log(res)
+  })
+  .catch(function(error) {
+  console.log(error);
+  });
   };
 
   return (
@@ -51,7 +65,12 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       {editing && (
-        <form onSubmit={saveEdit}>
+        <form onSubmit={saveEdit
+        //   (e)=>{
+        //     e.preventDefault()
+        //     axiosWithAuth().put((`/colors/${colorToEdit.id}`, colorToEdit))
+        // }
+        } >
           <legend>edit color</legend>
           <label>
             color name:
@@ -77,6 +96,7 @@ const ColorList = ({ colors, updateColors }) => {
           <div className="button-row">
             <button type="submit">save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
+            <button onClick={deleteColor} >delete</button>
           </div>
         </form>
       )}
