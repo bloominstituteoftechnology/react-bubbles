@@ -8,6 +8,9 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+
+  font-weight: bold;
+  color: #CCCCCC;
 }
 
 .App {
@@ -96,4 +99,20 @@ form {
     padding: 3px 8px;
     margin-top: 16px;
   }
+}
+
+.bubblesv2 {
+  border-radius: 50%;
+  opacity: 30%;
+
+  box-shadow: 3px 3px 5px inset rgba(255, 255, 255, 0.3), -5px -5px 5px inset rgba(0, 0, 0, 0.3);;
+  
+  float: left;
+  position: relative;
+}
+
+body {
+  background-image: url("./images/sky.jpeg");
+  background-size: fit;
+  background-repeat : no-repeat;
 }
