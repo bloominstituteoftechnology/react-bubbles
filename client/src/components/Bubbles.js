@@ -13,8 +13,11 @@ const Bubbles = ({ colors }) => {
   }, [colors]);
 
   return (
+    <div className='bubble-container'>
+    <div className='bubble-title'>
+        <h2>Bubbles</h2>
+      </div>
     <div className="bubble-wrap">
-      <p>bubbles</p>
       <Svg width={400} height={400}>
         <Pack
           data={{
@@ -46,6 +49,7 @@ const Bubbles = ({ colors }) => {
           }
         </Pack>
       </Svg>
+    </div>
     </div>
   );
 };

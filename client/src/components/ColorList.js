@@ -80,7 +80,7 @@ const ColorList = ({ colors, updateColors }) => {
       </ul>
       {editing && (
         <form onSubmit={saveEdit}>
-          <legend>edit color</legend>
+          <legend>Edit Color</legend>
           <label>
             color name:
             <input
@@ -111,7 +111,7 @@ const ColorList = ({ colors, updateColors }) => {
 
       <div className="spacer" >
         <form onSubmit={addColor}>
-            <legend>add color</legend>
+            <legend>Add Color</legend>
             <label>
               color name:
               <input
@@ -134,8 +134,7 @@ const ColorList = ({ colors, updateColors }) => {
               />
             </label>
             <div className="button-row">
-              <button type="submit">save</button>
-              <button onClick={() => setEditing(false)}>cancel</button>
+              <button type="submit">Add New Color</button>
             </div>
           </form>
         </div>
