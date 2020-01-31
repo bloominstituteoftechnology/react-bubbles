@@ -25,7 +25,7 @@ const ColorList = ({ colors, updateColors }, props) => {
       .put(`http://localhost:5000/api/colors/${colors.id}`, updateColors)
       .then(res => {
         console.log('Put Success', res);
-        updateColors(res.data);
+        updateColors(res);
         // props.history.push('/bubblepage');
         updateColors(initialColor);
       })
@@ -33,10 +33,9 @@ const ColorList = ({ colors, updateColors }, props) => {
         console.log(err);
         // props.history.push('/login');
     })
-
   };
 
-  const deleteColor = (color) => {
+  const deleteColor = color => {
     // make a delete request to delete this color
     // e.preventDefault();
     axiosWithAuth()
