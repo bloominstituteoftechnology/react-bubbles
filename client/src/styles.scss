@@ -97,3 +97,97 @@ form {
     margin-top: 16px;
   }
 }
+
+/* Login form styling */
+
+.login-container {
+  margin: 0 auto;
+  margin-top: 30px;
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  width: 450px;
+  margin: 18% auto;
+  padding: 40px 20px;
+  border-radius: 8px;
+  background-color: #f1f3f6;
+  box-shadow: 
+    inset 0 0 15px rgba(55, 84, 170,0),
+    inset 0 0 20px rgba(255, 255, 255,0),
+    7px 7px 15px rgba(55, 84, 170,.15),
+    -7px -7px 20px rgba(255, 255, 255,1),
+    inset 0px 0px 4px rgba(255, 255, 255,.2);
+}
+
+.login-form label {
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.login-form input {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin: 3% auto;
+  padding: 8px 10px;
+  font-size: 1rem;
+}
+
+.login-form button {
+  width: 120px;
+  padding: 12px 0;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: white;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+  box-shadow: 
+    inset 0 0 15px rgba(55, 84, 170,0),
+    inset 0 0 20px rgba(255, 255, 255,0),
+    7px 7px 15px rgba(55, 84, 170,.15),
+    -7px -7px 20px rgba(255, 255, 255,1),
+    inset 0px 0px 4px rgba(255, 255, 255,.2);
+}
+
+.login-form button:hover {
+  box-shadow: 0 2px 15px #ff0844;
+}
+
+// Add-color Form Styling
+
+.addcolor-form {
+  legend {
+    text-align: center;
+    margin-left: -35px;
+    text-decoration: none;
+  }
+  input {
+    padding: 2px 5px;
+    font-size: 0.75rem;
+  }
+  button {
+    margin: 12px auto;
+    width: 90px;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+    font-weight: bolder;
+    border: 1px solid black;
+    color: red;
+    background: red;
+    background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+    background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+  }
+}
