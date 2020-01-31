@@ -62,7 +62,7 @@ const login = e => {
     .then(res => {
         console.log(res);
         localStorage.setItem('token', res.data.payload);
-        props.history.push('/myfriends');
+        props.history.push('/bubblepage');
     })
     .catch(err => console.log(err));
 };
