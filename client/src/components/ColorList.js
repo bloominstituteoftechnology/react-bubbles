@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialColor = {
@@ -20,8 +19,20 @@ const ColorList = ({ colors, updateColors }, props) => {
   const saveEdit = e => {
     e.preventDefault();
     // Make a put request to save your updated color
-    // think about where will you get the id from...
+    // think about where you will get the id from...
     // where is it saved right now?
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${colors.id}`, updateColors)
+      .then(res => {
+        console.log('Put Success', res);
+        updateColors(res.data);
+        // props.history.push('/bubblepage');
+        updateColors(initialColor);
+      })
+      .catch(err => {
+        console.log(err);
+        // props.history.push('/login');
+    })
 
   };
 
@@ -64,9 +75,9 @@ const ColorList = ({ colors, updateColors }, props) => {
       </ul>
       {editing && (
         <form onSubmit={saveEdit}>
-          <legend>edit color</legend>
+          <legend>Edit Color</legend>
           <label>
-            color name:
+            Color Name:
             <input
               onChange={e =>
                 setColorToEdit({ ...colorToEdit, color: e.target.value })
@@ -75,7 +86,7 @@ const ColorList = ({ colors, updateColors }, props) => {
             />
           </label>
           <label>
-            hex code:
+            Hex Code:
             <input
               onChange={e =>
                 setColorToEdit({
