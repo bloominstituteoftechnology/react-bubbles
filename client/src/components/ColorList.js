@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { GetToken } from "../utils/GetToken";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, getColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -21,10 +21,23 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    GetToken()
+      .put(`/colors/${colorToEdit.id}`, {...colorToEdit})
+      .then(response => {
+        console.log(response);
+        getColors(response);
+      })
+      .catch(error => console.log("Failed to edit", error))
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    GetToken()
+      .delete(`/colors/${color.id}`)
+      .then(response => {
+        getColors(response);
+      })
+      .catch(error => console.log("Failed to Delete" , error))
   };
 
   return (
