@@ -5,12 +5,12 @@ const NavBar = () => {
   return (
     <div >
       <nav style={{display: "flex", flexDirection: "column"}}>
-        <a>
+        <span>
           <Link to="/login">Login</Link>
-        </a>
-        <a>
+        </span>
+        <span>
           <Link to="/bubbles">Bubbles</Link>
-        </a>
+        </span>
         </nav>
     </div>
   )
