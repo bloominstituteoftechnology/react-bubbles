@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Pack } from "@potion/layout";
 import { Svg, Circle } from "@potion/element";
 
+
+import styled from 'styled-components';
+
+const BubblesHeader = styled.p `
+font-size: 30px;
+
+`
+
 const Bubbles = ({ colors }) => {
   const [bubbleData, setBubbleData] = useState([]);
   useEffect(() => {
     const generateBubbleData = colors.map((_, i) => ({
-      value: Math.floor(Math.random() * (colors.length * 2)) + 1,
+      value: Math.floor(Math.random() * (colors.length * 3)) + 8,
       key: `${i + 1}`
     }));
     setBubbleData(generateBubbleData);
@@ -14,7 +22,7 @@ const Bubbles = ({ colors }) => {
 
   return (
     <div className="bubble-wrap">
-      <p>bubbles</p>
+      <BubblesHeader>Bubbles!</BubblesHeader>
       <Svg width={400} height={400}>
         <Pack
           data={{
@@ -45,7 +53,14 @@ const Bubbles = ({ colors }) => {
               .filter(v => v)
           }
         </Pack>
+
+
       </Svg>
+
+    
+
+
+
     </div>
   );
 };
