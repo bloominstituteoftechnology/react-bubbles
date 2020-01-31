@@ -4,7 +4,7 @@ import axios from 'axios';
 const Login = (props) => {
   //set state
   const [credentials, setCredentials] = useState({username:'', password:''})
-
+  const [loading, setLoading] = useState(false);
   //handle form changes
   const handleChange = e => {
     setCredentials({
@@ -17,12 +17,14 @@ const Login = (props) => {
    //handle form submission & make a post request to retrieve a token from the api
    const handleLogin = e => {
     e.preventDefault();
+    setLoading(true);
     console.log('Loggin in....')
     axios.post('http://localhost:5000/api/login', credentials)
     .then(res => {
     window.localStorage.setItem('token', res.data.payload)
     console.log('Logged In Response:', res)
-    // props.history.push('/friends')
+    props.history.push('/bubbles')
+    setLoading(false);
     })
   .catch(err => console.log(err));
    
@@ -47,7 +49,7 @@ const Login = (props) => {
                 value={credentials.password}
                 onChange={handleChange}
             />
-          <button color='info'>Log in</button>
+          {(!loading) ? <button color='info'>Log in</button> : <button color='info' disabled>Loading...</button>}
         </form>
     
     </div>
