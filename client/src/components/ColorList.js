@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
@@ -8,9 +9,19 @@ const initialColor = {
 };
 
 const ColorList = ( { colors, updateColors }) => {
-  console.log(colors);
+  
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+
+  const { id } = useParams();
+
+  console.log(`colors: `, colors);
+  console.log(`updateColors: `, updateColors);
+  console.log(`editing: `, editing);
+
+  console.log(`colorToEdit: `, colorToEdit);
+  console.log(`id: `, id);
+
 
   
   const editColor = color => {
@@ -19,10 +30,19 @@ const ColorList = ( { colors, updateColors }) => {
   };
 
   const saveEdit = e => {
-    e.preventDefault();
+    e.preventDefault()
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        console.log(`put request!!!!!`, res)
+        
+      })
+      .catch(err => {
+        console.log(`save edit error`, err)
+      })
   };
 
   const deleteColor = color => {
@@ -30,8 +50,7 @@ const ColorList = ( { colors, updateColors }) => {
     axiosWithAuth()
       .delete(`http://localhost:5000/api/colors/${color.id}`)
       .then(res => console.log(`deleting fired!`, res))
-      .catch(err => console.log(`deleting failed xxx`, err))
-      
+      .catch(err => console.log(`deleting failed xxx`, err))      
   };
 
   return (
