@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// step 1 import your token authorization page
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 
 const initialColor = {
@@ -13,18 +15,47 @@ const ColorList = ({ colors, updateColors }) => {
 
   const editColor = color => {
     setEditing(true);
+    console.log(colorToEdit);
     setColorToEdit(color);
   };
 
   const saveEdit = e => {
     e.preventDefault();
     // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    axiosWithAuth()
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
+      // think about where will you get the id from...
+      // where is is saved right now?
+      .then(response => {
+      //   updateColors(
+      //             colors.map(color => (color.id !== colorToEdit.id ? color:
+      //             response.data))
+      // );
+      //           setEditing(false);
+      //         })
+      //         .catch(error => {
+      //           console.log(error);
+      //           setEditing(false);
+      //     });
+      //   };
+      
+        updateColors([
+          ...colors.filter(color => color.id !== colorToEdit.id),
+          response.data,
+        ])
+        setEditing(false);
+      })
+      .catch(error => console.log(error));
   };
 
-  const deleteColor = color => {
-    // make a delete request to delete this color
+  const deleteColor = colorToDelete => {
+    axiosWithAuth()
+      .delete(`/colors/${colorToDelete.id}`)
+      // why do we not/need "color" after color.id?
+      .then(() => {
+updateColors(colors.filter(color => color.id !== colorToDelete.id));
+      })
+      .catch(error => console.log(error)); 
   };
 
   return (
