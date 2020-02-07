@@ -10,6 +10,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <p>Username: Lambda School, Password: iloveLambda </p>
         <Switch>
           <ProtectedRoute exact path = "/protected" component={BubblePage}/>
           <Route path="/login" component={Login} />

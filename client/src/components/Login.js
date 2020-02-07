@@ -6,8 +6,8 @@ const Login = (props) => {
   // when you have handled the token, navigate to the BubblePage route
   const [login, setLogin] = useState(
      {
-      username: "",
-      password: ""
+      username: '',
+      password: ''
     }
   );
 
@@ -38,6 +38,9 @@ const Login = (props) => {
   return (
     <>
       <form onSubmit={handelLogin}>
+        <h1>
+          Login
+        </h1>
           <input
               type="text"
               name="username"
