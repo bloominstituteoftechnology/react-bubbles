@@ -26,10 +26,24 @@ In this project you will create a login page and request a token from the server
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+- [X] Explain what a token is used for.
+As a client in a single page webapp we sometimes need to authenticate ourselves to the server in order to access information that is private. The server issues a Jason WebToken to authenticate the user. This token is a long encrypted text message that can be stored client side using local storage or sessions storage.
+- [X] What steps can you take in your web apps to keep your data secure?
+The following steps can be taken:
+(1)SSL encryption can be used to secure your page so that hackers are unable to get your login credentials.
+(2)A secure and safe webhosting service should be chosen in order to keep data safe
+(3) All data should be backed up periodically
+(4) If any application is no longer in use, it should be removed as these are vulnerable to outside hackers.
+(5) Periodically scan computer to check for viruses and malwares.
+- [X] Describe how web servers work.
+A webserver stores the code for different website. It is shared all across the world and has a program that runs the code.
+- [X] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+Crud means create, read, update and delete
+Create: creating a page(HTTP post method)
+Read: rest environment where information has been received from server(GET method)
+Update: It’s the PUT and POST method, where you modify content of the webpage
+DELETE: delete method deletes any data in a webpage.
+
 
 
 ## Project Set Up
