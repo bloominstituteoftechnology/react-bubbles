@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -7,7 +7,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  console.log("Colors in Color list", colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -16,15 +16,41 @@ const ColorList = ({ colors, updateColors }) => {
     setColorToEdit(color);
   };
 
-  const saveEdit = e => {
-    e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+  const saveEdit = e => {
+    e.preventDefault();
+    console.log("edit", colorToEdit);
+    axiosWithAuth()
+    .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+    .then (res => {
+      console.log( " Response in the PUT request",res)
+      updateColors(colors => colors.map((color) => {
+        return color.id === colorToEdit.id ? {...colorToEdit} : color;
+      }));
+    })
+    .catch(err => {
+      console.log(err)
+    })
   };
 
+  // make a delete request to delete this color
   const deleteColor = color => {
-    // make a delete request to delete this color
+    console.log("Color in delete", color.id)
+    axiosWithAuth()
+    .delete(`/api/colors/${color.id}`)
+    .then(res => {
+      console.log("Response in the DELETE request",res)
+      updateColors(res.data.filter(item => {
+        console.log("item",item)
+        return (
+          item.color !== color.id
+        )
+      }));
+    })
+    .catch (err => console.log (err))
+    
   };
 
   return (
@@ -34,8 +60,9 @@ const ColorList = ({ colors, updateColors }) => {
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
-              <span className="delete" onClick={e => {
-                    e.stopPropagation();
+              <span className="delete"
+               onClick={e => {
+                    //e.stopPropagation();
                     deleteColor(color)
                   }
                 }>
@@ -81,7 +108,7 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
-      stretch - build another form here to add a color
+      {/* stretch - build another form here to add a color */}
     </div>
   );
 };

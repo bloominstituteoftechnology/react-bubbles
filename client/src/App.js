@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import BubblePage from "./components/BubblePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./styles.scss";
+import ColorList from "./components/ColorList";
 
 function App() {
   return (
@@ -12,7 +13,10 @@ function App() {
         <Link to="/login">Login</Link>
          <Link to="/protected">Protected Page</Link>
          <Switch>
-            <ProtectedRoute exact path ='/protected' component= {BubblePage}/>
+            <ProtectedRoute exact path ='/protected' component= {BubblePage}  />
+            <ProtectedRoute exact path = '/color-list/:id' render ={props => (
+              <ColorList {...props} />
+            )}/>
             <Route path='/login' component ={Login} />
             <Route component={Login} />
           </Switch>

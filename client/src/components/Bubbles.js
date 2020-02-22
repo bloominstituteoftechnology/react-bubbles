@@ -3,7 +3,7 @@ import { Pack } from "@potion/layout";
 import { Svg, Circle } from "@potion/element";
 
 const Bubbles = ({ colors }) => {
-  console.log("colors", colors)
+  //console.log("Props colors in Bubbles ", colors)
   const [bubbleData, setBubbleData] = useState([]);
   useEffect(() => {
     const generateBubbleData = colors.map((_, i) => ({
