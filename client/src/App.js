@@ -5,6 +5,7 @@ import BubblePage from "./components/BubblePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./styles.scss";
 import ColorList from "./components/ColorList";
+import AddNewColor from "./components/AddNewColor";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <ProtectedRoute exact path = '/color-list/:id' render ={props => (
               <ColorList {...props} />
             )}/>
+            <ProtectedRoute exact path ='/color-list/add' component ={AddNewColor}/>
             <Route path='/login' component ={Login} />
             <Route component={Login} />
           </Switch>

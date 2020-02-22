@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import AddNewColor from "./AddNewColor";
 
 const initialColor = {
   color: "",
@@ -20,7 +21,7 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
   const saveEdit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log("edit", colorToEdit);
     axiosWithAuth()
     .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
@@ -55,6 +56,7 @@ const ColorList = ({ colors, updateColors }) => {
 
   return (
     <div className="colors-wrap">
+      <AddNewColor />
       <p>colors</p>
       <ul>
         {colors.map(color => (
@@ -62,7 +64,7 @@ const ColorList = ({ colors, updateColors }) => {
             <span>
               <span className="delete"
                onClick={e => {
-                    //e.stopPropagation();
+                    e.preventDefault();
                     deleteColor(color)
                   }
                 }>
@@ -77,6 +79,7 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+
       {editing && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
