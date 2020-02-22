@@ -14,11 +14,11 @@ const Login = (props) => {
   const handleSubmit = (event)=>{
     event.preventDefault()
     axiosWithAuth()
-    .post("/api/colors", user)
+    .post("/api/login", user)
     .then((result)=>{
       console.log(result)
       localStorage.setItem("token", result.data.token)
-      props.history.push("/protected")
+      props.history.push("/login")
     })
     .catch((err)=>{
       setError(err.response.data)
