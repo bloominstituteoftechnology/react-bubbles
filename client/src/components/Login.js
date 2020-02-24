@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios'
+import AxiosWithAuth from './axiosWithAuth'
 
 class Login extends React.Component {
   
@@ -13,7 +14,7 @@ class Login extends React.Component {
   onSubmit = (event) => {
     event.preventDefault()
     
-    axios.post('http://localhost:5000/api/login', this.state.userInfo)
+    AxiosWithAuth().post('login', this.state.userInfo)
     .then(res => {
       localStorage.setItem('token', res.data.payload)
       this.props.history.push("/bubbles")
