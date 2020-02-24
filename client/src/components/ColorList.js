@@ -9,6 +9,7 @@ const ColorList = ({ colors, updateColors }) => {
   // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [colorToAdd, setColorToAdd] = useState(initialColor)
 
   const editColor = color => {
     setEditing(true);
@@ -38,6 +39,17 @@ const ColorList = ({ colors, updateColors }) => {
     .catch(err => console.log(err))
     // make a delete request to delete this color
   };
+
+  const addColor = e => {
+    e.preventDefault()
+    AxiosWithAuth()
+    .post('/colors', colorToAdd)
+    .then(res => {
+      console.log(res)
+      updateColors([...colors, colorToAdd])
+    })
+    .catch(error => console.log(error))
+  }
 
   return (
     <div className="colors-wrap">
@@ -92,8 +104,45 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
+
+
+
+
+      <div />
+      
+      <form >
+        <legend> add color </legend>
+        
+        <label > Color Name: </label>
+        <ul>
+        <input  
+        onChange={e => setColorToAdd({
+          ...colorToAdd, color: e.target.value
+        })}
+
+        value={colorToAdd.color}
+        
+        />
+        </ul>
+
+        <label> Hex Color </label>
+        <ul>
+        <input 
+        onChange={e => {
+          setColorToAdd({
+            ...colorToAdd, code: {hex: e.target.value}
+          })
+        }}
+        value={colorToAdd.code.hex}
+
+        />
+        </ul>
+
+        <div className='buttonl'><button onClick={addColor}>add</button></div>
+      </form>
       {/* stretch - build another form here to add a color */}
+
+
     </div>
   );
 };
