@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {axiosWithAuth} from "./AxiosWithAuth"
 
-const Login = (props) => {
-  const [error, setError]= useState()
+const Login = props => {
   const [user, setUser] = useState({
     username: "",
     password: "",}
@@ -17,11 +16,11 @@ const Login = (props) => {
     .post("/api/login", user)
     .then((result)=>{
       console.log(result)
-      localStorage.setItem("token", result.data.token)
-      props.history.push("/login")
+      localStorage.setItem("token", result.data.payload)
+      props.history.push("/bubble-page")
     })
     .catch((err)=>{
-      setError(err.response.data)
+      console.log(err)
     })
   }
   // make a post request to retrieve a token from the api
@@ -30,21 +29,20 @@ const Login = (props) => {
     <>
       <h1>Welcome to the Bubble App!</h1>
       <form onSubmit={handleSubmit}>
-        {error && <div className="error">
-          {error}</div>}
+       
       <input
         type="username"
         name="username"
         placeholder="username"
         value= {user.username}
-        OnChange={handleChange}
+        onChange={handleChange}
       />
        <input
         type="password"
         name="password"
         placeholder="Password"
         value= {user.password}
-        OnChange={handleChange}
+        onChange={handleChange}
       />
       <button type="submit">Submit</button>
       </form>

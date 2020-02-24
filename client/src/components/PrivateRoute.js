@@ -1,16 +1,17 @@
 import React from "react";
 import {Route, Redirect} from "react-router-dom";
 
-function PrivateRoute({component: Component, ...props}){
+function PrivateRoute(props){
+    const { component: Component, ...rest }= props
     return(
         <Route
-        {...props}
-        render={(props)=>{
+        {...rest}
+        render={(renderProps)=>{
             if (localStorage.getItem("token")){
-                return <Component {...props}/>
+                return <Component {...renderProps}/>
             }
             else {
-                return <Redirect to="/login"/>
+                return <Redirect to="/bubble-page"/>
             }
         }
 
