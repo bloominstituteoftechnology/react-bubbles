@@ -81,6 +81,7 @@ form {
 
   input {
     width: 100px;
+    margin: 0 10px;
   }
 }
 
@@ -96,4 +97,9 @@ form {
     padding: 3px 8px;
     margin-top: 16px;
   }
+}
+
+.login {
+  display: block;
+  margin: 0 auto;
 }
