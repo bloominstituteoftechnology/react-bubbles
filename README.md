@@ -84,6 +84,14 @@ Build a login form to authenticate your users.
 
 ## STRETCH PROBLEMS
 
+Explain what a token is used for : it is used to make security decisions.
+
+What steps can you take in your web apps to keep your data secure? token or API key or md5/sha1 hash function, https and ProtectedRoute
+
+Describe how web servers work. a web servers processes incoming network request over http and other protocols.
+
+Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers. C-Create/Add R - Get/Fetch U - Put/Update D - Delete
+
 **HTTP/Axios Stretch Problems**
 
 - [ ] Build a form at the bottom of `ColorList.js` to add new colors to the colors data
