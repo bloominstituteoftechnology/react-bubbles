@@ -4,7 +4,8 @@ import axiosWithAuth from "../axiosWithAuth";
 
 const initialColor = {
   color: "",
-  code: { hex: "" }
+  code: { hex: "" },
+  id: undefined,
 };
 
 const ColorList = ({ colors, updateColors }) => {
@@ -18,9 +19,14 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    axiosWithAuth().put(`http://localhost:5000/api/colors/${colorToEdit.id}`, {...colorToEdit})
-      .then(updateColors).catch(console.log);
+    if (colorToEdit.id === undefined) {
+      console.log("here");
+      axiosWithAuth().post(`http://localhost:5000/api/colors/`, {...colorToEdit})
+        .then(updateColors).catch(console.log);
+    } else {
+      axiosWithAuth().put(`http://localhost:5000/api/colors/${colorToEdit.id}`, {...colorToEdit})
+        .then(updateColors).catch(console.log);
+    }
   };
 
   const deleteColor = color => {
@@ -51,6 +57,11 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+      <button onClick={ev => {
+        ev.preventDefault();
+        setColorToEdit(initialColor);
+        setEditing(true);
+      }}>New Color</button>
       {editing && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
