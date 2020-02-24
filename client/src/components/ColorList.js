@@ -21,10 +21,10 @@ const ColorList = ({ colors, updateColors }) => {
     e.preventDefault();
     if (colorToEdit.id === undefined) {
       console.log("here");
-      axiosWithAuth().post(`http://localhost:5000/api/colors/`, {...colorToEdit})
+      axiosWithAuth().post(`http://localhost:5000/api/colors/`, colorToEdit)
         .then(updateColors).catch(console.log);
     } else {
-      axiosWithAuth().put(`http://localhost:5000/api/colors/${colorToEdit.id}`, {...colorToEdit})
+      axiosWithAuth().put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
         .then(updateColors).catch(console.log);
     }
   };
