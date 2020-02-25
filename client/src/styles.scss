@@ -16,7 +16,7 @@ body,
   display: flex;
   flex-direction: column;
   background-color: rgb(53, 59, 65);
-
+  background-image: url('../src/img/Bubbles.png');
   
 
   svg {
@@ -28,10 +28,9 @@ body,
   }
   .reg {
     margin: 20px auto;
-    width: 40%;
-    height: 280px;
-    background-color: aliceblue;
-    border: black 1px solid;
+    width: 22%;
+    height: 30%;
+    background-color: rgba(193, 226, 255, 0.404);
     border-radius: 100%;
     display: flex;
     justify-content: center;
