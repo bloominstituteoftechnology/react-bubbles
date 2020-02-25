@@ -1,0 +1,11 @@
+* {
+    width: fit-content;
+    background-image: url('../public/Bubbles.png') ;
+    background-color: rgb(53, 59, 65);
+}
+
+.App {
+    display: flex;
+    align-content: space-around;
+    
+}
