@@ -2,6 +2,7 @@ import React from "react";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import AddNewColor from "./AddNewColor";
 
  class  BubblePage extends React.Component{
    state = {
@@ -27,8 +28,11 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
   render(){
     return (
       <>
+       <div className ="bubbleAndColor">
+         <AddNewColor/>
         <ColorList colors={this.state.colorList} updateColors={this.state.setState} />
         <Bubbles colors={this.state.colorList} />
+       </div>
       </>
     );
   }

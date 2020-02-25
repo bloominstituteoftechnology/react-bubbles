@@ -25,7 +25,7 @@ const initialState = {
       .then(response => {
           console.log ("Response in the POST request Add Color", response)
           setNewColor(response.data)
-       props.history.push('/');
+          props.history.push('/');
       })
       .catch(err => {
         console.log(err);
@@ -33,29 +33,31 @@ const initialState = {
   };
  
      return (
-        <form onSubmit={handleSubmit}>
-        <legend>Add color</legend>
-        <label>
-          color name:
-          <input
-            type='text'
-            name='color'
-            onChange={ e =>{ setNewColor({...newColor, color:e.target.value})}}
-            value={newColor.color}
-          />
-        </label>
-        <label>
-          hex code:
-          <input
-            name="code"
-            onChange={e =>{ setNewColor ({...newColor, code:{hex: e.target.value}})}}
-            value={newColor.code.hex}
-          />
-        </label>
-        <div className="button-row">
-          <button type="submit"  >save</button>
-        </div>
-      </form>
+        <div className="add-color-wrapp">
+          <form onSubmit={handleSubmit}>
+            <legend>Add color</legend>
+            <label>
+              Color name:
+              <input
+                type='text'
+                name='color'
+                onChange={ e =>{ setNewColor({...newColor, color:e.target.value})}}
+                value={newColor.color}
+              />
+            </label>
+            <label>
+              Hex code:
+              <input
+                name="code"
+                onChange={e =>{ setNewColor ({...newColor, code:{hex: e.target.value}})}}
+                value={newColor.code.hex}
+              />
+            </label>
+            <div className="button-row">
+              <button type="submit"  >Save</button>
+            </div>
+        </form>
+      </div>
      )
 
  }

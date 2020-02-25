@@ -8,17 +8,30 @@ import ColorList from "./components/ColorList";
 import AddNewColor from "./components/AddNewColor";
 
 function App() {
+  //  const handleDelete = (props) => {
+  //   return (
+  //     localStorage.removeItem("token"),
+  //     props.history.push("/")
+  //   )
+  // }
   return (
     
       <div className="App">
-        <Link to="/login">Login</Link>
+       <nav >
+         <h1>React Bubbles</h1>
+       <div className="nav-links">
+         <Link to="/login">Login</Link>
          <Link to="/protected">Protected Page</Link>
+         {/* <button onClick={handleDelete}>Log Out</button> */}
+       </div>
+     
+       </nav>
          <Switch>
-            <ProtectedRoute exact path ='/protected' component= {BubblePage}  />
-            <ProtectedRoute exact path = '/color-list/:id' render ={props => (
+            <ProtectedRoute exact path ='/protected' component= {BubblePage}  />  
+            {/* <ProtectedRoute exact path = '/color-list/:id' render ={props => (
               <ColorList {...props} />
-            )}/>
-            <ProtectedRoute exact path ='/color-list/add' component ={AddNewColor}/>
+            )}/> */}
+            {/* <ProtectedRoute exact path ='/color-list/add' component ={AddNewColor}/> */}
             <Route path='/login' component ={Login} />
             <Route component={Login} />
           </Switch>
