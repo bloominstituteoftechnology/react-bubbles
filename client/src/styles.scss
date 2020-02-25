@@ -14,11 +14,42 @@ body,
   font-family: "Montserrat", sans-serif;
   text-align: center;
   display: flex;
+  flex-direction: column;
   background-color: rgb(53, 59, 65);
+
   
 
   svg {
     height: 100%;
+  }
+  h1 {
+    height: 10%;
+    margin: 5px auto;
+  }
+  .reg {
+    margin: 20px auto;
+    width: 40%;
+    height: 280px;
+    background-color: aliceblue;
+    border: black 1px solid;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+
+    .logs{
+      margin: auto;
+      
+      input {
+        margin: 15px;
+        border-radius: 8%;
+        height: 30px;
+      }
+      .login {
+        margin-left: 15px;
+        border-radius: 25px;
+        width: 80%;
+      }
+    }
   }
 }
 

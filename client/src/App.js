@@ -4,7 +4,6 @@ import PrivateRoute from './components/PrivateRoute'
 import Login from "./components/Login";
 import BubblePage from "./components/BubblePage";
 import "./styles.scss";
-import "./App.css";
 
 function App() {
   return (
