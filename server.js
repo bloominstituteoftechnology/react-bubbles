@@ -53,23 +53,23 @@ let colors = [
     id: 6
   },
   {
-    color: "bisque",
+    color: "cadetblue",
     code: {
-      hex: "#dd9a99"
+      hex: "#5F9EA0"
     },
     id: 7
   },
   {
-    color: "softyellow",
+    color: "lime",
     code: {
-      hex: "#dcdd99"
+      hex: "#00FF00"
     },
     id: 8
   },
   {
-    color: "blanchedalmond",
+    color: "navy",
     code: {
-      hex: "#ffebcd"
+      hex: "#000080"
     },
     id: 9
   },
@@ -102,13 +102,13 @@ function authenticator(req, res, next) {
 
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
-  if (username === "Lambda School" && password === "i<3Lambd4") {
+  if (username === "user" && password === "user") {
     req.loggedIn = true;
     setTimeout(() => {
       res.status(200).json({
         payload: token
       });
-    }, 1000);
+    }, 24000);
   } else {
     res
       .status(403)
