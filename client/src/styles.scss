@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
+
 html,
 body,
 #root,
@@ -8,17 +9,22 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .App {
   font-family: "Montserrat", sans-serif;
   text-align: center;
   display: flex;
+  width: 100%;
+  max-width: 100%;
+  background-color: rgb(211,211,211);
 
   svg {
     height: 100%;
   }
 }
+
 
 .spacer {
   height: 100%;
@@ -96,4 +102,9 @@ form {
     padding: 3px 8px;
     margin-top: 16px;
   }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+.main-header {
+  align-self: center;
 }
