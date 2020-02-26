@@ -19,7 +19,7 @@ body,
   flex-direction: column;
   background-color: rgb(53, 59, 65);
   background-image: url('../src/img/longbubs.png');
-  background-repeat: repeat;
+  object-fit: cover;
   // background-position: center;
   height: 100vh;
 
