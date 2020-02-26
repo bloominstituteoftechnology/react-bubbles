@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import { axiosWithAuth } from "../utils/AxiosWithAuth";
+import React, {useState, useEffect} from "react";
+import { axiosWithAuth } from '../utils/AxiosWithAuth'
 
 const Login = (props) => {
-  console.log('props', props)
+  // console.log('props', props)
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
@@ -10,17 +10,22 @@ const Login = (props) => {
 
   const login = e => {
     e.preventDefault()
+   
     axiosWithAuth()
-    .post('/api/login', credentials)
+    .post('/login', credentials)
     .then(res => {
       console.log('login cred', res.data)
       localStorage.setItem('token', res.data.payload)
+      console.log('payload', res.data.payload)
       props.history.push('/bubbles')
     })
     .catch(err => console.log('login error', err))
+
   }
 
+  
   const handleChange = e => {
+    console.log('targets', e.target.value)
     setCredentials({...credentials, [e.target.name]:e.target.value})
   }
   
@@ -32,15 +37,15 @@ const Login = (props) => {
           <input
             type="text"
             name="username"
-            placeholder="Username"
-            value={credentials.username}
+            placeholder="user"
+            value={setCredentials.username}
             onChange={handleChange}
           />
           <input
             type="password"
             name="password"
-            placeholder="Password"
-            value={credentials.password}
+            placeholder="user"
+            value={setCredentials.password}
             onChange={handleChange}
           />
           <button type='submit'className="login">Log in</button>

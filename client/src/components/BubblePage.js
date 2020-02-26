@@ -8,9 +8,9 @@ const BubblePage = () => {
   
   useEffect(() => {
     axiosWithAuth()
-    .get('/api/colors')
+    .get('/colors')
     .then(res => {
-      console.log('Color Data Call', res.data)
+      console.log('Color Data Call', res)
       setColorList(res.data)
     })
     .catch(err => console.log(err.response))
@@ -18,10 +18,10 @@ const BubblePage = () => {
 
   console.log('Passed props for colors', colorList)
   return (
-    <>
+    <div className='bubDisplay'>
       <ColorList colors={colorList} updateColors={setColorList} />
       <Bubbles colors={colorList} />
-    </>
+    </div>
   );
 };
 
