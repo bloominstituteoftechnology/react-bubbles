@@ -37,6 +37,7 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
       .delete(`http://localhost:5000/api/colors/${color.id}`)
       .then(() => {
+        alert('Color Deleted')
         axiosWithAuth()
           .get('http://localhost:5000/api/colors')
           .then(res => updateColors(res.data))

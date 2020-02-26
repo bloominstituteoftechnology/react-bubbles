@@ -19,9 +19,7 @@ function App() {
     <Router>
       <div className="App">
         <Route path="/" component={Login} />
-        <Switch>
           <PrivateRoute exact path = '/bubbles' isLoggedIn = {loggedIn} component = {BubblePage} />
-        </Switch>
       </div>
     </Router>
   );

@@ -1,6 +1,5 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { H1, H2, LoginContainer, LoginForm, Input, Button } from './LoginStyles';
 
 const Login = props => {
   // make a post request to retrieve a token from the api
@@ -30,12 +29,11 @@ const Login = props => {
 
 
   return (
-    <LoginContainer>
-      <H1>Welcome to the Bubble App!</H1>
-      <LoginForm onSubmit = {login}>
-        <H2>Sign in</H2>
+    <>
+      <h1>Welcome to the Bubble App!</h1>
+      <form onSubmit = {login}>
         <label htmlFor = 'Username'>
-          <Input
+          <input 
             name = 'username'
             placeholder = 'Username'
             value = {user.username}
@@ -44,7 +42,7 @@ const Login = props => {
           />
         </label>
         <label htmlFor = 'Password'>
-          <Input
+          <input 
             type = 'text'
             name = 'password'
             value = {user.password}
@@ -52,9 +50,9 @@ const Login = props => {
             onChange = {handleChange}
           />
         </label>
-        <Button className = 'button'>Login</Button>s
-      </LoginForm>
-    </LoginContainer>
+        <button>Login</button>
+      </form>
+    </>
   );
 };  
 
