@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const axiosWithAuth = () => {
+const AxiosWithAuth = () => {
     return axios.create({
         baseURL: "http://localhost:5000/api",
         headers: {
@@ -8,3 +8,5 @@ export const axiosWithAuth = () => {
         }
     })
 };
+
+export default AxiosWithAuth;
