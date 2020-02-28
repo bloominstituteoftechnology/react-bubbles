@@ -15,23 +15,25 @@ class Login extends React.Component {
     }
   };
 
-  handleChange = e =>{
+  handleChange = e => {
     this.setState({
       credentials: {
         ...this.state.credentials,
-        [e.target.value] : e.target.name
+        [e.target.name]: e.target.value
       }
-    })
-  }
+    });
+  };
 
   login = e => {
     e.preventDefault();
+
     axios
-    .get('http://localhost:5000/api/login', this.state.credentials)
+    .post('http://localhost:5000/api/login', this.state.credentials)
     .then(res => {
       window.localStorage.setItem("token", res.data.payload)
+      this.props.history.push('./protected')
     })
-    .catch(error => console.log("SOmething went wrong with the call",error))
+    .catch(error => console.log("Something went wrong with the call",error))
   }
 
   render(){
@@ -43,20 +45,21 @@ class Login extends React.Component {
         <div className="loginContainer">
     
          <form className="form" onSubmit={this.login}>
-         <label className="label" htmlFor="Login">Login</label>
-           <input type="text" 
+           <input 
+           type="text" 
            name="username"
-            placeHolder="username"
+            placeholder="username"
             value={this.state.credentials.username}
             onChange={this.handleChange} />
 
-           <input type="password" 
+           <input 
+           type="password" 
            name="password" 
            placeholder="password"
            value={this.state.credentials.password}
            onChange={this.handleChange}
             />
-            
+
            <button type="submit">Submit</button>
          </form>
         </div>
