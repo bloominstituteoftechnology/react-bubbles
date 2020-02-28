@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -21,10 +21,27 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    axiosWithAuth()
+      .put(`colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`colors/${colorToEdit.id}`, color)
+      .then(res => {
+        console.log(res);
+        updateColors(colors.filter(an => an.id !== colorToEdit.id));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
@@ -33,16 +50,7 @@ const ColorList = ({ colors, updateColors }) => {
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
-            <span>
-              <span className="delete" onClick={e => {
-                    e.stopPropagation();
-                    deleteColor(color)
-                  }
-                }>
-                  x
-              </span>{" "}
-              {color.color}
-            </span>
+            <span>{color.color}</span>
             <div
               className="color-box"
               style={{ backgroundColor: color.code.hex }}
@@ -77,6 +85,15 @@ const ColorList = ({ colors, updateColors }) => {
           <div className="button-row">
             <button type="submit">save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
+            <button
+              className="delete"
+              onClick={e => {
+                e.stopPropagation();
+                deleteColor(colorToEdit);
+              }}
+            >
+              x
+            </button>
           </div>
         </form>
       )}
