@@ -32,9 +32,16 @@ a token is stored by the server and returned to user if credentials match the on
 
 
 - [ ] What steps can you take in your web apps to keep your data secure?
+*use software to scan for vulnerabilites
+*limit the amount of remote access
+*dont hardcode sensitive information into your project and push it to public sources
+
 - [ ] Describe how web servers work.
+a web server is merely another computer that stores data and code that communicates and interacts with front end code on other machines in order to complete tasks
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
 
+create, read, update, delete = post, get, put, delete
 
 ## Project Set Up
 
