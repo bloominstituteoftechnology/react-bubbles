@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 // import axios from "axios";
 
@@ -12,7 +12,7 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  // const { id } = useParams();
+  const { id } = useParams();
 
   const editColor = color => {
     setEditing(true);
@@ -24,7 +24,7 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
       .put(`api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
-        // console.log(res.data);
+        console.log(res.data);
         updateColors([
           ...colors.filter(color => color.id !== colorToEdit.id),
           res.data,
@@ -35,16 +35,16 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
-    axiosWithAuth()
-    .delete(`/api/colors/${color.id}`)
-    .then(res => {
-      console.log(res)
-      updateColors([
-        ...colors.filter(color => color.id !== colorToEdit.id),
-        res.data,
-      ]);
-    })
-    .catch(err => console.log(err))
+      axiosWithAuth()
+      .delete(`/api/colors/${color.id}`)
+      .then(res => {
+        console.log(res);
+        updateColors([
+          ...colors
+        ]);
+        window.location.reload();
+      })
+      .catch(err => console.log(err))
   };
 
   return (
