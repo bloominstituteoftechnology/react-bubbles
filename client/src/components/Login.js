@@ -26,7 +26,7 @@ const Login = props => {
       });
   };
 
-  console.log(login);
+  // console.log(login);
   return (
     <div>
       <form onSubmit={handleSubmit}>
