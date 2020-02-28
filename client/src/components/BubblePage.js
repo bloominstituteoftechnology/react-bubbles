@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch } from 'react-router-dom';
-import axios from "axios";
+
 
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Bubbles from "./Bubbles";
