@@ -5,7 +5,7 @@
 
 1.) A token is a unique series of letters and number specificto a user. A piece of data that is a vital player on its own terms. This is stored in a a server for that users authentication. This can be stored locally to the users local storage for easy access to that same website .
 
-2). 
+2). Making sure we have https on our web applications. Making sure that all tokens are secure and private to each user.
 
 3). a web server will p rocess incoming network request over HTTP and many other protocols. The main fucntion of a web server is to store, process and deliever all web pages to the user/client calling for it. The bridge between the client and the server is called HTTP(HyperText-transfer-Protcol)
 
