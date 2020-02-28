@@ -1,11 +1,13 @@
 import React from "react";
-import ColorList from "./ColorList";
 import axios from "axios";
 
 
 class BubblePage extends React.Component {
   state ={
-    colors: []
+    colors: '',
+    code:{
+      hex: ''
+    }
   }
 
   componentDidMount(){
@@ -15,21 +17,13 @@ class BubblePage extends React.Component {
 
   // fetch your colors data from the server when the component mounts
 getData = () => {
-  const token = window.localStorage.getItem("token")
+  axios
+  .get('http://localhost:5000/api/colors')
+  .then(res => console.log(res))
+  .catch(err =>console.log(err))
+  // const token = window.localStorage.getItem("token")
 
-  axios.get('http://localhost:5000/api/colors', {
-    headers: {
-      authorization: token
-    }
-  })
-  .then(res => {
-    this.setState({
-      colors: res
-    })
-    console.log(res)
-  })
-  .catch(error => console.log(error))
-  // set that data to the colorList state property
+  
 }
 
 render(){
@@ -41,7 +35,6 @@ render(){
          <p key={color.id}>{color.color}</p>
        ))}
      </div>
-     <ColorList />
     </>
   );
 }
