@@ -27,10 +27,23 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+    The token weve been working with (client-side) is stored in user local storage for authentication. It is checked for when navigating to a protected route. If no token is found, the component wont render
 
+- [ ] What steps can you take in your web apps to keep your data secure?
+    -Ensuring that the user will see what they are supposed to by setting up Prtoected routes and giving every user a unique form of authorization to access it
+
+    -Something else to watch out for is encryption of data being passed to a network. HTTPS can do this so other users on the network cant see your important information.
+
+    -Though authentication using tokens and API keys can be enough, there are steps you can take to make sure that layer of security doesnt fail. Making sure a new token is being produced for every visit and avoid using API key inside of code that is viewable online.
+
+- [ ] Describe how web servers work.
+   -Essentially its a group of computers that can store a copy of your website and be served to other clients(users). IP address and URLs are used to navigate through the network and when data from your website url is requested from a browser, the network serves the requesting user with the copy of your websites code.
+
+- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+    -C - Stands for create (axios.post)
+    -R - Stands for retrieve (axios.get)
+    -U - Stands for update (axios.put)
+    -D - Stands for delete (axios.delete)
 
 ## Project Set Up
 
