@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { isPropertySignature } from "typescript";
 
 const initialColor = {
   color: "",
@@ -17,14 +18,15 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const saveEdit = e => {
-    e.preventDefault(updateColors);
+    e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
     axios
-      .put(`api/colors/`, updateColors)
+      .put(`http://localhost:5000/api`, colors)
       .then(res => {
         console.log(res)
+        updateColors(res.data);
       })
       .catch(err => {
         console.log(err)
