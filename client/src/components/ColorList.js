@@ -34,10 +34,10 @@ const ColorList = ({ colors, updateColors }) => {
   const deleteColor = color => {
     // make a delete request to delete this color
     axios     
-    .delete(`http://localhost:5000/api/${id}`)
+    .delete(`http://localhost:5000/api/`)
        .then(res => {
         color({
-          deleteSuccessMessage: response.data.successMessage,
+          deleteSuccessMessage: res.data.successMessage,
           deleteError: ""
         });
           console.log(res)
