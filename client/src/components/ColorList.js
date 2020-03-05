@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { isPropertySignature } from "typescript";
 
 const initialColor = {
   color: "",
@@ -8,7 +7,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -25,8 +23,8 @@ const ColorList = ({ colors, updateColors }) => {
     axios
       .put(`http://localhost:5000/api`, colors)
       .then(res => {
-        console.log(res)
         updateColors(res.data);
+        console.log(res.data);
       })
       .catch(err => {
         console.log(err)
@@ -35,6 +33,18 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axios     
+    .delete(`http://localhost:5000/api/${id}`)
+       .then(res => {
+        color({
+          deleteSuccessMessage: response.data.successMessage,
+          deleteError: ""
+        });
+          console.log(res)
+       })
+       .catch(err => {
+         console.log(err)
+       });
   };
 
   return (

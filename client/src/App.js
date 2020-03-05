@@ -16,7 +16,7 @@ function App() {
           display BubblePage when you're authenticated 
         */}
         <PrivateRoute 
-          path='/components/BubblesPage' 
+          path='/protected/' 
           component={BubblePage} 
         />
       </div>
