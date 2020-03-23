@@ -7,10 +7,18 @@ const initialColor = {
   code: { hex: "" }
 };
 
+const newColor = {
+  color: '',
+  code: { hex: '' }
+};
+
 const ColorList = ({ colors, updateColors }) => {
  
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [remove, setRemove] = useState({});
+  const [addColor, setAddColor] = useState(newColor);
+    
 
   const editColor = color => {
     setEditing(true);
@@ -32,7 +40,7 @@ const ColorList = ({ colors, updateColors }) => {
             } 
             return color;
           }));
-       }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
          
     } 
 
@@ -42,6 +50,7 @@ const ColorList = ({ colors, updateColors }) => {
      .delete(`/api/colors/${color.id}`, color)
      .then((res) => {
        console.log(res)
+       setRemove({ delete: res.data })
        updateColors(colors.filter(color => {
           if(color.id !== res.data.id) { 
             return res.data//params is the correct property for 
@@ -110,6 +119,7 @@ const ColorList = ({ colors, updateColors }) => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+      
     </div>
   );
 };
