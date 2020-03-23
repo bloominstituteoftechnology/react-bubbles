@@ -12,7 +12,7 @@ const newColor = {
   code: { hex: '' }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, newcolor }) => {
  
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -44,10 +44,10 @@ const ColorList = ({ colors, updateColors }) => {
          
     } 
 
-  const deleteColor = (color) => {
+  const deleteColor = (remove) => {
      // make a delete request to delete this color
     axiosWithAuth()
-     .delete(`/api/colors/${color.id}`, color)
+     .delete(`/api/colors/${remove.id}`, remove)
      .then((res) => {
        console.log(res)
        setRemove({ delete: res.data })
@@ -63,6 +63,20 @@ const ColorList = ({ colors, updateColors }) => {
   })    
      .catch(err => console.log(err));
   };
+
+  const addNewColor = e => {
+   e.preventDefault();
+    axiosWithAuth()
+    .post(`/api/colors/`, addColor)
+    .then((res) => {
+      console.log(res.data);
+      setAddColor({ addColor: res.data });
+       return res.data;
+      this.history.push('/bubble-list')
+    })
+    .catch(err => console.log('Oops! I don\'t work', err));
+
+ }
 
   return (
     <div className="colors-wrap">
@@ -87,6 +101,30 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+      {addColor && (
+          <form onSubmit={addNewColor}>
+            <label>color name:
+              <input 
+                onChange={e => setAddColor({
+                  ...addColor,
+                  color: e.target.value
+                })}                 
+                value={addColor.color}
+              />
+              </label>
+              <label>hex code:
+              <input 
+                onChange={e => setAddColor({
+                  ...addColor,
+                  code: {hex: e.target.value}
+                })
+               }
+               value={addColor.code.hex}
+              />
+             </label> 
+             <button type='submit'>add</button>
+           </form>
+        )}
       {editing && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
@@ -115,13 +153,12 @@ const ColorList = ({ colors, updateColors }) => {
             <button type="submit">save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
-        </form>
-      )}
-      <div className="spacer" />
+         </form>
+        )}
+       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
-      
-    </div>
-  );
+     </div> 
+    );
 };
 
 export default ColorList;
