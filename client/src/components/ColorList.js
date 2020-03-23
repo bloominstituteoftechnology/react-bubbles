@@ -15,7 +15,7 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
-  console.log('match.params.id outside put', match.params.id)
+  
   console.log('colors', colors)
 
   const editColor = color => {
@@ -56,6 +56,33 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    
+    // Make a put request to save your updated color
+    // think about where will you get the id from...
+    // where is is saved right now?
+    
+   
+    console.log('colorToEdit', colorToEdit)
+    axiosWithAuth()
+        .delete(`http://localhost:5000/api/colors/${color.id}`, color)
+
+        .then(res => {
+            console.log('res inside put', res)
+            console.log('res.data', res.data);
+            // console.log('match.params.id inside put', match.params.id)
+            // props.getMovieList();
+            axiosWithAuth().get('http://localhost:5000/api/colors')
+                .then(res => {
+                   updateColors(res.data)
+                })
+                .catch(err => console.log(err))
+                console.log(res.data.payload);
+            history.push(`/`)
+
+        })
+        .catch(err => {
+            console.log('err inside catch', err);
+        })
   };
 
   return (
