@@ -27,10 +27,30 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
+
+Many services require  the client to provide proof that it’s authenticated with them. The server running these services can issue a JWT (JSON Web Token) as the authentication token, in exchange for correct login credentials. Modern web services dealing with JSON data often use Jason Web Tokens (JWT)s instead.
+These tokens  issued by the server, are strings of cryptic text, which can be stored on the client-side using local storage or session storage. The server can readily tell the client that it issued the token. It can also read the token and make decisions for data transfer based on the client’s permission.
+
 - [ ] What steps can you take in your web apps to keep your data secure?
+
+We can build “protected” routes - routes that only render with authentication:
+The client will make a login request, sending the server the user’s username and password. 
+The server will check those credentials against the database
+If it can authenticate the user, it will return a token. 
+Once we have this token, we can add two layers of protection to our app. One uses protected routes The other sends an authentication header with our API calls (as we learned in the above objective). Your app saves the returned token (the permissions) to localStorage, so that the axiosWithAuth module can grab it for other calls that require the Authorization header.
+
 - [ ] Describe how web servers work.
+
+“Web server” can mean 1) a computer that stores the code for a website or 2) a program that runs on  a computer.
+The physical computer is connected to the internet, and stores the code for different websites to be shared. When we load the code for our websites, or web apps, on a server like this, we would say that the server is “hosting” our website/app.
+However, the server itself needs some code. That software program is called a web server! Its main purpose is to “serve” web pages it retrieves from your project code to users upon request.
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
 
+Create: Post HTTP 
+Read:  Get HTTP
+Update: PUT HTTP 
+Delete: DELETE HTTP
 
 ## Project Set Up
 
