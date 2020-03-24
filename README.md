@@ -1,3 +1,4 @@
+# Tanveer Saleem 
 # Sprint Challenge: Advanced Web Applications - React Bubbles
 
 This challenge allows you to practice the concepts and techniques learned over the past Sprint and apply them in a concrete project. This Sprint explored Advanced Web Applications, focusing on testing, client-side authentication, hosting web apps, and PUT and DELETE requests.
@@ -26,10 +27,25 @@ In this project you will create a login page and request a token from the server
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+- [X] Explain what a token is used for.
+
+ Token use for client side authentication. Many services out in the wild require the client to provide proof that it’s authenticated with them. The server running these services can issue a JWT (JSON Web Token) as the authentication token, in exchange for correct login credentials. 
+
+- [X] What steps can you take in your web apps to keep your data secure?
+
+Implement protected routes using an authentication token and Redirect
+
+- [X] Describe how web servers work.
+
+A web server processes incoming network requests over HTTP and several other related protocols. The primary function of a web server is to store, process and deliver web pages to clients. The communication between client and server takes place using the Hypertext Transfer Protocol
+
+- [X] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+The HTTP POST method is most-often utilized to **create** new resources.
+The HTTP GET method is used to **read** (or retrieve) a representation of a resource.
+PUT is most-often utilized for **update** capabilities
+DELETE is pretty easy to understand. It is used to **delete** a resource
+
 
 
 ## Project Set Up
