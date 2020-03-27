@@ -49,6 +49,7 @@ const ColorList = ({ colors, updateColors, getData }) => {
         console.log(res.data, ' is res.data in colorToAdd')
         updateColors(res.data) 
       })
+    setColorToAdd(initialColor);
   } 
 
   return (
