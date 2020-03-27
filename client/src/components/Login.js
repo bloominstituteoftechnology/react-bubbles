@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from '../utility/axiosWithAuth';
 
-const Login = () => {
+const Login = (props) => {
 	const [userInput, setUserInput] = useState({ username: '', password: ''});
 
 	const handleChange = e => {
@@ -12,12 +12,15 @@ const Login = () => {
 	const handleSubmit = e => {
 		e.preventDefault();
 
-		axiosWithAuth().post('api/login', userInput)
+		axiosWithAuth().post('/api/login', userInput)
 		.then(res => {
 			console.log(res);
+			localStorage.setItem('token', res.data.payload);
+			props.history.push('/bubble-page');
 		})
 		.catch(err => {
 			console.log(err);
+			alert('Incorrect Login');
 		})
 
 	}
@@ -32,7 +35,7 @@ const Login = () => {
 				value={userInput.username} onChange={handleChange} />
 				<input type="password" name="password"
 				value={userInput.password} onChange={handleChange} />
-				<input type="submit" />
+				<button>Login</button>
 			</form>
 
 		</div>
