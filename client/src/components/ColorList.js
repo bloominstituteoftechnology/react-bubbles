@@ -33,7 +33,7 @@ const ColorList = ({ colors, updateColors }) => {
 
     console.log('colorToEdit: ', colorToEdit)
     axiosWithAuth()
-    .put(`/api/colors/${colorToEdit}`, colorToEdit)
+    .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res=>{
       console.log('res inside put', res)
       console.log('res.data', res.data)
