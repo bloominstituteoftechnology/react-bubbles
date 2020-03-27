@@ -15,9 +15,7 @@ const BubblePage = (props) => {
       .then(response => setColorList(response.data))
       .catch(error => console.log(error.response, 'no bubbles'))
   }, []);
-  if (colorList.length === 0){
-    return null;
-  }
+
 
   return (
     <>

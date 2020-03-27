@@ -48,8 +48,11 @@ const ColorList = props => {
 
     axiosWithAuth()
       .delete(`/colors/${color.id}`)
-      .then(axiosWithAuth().get('/colors'))
-      .then(res => updateColors(res.data))
+      .then(axiosWithAuth()
+        .get('/colors')
+        .then(res => updateColors(res.data))
+        )
+      
       .catch(error => console.log(error, 'delete color'))
   };
 
