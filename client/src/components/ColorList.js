@@ -11,13 +11,23 @@ const ColorList = props => {
   console.log('color list', props);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [addColor, setAddColor] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
   };
 
-
+  const saveColor = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/colors', addColor)
+      .then(res => {
+        console.log(res, 'add color')
+          setAddColor(addColor = [...addColor, res])
+      })
+      .catch(error => console.log(error, 'saveColor'))
+  }
   const saveEdit = e => {
     e.preventDefault();
     // Make a put request to save your updated color
@@ -105,19 +115,29 @@ const ColorList = props => {
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
 
-      <form>
+      <form onSubmit={saveColor}>
         <legend>add color</legend>
         <label>
           color name:
-          <input/>
+          <input  
+            onChange={e =>
+              setAddColor({ ...addColor, color: e.target.value })
+            }
+            value={addColor.color}
+          />
         </label>
         <label>
           hex code:
-          <input />
+          <input 
+            onChange={e =>
+              setAddColor({ ...addColor, 
+                code : {hex: e.target.value} })
+            }
+            value={addColor.code.hex}
+          />
         </label>
         <div>
           <button type='submit'>save</button>
-          <button>cancel</button>
         </div>
 
       </form>
