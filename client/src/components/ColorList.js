@@ -104,6 +104,24 @@ const ColorList = props => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+
+      <form>
+        <legend>add color</legend>
+        <label>
+          color name:
+          <input/>
+        </label>
+        <label>
+          hex code:
+          <input />
+        </label>
+        <div>
+          <button type='submit'>save</button>
+          <button>cancel</button>
+        </div>
+
+      </form>
+
     </div>
   );
 };
