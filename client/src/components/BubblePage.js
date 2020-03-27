@@ -21,7 +21,7 @@ const BubblePage = (props) => {
 	}, [props])
 
 	return (
-		<div>
+		<div className="BubblePageStyle">
 			<ColorList props={props} colors={colorList} updateColors={setColorList} />
 			<Bubbles colors={colorList} />
 		</div>
