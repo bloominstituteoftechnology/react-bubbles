@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState,useEffect } from "react";
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 const initialColor = {
   color: "",
@@ -7,26 +7,41 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-
+  const [paint,setPaint]=useState();
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
+    console.log(color);
+    setPaint(color);
   };
 
   const saveEdit = e => {
-    e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    // e.preventDefault();
+    console.log(colorToEdit)
+    console.log(colors);
+    
+    if(paint.color!==colorToEdit.color){
+    // ///ADD
+      axiosWithAuth().post("api/colors", colorToEdit)
+      updateColors([...colors]);
+    }else{
+    // //EDIT
+      axiosWithAuth().put(`api/colors/${colorToEdit.id}`, colorToEdit)
+      updateColors([...colors]);
+    }
+    
   };
 
-  const deleteColor = color => {
+  const deleteColor = (color) => {
+    const zapper=colors.filter(item=>{return ((item.color!==color.color)&&(item.code.hex!==color.code.hex))})
+    updateColors(zapper)
     // make a delete request to delete this color
+    axiosWithAuth().delete(`api/colors/${color.id}`)
+    // console.log(colors);
   };
-
   return (
     <div className="colors-wrap">
       <p>colors</p>
