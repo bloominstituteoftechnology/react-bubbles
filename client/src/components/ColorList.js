@@ -16,13 +16,13 @@ const ColorList = ({ colors, updateColors }) => {
     setColorToEdit(color);
   };
 
-  const updateColorList = () => {
-    axiosWithAuth()
-      .get("http://localhost:5000/api/colors")
-      .then(response => {
-        updateColors(response.data);
-      });
-  };
+  // const updateColorList = () => {
+  //   axiosWithAuth()
+  //     .get("http://localhost:5000/api/colors")
+  //     .then(response => {
+  //       updateColors(response.data);
+  //     });
+  // };
 
   const saveEdit = e => {
     e.preventDefault();
@@ -31,17 +31,24 @@ const ColorList = ({ colors, updateColors }) => {
     // where is is saved right now?
 
     axiosWithAuth()
-      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
-      .then(updateColorList())
-      .catch(error => console.log(error.response, 'add color'))
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        axiosWithAuth()
+          .get('/colors')
+          .then( res => updateColors(res.data))
+          setColorToEdit(initialColor)
+          setEditing(false)
+      })
+      .catch(error => console.log(error.response, 'edit color'))
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
 
     axiosWithAuth()
-      .delete(`https://localhost:5000/api/colors/${color.id}`)
-      .then(updateColorList())
+      .delete(`/colors/${color.id}`)
+      .then(axiosWithAuth().get('/colors'))
+      .then(res => updateColors(res.data))
       .catch(error => console.log(error, 'delete color'))
   };
 
