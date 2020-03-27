@@ -17,13 +17,6 @@ const ColorList = props => {
     setColorToEdit(color);
   };
 
-  // const updateColorList = () => {
-  //   axiosWithAuth()
-  //     .get("http://localhost:5000/api/colors")
-  //     .then(response => {
-  //       updateColors(response.data);
-  //     });
-  // };
 
   const saveEdit = e => {
     e.preventDefault();
