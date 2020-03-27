@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useRouteMatch, useHistory } from 'react-router-dom';
 
 const initialColor = {
   color: "",
@@ -10,7 +11,15 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [newColor, setNewColor] = useState({
+    color: '',
+    code: {
+      hex:''
+    }
+  })
 
+  const history = useHistory();
+  const match = useRouteMatch();
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -21,11 +30,75 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+
+    console.log('colorToEdit: ', colorToEdit)
+    axiosWithAuth()
+    .put(`/api/colors/${colorToEdit}`, colorToEdit)
+    .then(res=>{
+      console.log('res inside put', res)
+      console.log('res.data', res.data)
+      axiosWithAuth().get('/api/colors')
+      .then(res => {
+        updateColors(res.data)
+      })
+      .catch(err => console.log('inner color edit error: ', err))
+      console.log(res.data.payload);
+      history.push('/protected')
+    })
+    .catch(err =>{
+      console.log('outer color edit error: ', err)
+    })
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    console.log('colorToEdit', colorToEdit)
+    axiosWithAuth()
+    .delete(`/api/colors/${color.id}`, color)
+    .then(res => {
+      console.log('res inside put', res)
+      console.log('res.data', res.data)
+      axiosWithAuth().get('/api/colors')
+      .then(res => {
+        updateColors(res.data)
+      })
+      .catch(err => console.log('inner color edit error: ', err))
+      console.log(res.data.payload);
+      history.push('/protected')
+    })
+    .catch(err =>{
+      console.log('outer color edit error: ', err)
+    })
   };
+
+  const addColor = e => {
+    e.preventDefault();
+    console.log(newColor);
+
+    axiosWithAuth()
+    .post('/api/colors', newColor)
+    .then(res => {
+      axiosWithAuth().get('/api/colors')
+      .then(res => {
+        updateColors(res.data)
+      })
+      .catch(err => {
+        console.log()
+        console.log(res.data.payload)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    })
+  }
+
+  const handleChange = e => {
+    setNewColor({...newColor, [e.target.name]: e.target.value})
+  }
+
+  const handleHexChange = e => {
+    setNewColor({...newColor, code: {hex: e.target.value}})
+  }
 
   return (
     <div className="colors-wrap">
@@ -80,8 +153,22 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
+
+      <form onSubmit={addColor}>
+              <p>Enter New Color</p>
+              <input 
+                type='text'
+                name='color'
+                onChange={handleChange}
+              />
+              <p>Enter Color Hex code</p>
+              <input 
+                type='text'
+                name='hex'
+                onChange={handleHexChange}
+              />
+              <button>Add New Color</button>
+      </form>
     </div>
   );
 };
