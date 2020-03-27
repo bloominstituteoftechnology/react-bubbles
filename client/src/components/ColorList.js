@@ -6,8 +6,9 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
-  // console.log(colors);
+const ColorList = props => {
+  const { colors, updateColors } = props
+  console.log('color list', props);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
