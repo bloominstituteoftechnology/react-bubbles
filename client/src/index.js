@@ -1,6 +1,16 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
+
+
+
+
+// import React, { useState } from "react";
+// import ReactDOM from "react-dom";
+// import App from "./App";
+
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
