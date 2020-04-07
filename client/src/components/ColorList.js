@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axiosWithAuth } from "../utilis/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -7,7 +7,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -18,18 +17,27 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    axiosWithAuth()
+    .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+    .then(res=> {
+      updateColors([...colors.filter(color=> color.id !== colorToEdit.id), res.data])
+      setEditing(false);
+    })
+    .catch(err=>console.log('Edit not saved', err))
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth()
+    .delete(`/api/colors/${color.id}`)
+    .then(res=> {
+      updateColors(colors.filter(color=>color.id !== res.data))
+    })
+    .catch(err=>console.log('Undeleted', err))
   };
 
   return (
     <div className="colors-wrap">
-      <p>colors</p>
+      <p>COLORS</p>
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
@@ -80,8 +88,7 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
+      <div className="spacer" />  
     </div>
   );
 };
