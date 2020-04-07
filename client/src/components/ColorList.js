@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosWithAuth from "../auth/axiosWithAuth"
+import AddColorForm from "./AddColorForm";
 
-const initialColor = {
+export const initialColor = {
   color: "",
   code: { hex: "" }
 };
@@ -21,10 +22,29 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    axiosWithAuth()
+    .put(`/colors/${colorToEdit.id}`, colorToEdit)
+    .then (res => {
+      updateColors ([
+        ...colors.filter
+        (color => color.id !== colorToEdit.id), res.data]);
+        setEditing(false);
+    })
+    .catch (error => 
+      console.log('error', error));
+
   };
 
-  const deleteColor = color => {
+  const deleteColor = (color) => {
     // make a delete request to delete this color
+    console.log('delete', color)
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${color}`)
+      .then ((res)=> { 
+        //updateColors (colors.filter((col) => col.id !== color.id))
+      })
+      .catch (error => 
+        console.log('error', error));
   };
 
   return (
@@ -36,7 +56,7 @@ const ColorList = ({ colors, updateColors }) => {
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
-                    deleteColor(color)
+                    deleteColor(color.id)
                   }
                 }>
                   x
@@ -77,9 +97,12 @@ const ColorList = ({ colors, updateColors }) => {
           <div className="button-row">
             <button type="submit">save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
+            <button onClick={() => deleteColor}>Delete color</button>
           </div>
         </form>
+       
       )}
+       <AddColorForm />
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
     </div>
