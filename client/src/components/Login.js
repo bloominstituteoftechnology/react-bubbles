@@ -8,7 +8,7 @@ const initialState = {
   isFetching: false
 };
 const Login = props => {
-  const {loginData, setLoginData} = useState(initialState);
+  const [loginData, setLoginData] = useState(initialState);
 
   const handleChange = e => {
     setLoginData({ ...loginData, [e.target.name]: e.target.walue });
@@ -18,7 +18,7 @@ const Login = props => {
     e.preventDefault();
     setLoginData({ ...loginData, isFetching: true});
     axiosWithAuth()
-    .post("/login", { username: 'Lambda School', password: 'i<3Lambd4' })
+    .post("/api/login", { username: 'Lambda School', password: 'i<3Lambd4' })
     .then(res => {
       localStorage.setItem("token", res.loginData.payload)
       props.history.push("/bubble-page")
