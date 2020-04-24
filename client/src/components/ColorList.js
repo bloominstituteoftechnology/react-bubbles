@@ -12,6 +12,7 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [newColor, setNewColor] = useState(initialColor);
   const {push} = useHistory();
 
   const editColor = color => {
@@ -25,6 +26,8 @@ const ColorList = ({ colors, updateColors }) => {
     .then(res => {
       //need to push this back somehow
       console.log(res, "FROM THE PUTTTTTT")
+      document.location.reload(true)
+      // push('/bubble-page')
     }).catch(err =>{
       console.log(err, 'this is the put error danggit!')
     })
@@ -37,9 +40,18 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth().delete(`/colors/${color.id}`)
     .then(res =>
       console.log('successfully deleted', res)
-      
+      ,document.location.reload(true)
     ).catch(err => console.log('sorry this color did not delete', err))
   };
+
+  const addNewColor = color => {
+    color.persist();
+    setNewColor({...newColor, colors})
+  }
+
+  
+  
+  
 
   return (
     <div className="colors-wrap">
@@ -95,6 +107,24 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
+      {/* <form className="colorAdder" onSubmit={}>
+        <lengend>Add New Color</lengend>
+            <input 
+            type ="text"
+            name ='color'
+            placeholder = "Enter New Color"
+            onChange = {}
+            />
+            <input 
+            type ='text'
+            name ='hex'
+            placeholder = 'Enter Hex'
+            
+            />
+
+
+            <button>Add New Color!</button>
+      </form> */}
       {/* stretch - build another form here to add a color */}
     </div>
   );
