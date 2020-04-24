@@ -11,19 +11,20 @@ const Login = props => {
   const [loginData, setLoginData] = useState(initialState);
 
   const handleChange = e => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.walue });
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     setLoginData({ ...loginData, isFetching: true});
     axiosWithAuth()
-    .post("/api/login", { username: 'Lambda School', password: 'i<3Lambd4' })
+    .post("http://localhost:5000/api/login", { username: loginData.username, password: loginData.password })
     .then(res => {
-      localStorage.setItem("token", res.loginData.payload)
+      console.log(res)
+      localStorage.setItem("token", res.data.payload)
       props.history.push("/bubble-page")
-    .catch(err => console.log("Oof...sorry, an error occured"))
     })
+    .catch(err => console.log("Oof...sorry, an error occured"))
   }
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route

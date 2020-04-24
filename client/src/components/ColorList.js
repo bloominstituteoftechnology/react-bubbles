@@ -17,9 +17,9 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const saveEdit = e => {
-    e.preventDefault()
+    // e.preventDefault()
     axiosWithAuth()
-    .put(`/colors/${colorToEdit.id}`, colorToEdit)
+    .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
       colors.history.push("/bubble-page")
     })
@@ -28,9 +28,10 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     axiosWithAuth()
-    .delete(`/colors/${color.id}`, color)
-    .then(res => console.log("response from .delete", res))
-    document.location.reload(true)
+    .delete(`http://localhost:5000/api/colors/${color.id}`)
+    // .then(res => console.log("response from .delete", res))
+    color.history.push("/bubble-page")
+    // document.location.reload(true)
     .catch(err => console.log("sorry, something went wrong", err))
   };
   return (
