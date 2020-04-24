@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {axiosWithAuth} from '../utils/axiosWithAuth';
+import {useHistory } from 'react-router-dom';
 
 const initialColor = {
   color: "",
@@ -11,6 +12,7 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const {push} = useHistory();
 
   const editColor = color => {
     setEditing(true);
@@ -19,9 +21,10 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    axiosWithAuth().put(`/colors/${colorToEdit.id}`)
+    axiosWithAuth().put(`/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
       //need to push this back somehow
+      console.log(res, "FROM THE PUTTTTTT")
     }).catch(err =>{
       console.log(err, 'this is the put error danggit!')
     })
@@ -33,7 +36,7 @@ const ColorList = ({ colors, updateColors }) => {
   const deleteColor = color => {
     axiosWithAuth().delete(`/colors/${color.id}`)
     .then(res =>
-      console.log('response from .delete', res)
+      console.log('successfully deleted', res)
       
     ).catch(err => console.log('sorry this color did not delete', err))
   };
