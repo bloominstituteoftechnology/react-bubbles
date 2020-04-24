@@ -8,19 +8,19 @@ const initialState = {
   isFetching: false
 };
 const Login = props => {
-  const {login, setLogin} = useState(initialState);
+  const {loginData, setLoginData} = useState(initialState);
 
   const handleChange = e => {
-    setLogin({ ...login, [e.target.name]: e.target.walue });
+    setLoginData({ ...loginData, [e.target.name]: e.target.walue });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    setLogin({ ...login, isFetching: true});
+    setLoginData({ ...loginData, isFetching: true});
     axiosWithAuth()
-    .post("/api/login", login)
+    .post("/login", { username: 'Lambda School', password: 'i<3Lambd4' })
     .then(res => {
-      localStorage.setItem("token")
+      localStorage.setItem("token", res.loginData.payload)
       props.history.push("/bubble-page")
     .catch(err => console.log("Oof...sorry, an error occured"))
     })
@@ -38,19 +38,19 @@ const Login = props => {
             type="text"
             name="username"
             placeholder="Username"
-            value={login.username}
+            value={loginData.username}
             onChange={handleChange}
           />
           <input
           lable="Password"
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
-            value={login.password}
+            value={loginData.password}
             onChange={handleChange}
           />
           <button>Log In</button>
-          {login.isFetching && "Please wait...logging you in"}
+          {loginData.isFetching && "Please wait...logging you in"}
         </form>
       </div>
     </>
