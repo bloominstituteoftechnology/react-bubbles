@@ -8,7 +8,7 @@ const initialColor = {
   // id: 0
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, setDirty }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -38,6 +38,16 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    const token = JSON.parse(localStorage.getItem('token'));
+    axiosWithAuth(token).delete(`/api/colors/${color.id}`)
+      .then(res => {
+        console.log({res})
+        setDirty(true);
+      })
+      .catch(err => {
+        console.log({err})
+
+      })
   };
 
   return (

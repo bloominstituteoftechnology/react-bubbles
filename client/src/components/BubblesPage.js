@@ -7,6 +7,7 @@ import ColorList from "./ColorList";
 
 const BubblesPage = () => {
   const [colorList, setColorList] = useState([]);
+  const [dirty, setDirty] = useState(false);
   // fetch your colors data from the server when the component mounts
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('token'));
@@ -15,16 +16,17 @@ const BubblesPage = () => {
         console.log({res})
         // set that data to the colorList state property
         setColorList(res.data);
+        setDirty(false);
       })
       .catch(err => {
         console.log({err})
       })
 
-  },[])
+  },[dirty])
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
+      <ColorList colors={colorList} setDirty={setDirty} updateColors={setColorList} />
       <Bubbles colors={colorList} />
     </>
   );
