@@ -22,8 +22,6 @@ const BubblesPage = () => {
 
   },[])
 
-
-
   return (
     <>
       <ColorList colors={colorList} updateColors={setColorList} />

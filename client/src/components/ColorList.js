@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import axiosWithAuth from '../utils/axiosWithAuth'
 
 const initialColor = {
   color: "",
-  code: { hex: "" }
+  code: { hex: "" },
+  // id: 0
 };
 
 const ColorList = ({ colors, updateColors }) => {
@@ -19,8 +21,19 @@ const ColorList = ({ colors, updateColors }) => {
   const saveEdit = e => {
     e.preventDefault();
     // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    const token = JSON.parse(localStorage.getItem('token'));
+    axiosWithAuth(token).put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        console.log({res})
+        // close editing form
+        setEditing(false);
+        // update master list and propagage upwards
+        const newColors = colors.map(item => (item.id === res.data.id) ? res.data : item )
+        updateColors(newColors)
+      })
+      .catch(err => {
+        console.log({err})
+      })
   };
 
   const deleteColor = color => {
