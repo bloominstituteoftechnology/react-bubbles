@@ -6,7 +6,7 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, history, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -21,17 +21,21 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
     .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
-      colors.history.push("/bubble-page")
+      // history.push("/bubble-page")
     })
     .catch(err => console.log(err, "sorry, something went wrong"))
   };
 
   const deleteColor = color => {
     axiosWithAuth()
-    .delete(`http://localhost:5000/api/colors/${color.id}`)
-    // .then(res => console.log("response from .delete", res))
-    color.history.push("/bubble-page")
-    // document.location.reload(true)
+    .delete(`http://localhost:5000/api/colors/${color.id}`, color)
+    .then(res => {
+      console.log("response from .delete", res)
+      // history.push("/bubble-page")
+      document.location.reload(true)
+    })
+
+
     .catch(err => console.log("sorry, something went wrong", err))
   };
   return (
