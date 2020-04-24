@@ -19,7 +19,7 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    axiosWithAuth().put(`/api/colors/${colorToEdit.id}`)
+    axiosWithAuth().put(`/colors/${colorToEdit.id}`)
     .then(res => {
       //need to push this back somehow
     }).catch(err =>{
@@ -31,7 +31,7 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
-    axiosWithAuth().delete(`/colors/${colorToEdit.id}`)
+    axiosWithAuth().delete(`/colors/${color.id}`)
     .then(res =>
       console.log('response from .delete', res)
       
