@@ -5,6 +5,9 @@ import Login from "./components/Login";
 import "./styles.scss";
 
 function App() {
+
+  const token = JSON.parse(localStorage.getItem('token'))
+
   return (
     <Router>
       <div className="App">
