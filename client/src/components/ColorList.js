@@ -8,11 +8,16 @@ const initialColor = {
   code: { hex: "" }
 };
 
+const newInitialColor = {
+  color: '',
+  code: {hex: ''}
+}
+
 const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  const [newColor, setNewColor] = useState(initialColor);
+  const [newColor, setNewColor] = useState(newInitialColor);
   const {push} = useHistory();
 
   const editColor = color => {
@@ -26,7 +31,7 @@ const ColorList = ({ colors, updateColors }) => {
     .then(res => {
       //need to push this back somehow
       console.log(res, "FROM THE PUTTTTTT")
-      document.location.reload(true)
+       //document.location.reload(true)
       // push('/bubble-page')
     }).catch(err =>{
       console.log(err, 'this is the put error danggit!')
@@ -40,15 +45,28 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth().delete(`/colors/${color.id}`)
     .then(res =>
       console.log('successfully deleted', res)
-      ,document.location.reload(true)
+    //,document.location.reload(true)
     ).catch(err => console.log('sorry this color did not delete', err))
   };
 
   const addNewColor = color => {
-    color.persist();
-    setNewColor({...newColor, colors})
+    color.preventDefault();
+    axiosWithAuth().put(`colors/${newColor.nextId}`)
+    .then(res =>{
+      
+      console.log('adding new color:', res)
+    }).catch(err => {console.log(err, 'ERROR FOR ADD COLOR')})
+    
   }
 
+
+  const colorSubmit = e =>{
+    e.preventDefault();
+    setNewColor(setNewColor({
+      ...newColor,
+      code: [colors.hex, '']
+    }))
+  }
   
   
   
@@ -106,14 +124,14 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
-      {/* <form className="colorAdder" onSubmit={}>
+      {/* <div className="spacer" /> */}
+      <form className="colorAdder" onSubmit={colorSubmit}>
         <lengend>Add New Color</lengend>
             <input 
             type ="text"
             name ='color'
             placeholder = "Enter New Color"
-            onChange = {}
+            // onChange = {}
             />
             <input 
             type ='text'
@@ -123,8 +141,8 @@ const ColorList = ({ colors, updateColors }) => {
             />
 
 
-            <button>Add New Color!</button>
-      </form> */}
+            <button onClick={addNewColor}> Add New Color!</button>
+      </form>
       {/* stretch - build another form here to add a color */}
     </div>
   );
