@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Bubbles from "./Bubbles";
@@ -13,6 +14,11 @@ const BubblePage = () => {
     <>
       <ColorList colors={colorList} updateColors={setColorList} />
       <Bubbles colors={colorList} />
+      <div>
+        <p>
+					<Link to='/' onClick={() => localStorage.removeItem('token')}>Logout</Link>
+        </p>
+      </div>
     </>
   );
 };
