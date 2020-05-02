@@ -17,12 +17,15 @@ const Login = (props) => {
   function handleSubmit(e) {
     e.preventDefault()
     axios.post("http://localhost:5000/api/login", login)
-    .then( res => {
-      localStorage.setItem("token", res.data.payload)
-      props.history.push("/bubblepage")
-    }
-    .catch( err => console.log(err))
-    )
+    .then( 
+        res => {
+          localStorage.setItem("token", res.data.payload)
+          props.history.push("bubbles")
+        })
+    .catch( 
+      err => 
+      console.log(err)
+      )
   }
 
 
@@ -51,9 +54,9 @@ const Login = (props) => {
             value={login.password}
           />
         </div>
-        <button>Submit</button>
+        <button>Login</button>
       </form>
-    </div>
+    </>
   );
 };
 
