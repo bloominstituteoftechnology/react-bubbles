@@ -19,15 +19,17 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    axiosWithAuth().put(`/colors/${colorToEdit.id}`, colorToEdit)
+    axiosWithAuth().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
+      updateColors(res.data)
       setEditing(false); 
     })
+    .catch(err => console.log(err))
   };
 
   const deleteColor = color => {
-    axiosWithAuth().delete(`/colors/${color.id}`)
-      .then(res => console.log(res));
+    axiosWithAuth().delete(`/api/colors/${color.id}`)
+    .then(res => console.log(res))
   };
 
   return (
