@@ -27,10 +27,21 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+A token is used for authentication. It is issued by the server to the client in exchange for login credintials.
 
+- [ ] What steps can you take in your web apps to keep your data secure?
+im not entirely sure in what reference this went with the TK but my guess is the part about try not to store info/data in local storage if possible,
+try to store it in places like the Redux Store or something similar
+
+- [ ] Describe how web servers work.
+Servers are the back end of things, where the data is being stored. The client would send requests such as Get, Put, Delete, Post to the server
+and and then the server would reply back with the request
+
+- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+Create is kind of like a post, we create new data and post it to the server.
+Read can kind of be similar to get, but not really. we are just getting and reading the data
+Update is used to update/change exsisting data that is like the Put request we learned about
+Delete is delete, used to erase information/data
 
 ## Project Set Up
 
