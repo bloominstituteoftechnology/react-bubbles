@@ -10,6 +10,7 @@ const ColorList = ({ colors, updateColors }) => {
   console.log('ColorList : colors passed in', colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [colorToAdd, setColorToAdd] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
@@ -50,9 +51,8 @@ const ColorList = ({ colors, updateColors }) => {
   const addColor = (e) => {
     e.preventDefault()
     const id = colors.length + 1
-    console.log(colorToEdit)
     const newColor = {
-      ...colorToEdit,
+      ...colorToAdd,
       id: id
     }
     console.log(newColor)
@@ -60,7 +60,7 @@ const ColorList = ({ colors, updateColors }) => {
     .post(`/api/colors/`, newColor)
     .then(res => {
       updateColors(res.data)
-      setColorToEdit(initialColor)
+      setColorToAdd(initialColor)
     })
     .catch(err => console.log(err))
   };
@@ -127,21 +127,21 @@ const ColorList = ({ colors, updateColors }) => {
             color name:
             <input
               onChange={e =>
-                setColorToEdit({ ...colorToEdit, color: e.target.value })
+                setColorToAdd({ ...colorToAdd, color: e.target.value })
               }
-              value={colorToEdit.color}
+              value={colorToAdd.color}
             />
           </label>
           <label>
             hex code:
             <input
               onChange={e =>
-                setColorToEdit({
-                  ...colorToEdit,
+                setColorToAdd({
+                  ...colorToAdd,
                   code: { hex: e.target.value }
                 })
               }
-              value={colorToEdit.code.hex}
+              value={colorToAdd.code.hex}
             />
           </label>
           <div className="button-row">
