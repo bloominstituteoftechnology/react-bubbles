@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { authWithAxios } from "./authWithAxios";
 
 const initialColor = {
   color: "",
@@ -12,6 +12,7 @@ const ColorList = ({ colors, updateColors }) => {
 
   const editColor = color => {
     setEditing(true);
+    console.log(color)
     setColorToEdit(color);
   };
 
@@ -20,10 +21,14 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-    axios
-      .put(`http://localhost:5000/api`, colors)
+    authWithAxios()
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
-        updateColors(res.data);
+        updateColors([...colors.filter((e) => {
+          if (e.id != colorToEdit.id) {
+            return e;
+          }
+        }), res.data]);
         console.log(res.data);
       })
       .catch(err => {
@@ -32,10 +37,18 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
+    console.log(color)
     // make a delete request to delete this color
-    axios     
-    .delete(`http://localhost:5000/api/`)
+    authWithAxios()    
+    .delete(`http://localhost:5000/api/colors/${color.id}`)
        .then(res => {
+        updateColors(colors.filter((e) => {
+          if (e.id != colorToEdit.id) {
+            return e;
+          }
+
+        }));
+        window.location.reload()
         color({
           deleteSuccessMessage: res.data.successMessage,
           deleteError: ""
@@ -51,6 +64,7 @@ const ColorList = ({ colors, updateColors }) => {
     <div className="colors-wrap">
       <p>colors</p>
       <ul>
+        {console.log(colors)}
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
@@ -76,9 +90,10 @@ const ColorList = ({ colors, updateColors }) => {
           <label>
             color name:
             <input
-              onChange={e =>
+              onChange={e => {
+                console.log({ ...colorToEdit, color: e.target.value })
                 setColorToEdit({ ...colorToEdit, color: e.target.value })
-              }
+              }}
               value={colorToEdit.color}
             />
           </label>
