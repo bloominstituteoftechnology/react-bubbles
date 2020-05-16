@@ -1,18 +1,23 @@
 import React from "react";
 import {axiosWithAuth} from "./axiosWithAuth";
+import axios from "axios";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
 class BubblePage extends React.Component{
-  contructor(){
-
+  constructor(){
+    super()
     this.state={
       colorList: [],
-      newColor: {
-        hexcode: this.color,
-        id: Date.now(),
+      newcolor: {
+      code: {
+        hex:this.code
+      },
+      color: this.color, 
+      id: ""
       },
       color: "",
+      name: ""
     }
   }
   // fetch your colors data from the server when the component mounts
@@ -21,37 +26,60 @@ getData = () => {
     axiosWithAuth()
       .get("http://localhost:5000/api/colors")
       .then(res =>{
-        this.setState({colorList: res.data});
-        console.log("this", res.data)
+        this.setState({colorList: res.data})
       })
       .catch(err =>{
         console.log(err);
       })
     }
 
-componentDidMount(){
-    this.getData()
+ componentDidMount(){
+  this.getData();
   }
 
   onChangeHexCode = (e) =>{
     e.preventDefault();
-    this.setState({color: e.target.value})
+    this.setState({newcolor: {...this.state.newcolor, code: e.target.value}})
+  }
+  
+  onChangeColorName = (e) =>{
+    e.preventDefault();
+    this.setState({newcolor: {...this.state.newcolor, color: e.target.value}})
   }
 
-  onSubmitting = () => {
-    this.setState({newColor: {hexcode: this.color, ...this.newColor}})
+  onSubmitting = (e) => {
+    e.preventDefault()
+    this.setState({hexcode: this.state.color})
+    axiosWithAuth()
+    .post("http://localhost:5000/api/colors", this.state.newcolor)
+    .then(res => {
+      this.setState({colorList: res.data})
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
+  
   render(){
+    console.log(this.state.colorList)
   return (
     <>
-      <ColorList colors={this.colorList} updateColors={this.setState({colorList: this.setColorList})} />
-      <Bubbles colors={this.colorList} />
+      <div>
+        <ColorList colors={this.state.colorList} />
+        <Bubbles colors={this.state.colorList} />
+      </div>
       <form onSubmit={this.onSubmitting}>
+      <input
+        type="text"
+        placeholder="enter name of color here"
+        name="color"
+        onChange={this.onChangeColorName}/>
         <input
         type="text"
         placeholder="enter hexcode here"
         name="color"
         onChange={this.onChangeHexCode}/>
+        <button>Still Not Forgetting The Button</button>
       </form>
     </>
   );
