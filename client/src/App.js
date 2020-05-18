@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import BubblePage from './components/BubblePage';
@@ -10,11 +10,11 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <switch>
+        <Switch>
           <PrivateRoute exact path='/BubblePage' component={BubblePage} />
           <Route path='/Login' component={Login} />
           <Route component={Login} />
-        </switch>
+        </Switch>
       </div>
     </Router>
   );

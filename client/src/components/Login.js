@@ -60,9 +60,7 @@ render() {
       <button>Log In</button>
     </form>
   </div>
-);
-}
-}
+)}}
 
 export default Login;
 
