@@ -57,7 +57,6 @@ render() {
         onChange={this.handleChange}
         placeholder='Password:'
       />
-
       <button>Log In</button>
     </form>
   </div>
@@ -66,6 +65,5 @@ render() {
 }
 
 export default Login;
-
 
 //username === Lambda School && password === i<3Lambd4

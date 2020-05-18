@@ -129,82 +129,39 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-   {posting && (
-
-<form onSubmit={postColor}>
-
-  <legend>Add Color</legend>
-
-  <label>
-
-    Color Name:
-
-    <input
-
-      onChange={e =>
-
-        setColorToPost({
-
-          ...colorToPost,
-
-          color: e.target.value
-
-        })
-
-      }
-
-    />
-
-  </label>
-
-  <label>
-
-    hex code:
-
-    <input
-
-      onChange={e =>
-
-        setColorToPost({
-
-          ...colorToPost,
-
-          code: { hex: e.target.value }
-
-        })
-
-      }
-
-    />
-
-  </label>
-
-  <div className='button-row'>
-
-    <button type='submit'>Add</button>
-
-    <button onClick={() => setPosting(false)}>Cancel</button>
-
-    <span className='sucMsg'>{sucMsg}</span>
-
+      {posting && (
+        <form onSubmit={postColor}>
+          <legend>Add Color</legend>
+          <label>
+            Color Name:
+            <input
+              onChange={e =>
+                setColorToPost({
+                  ...colorToPost,
+                  color: e.target.value
+                })
+              }
+            />
+          </label>
+          <label>
+            hex code:
+            <input
+              onChange={e =>
+                setColorToPost({
+                  ...colorToPost,
+                  code: { hex: e.target.value }
+                })
+              }
+          />
+          </label>
+        <div className='button-row'>
+            <button type='submit'>Add</button>
+            <button onClick={() => setPosting(false)}>Cancel</button>
+            <span className='sucMsg'>{sucMsg}</span>
+          </div>
+        </form>
+      )}
   </div>
-
-</form>
-
-)}
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-    </div>
   );
 };
 
