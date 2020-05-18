@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
-//import '../App.css';
-
 class Login extends Component {
   state = {
     credentials: {
@@ -40,9 +38,9 @@ handleChange = e => {
 
 render() {
   return (
-    <div className='formBody'>
-    <h1 className=''>Login</h1>
-    <form className='formArrange' onSubmit={this.handleSubmit}>
+    <div>
+    <h1>Login</h1>
+    <form onSubmit={this.handleSubmit}>
       <input
         className='input'
         type='text'
@@ -60,7 +58,7 @@ render() {
         placeholder='Password:'
       />
 
-      <button className='button'>Log In</button>
+      <button>Log In</button>
     </form>
   </div>
 );
@@ -68,3 +66,6 @@ render() {
 }
 
 export default Login;
+
+
+//username === Lambda School && password === i<3Lambd4

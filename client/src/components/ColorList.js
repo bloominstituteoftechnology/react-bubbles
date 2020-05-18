@@ -46,6 +46,20 @@ const ColorList = ({ colors, updateColors }) => {
       console.log('Error Deleting', error);
     });
   };
+    const postColor = e => {
+      e.preventDefault();
+      setEditing(false);
+      AxiosWithAuth()
+         .post('/api/colors', colorToPost)
+         .then(response => {
+          updateColors();
+          console.log('Posting', response);
+          setSucMsg(response.statusText);
+        })
+        .catch(error => {
+          console.log('Unable to Post', error);
+        });
+  };
 
   return (
 
@@ -115,6 +129,81 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
+   {posting && (
+
+<form onSubmit={postColor}>
+
+  <legend>Add Color</legend>
+
+  <label>
+
+    Color Name:
+
+    <input
+
+      onChange={e =>
+
+        setColorToPost({
+
+          ...colorToPost,
+
+          color: e.target.value
+
+        })
+
+      }
+
+    />
+
+  </label>
+
+  <label>
+
+    hex code:
+
+    <input
+
+      onChange={e =>
+
+        setColorToPost({
+
+          ...colorToPost,
+
+          code: { hex: e.target.value }
+
+        })
+
+      }
+
+    />
+
+  </label>
+
+  <div className='button-row'>
+
+    <button type='submit'>Add</button>
+
+    <button onClick={() => setPosting(false)}>Cancel</button>
+
+    <span className='sucMsg'>{sucMsg}</span>
+
+  </div>
+
+</form>
+
+)}
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     </div>
   );
 };
