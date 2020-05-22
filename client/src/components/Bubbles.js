@@ -10,7 +10,7 @@ const Bubbles = ({ colors }) => {
       key: `${i + 1}`
     }));
     setBubbleData(generateBubbleData);
-  }, [colors]);
+  }, [colors]) ;
 
   return (
     <div className="bubble-wrap">
