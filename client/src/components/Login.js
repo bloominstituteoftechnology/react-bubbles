@@ -27,8 +27,8 @@ class Login extends React.Component {
     axiosWithAuth()
     .post('/api/login', this.state.credentials)
     .then(res => {
-      localStorage.setItem('token', JSON.stringify(res.data.payload));
-      this.props.history.push('/bubblepage');
+      localStorage.setItem('token', res.data.payload);
+      this.props.history.push('/protected');
       console.log(res)
     })
     .catch(err => 
@@ -43,13 +43,13 @@ class Login extends React.Component {
             <input
               type='text'
               name='usename'
-              placeholder='Must contain 5 characters'
+              placeholder='Username'
               onChange={this.handleChange}
             />
             <input 
               type='text'
               name='password'
-              placeholder='Min 8 characters w/ special character'
+              placeholder='Password'
               onChange={this.handleChange}
             />
             <button>Login</button>
