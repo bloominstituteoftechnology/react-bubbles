@@ -27,7 +27,7 @@ const Login = () => {
 				localStorage.setItem(res.data.payload);
 			})
 			.catch((err) => console.log(err.response));
-		history.push("/bubble-page");
+		history.push("/bubblepage");
 		setLogin({
 			username: "",
 			password: "",
