@@ -32,7 +32,7 @@ const ColorList = ({ colors, updateColors }) => {
 
     axios.put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
 .then(res => {
-
+setColorToEdit({color: res.data, code: {hex: res.data} })
 })
 .catch(err => console.error("ERROR", err.message))
   };
@@ -40,10 +40,11 @@ const ColorList = ({ colors, updateColors }) => {
   const deleteColor = color => {
     // make a delete request to delete this color
  
+    color.preventDefault();
  
     axios.delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
 .then(res => {
-
+  setColorToEdit({color: res.data, code: {hex: res.data} })
 })
 .catch(err => console.error("ERROR", err.message))
   };
