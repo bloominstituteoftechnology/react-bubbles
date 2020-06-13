@@ -24,11 +24,11 @@ class Login extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    axiosWithAuth
+    axiosWithAuth()
     .post('/api/login', this.state.credentials)
     .then(res => {
-      localStorage.setItem('token', res.data.payload);
-      this.props.history.push('/protected');
+      localStorage.setItem('token', JSON.stringify(res.data.payload));
+      this.props.history.push('/bubblepage');
       console.log(res)
     })
     .catch(err => 
@@ -45,17 +45,12 @@ class Login extends React.Component {
               name='usename'
               placeholder='Must contain 5 characters'
               onChange={this.handleChange}
-              minLength='5'
-              required 
             />
             <input 
-              type='password'
+              type='text'
               name='password'
               placeholder='Min 8 characters w/ special character'
               onChange={this.handleChange}
-              minLength='8'
-              pattern='(?=.*\d)(?=.*[\W_]).{7,}'
-              required
             />
             <button>Login</button>
           </form>
