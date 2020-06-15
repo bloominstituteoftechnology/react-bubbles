@@ -22,6 +22,6 @@ const BubblePage = () => {
 			<Bubbles colors={colorList} />
 		</>
 	);
-};
+}; 
 
 export default BubblePage;
