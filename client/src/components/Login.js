@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 
 const Login = () => {
@@ -21,7 +22,18 @@ const Login = () => {
 
   const handleSubmit = e =>{
     e.preventDefault();
-      axios.post()
+    //call axios baseUrl
+      axiosWithAuth()
+          .post('/api/login', credentials)
+          .then(res =>{
+            console.log('login, post', res)
+            localStorage.setItem("token", res.data.payload)
+            localStorage.setItem("Logged in ", true)
+            push('/bubblepage');
+          })
+          .catch(err =>{
+            console.log('Login.js: error is : ', err)
+          })
   }
 
   return (
@@ -42,7 +54,7 @@ const Login = () => {
           onChange={handleChange}
           value={credentials.password}
         />
-        <button>Login</button>
+        <button type="submit">Login</button>
       </form>
     </>
   );
