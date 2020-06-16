@@ -1,57 +1,60 @@
 import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import { useParams } from 'react-router-dom';
+import { useHistory} from 'react-router-dom'
+
 
 const initialColor = {
   color: '',
   code: { hex: '' }
 };
 
-const ColorList = ({ colors, getColors }) => {
-  
+const ColorList = ({ colors, getColors, setColorList }) => {
+  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-
-   const { id } = useParams();
+  const { push } = useHistory();
 
   const editColor = (color) => {
     setEditing(true);
     setColorToEdit(color);
   };
 
-  
+
   const saveEdit = e => {
     e.preventDefault();
 
     axiosWithAuth()
-      .put(`http://localhost:5000/api/colors/:id/${id}`, colorToEdit)
-      .then(res => {
-        getColors();
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then((res) => {
+        const newColorList = colors.map(color => {
+          if (color.id === colorToEdit.id) {
+            return colorToEdit;
+          }
+          return color;
+        })
+        setColorList(newColorList)
+        push('/bubbles-page')
       })
-      .catch(err => console.error('error', err.message));
+      .catch((err) => console.error('error', err.message));
   };
-  
-  const deleteColor = color => {
+
+  const deleteColor = (color) => {
     axiosWithAuth()
       .delete(`http://localhost:5000/api/colors/${color.id}`)
-      .then(res => {
-          getColors()
-      })
-      .catch(err => {
-          console.error(err.message, err.response)
-      });
+      .then(res => getColors())
+      .catch(err => console.error('error', err.message));
   };
 
   return (
     <div className='colors-wrap'>
-      <p>Colors</p>
+      <p>colors</p>
       <ul>
         {colors.map((color) => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
               <span
                 className='delete'
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation();
                   deleteColor(color);
                 }}
@@ -68,7 +71,7 @@ const ColorList = ({ colors, getColors }) => {
         ))}
       </ul>
       {editing && (
-        <form onSubmit={saveEdit}>
+        <form>
           <legend>edit color</legend>
           <label>
             color name:
@@ -80,9 +83,9 @@ const ColorList = ({ colors, getColors }) => {
             />
           </label>
           <label>
-            Hex code:
+            hex code:
             <input
-              onChange={e =>
+              onChange={(e) =>
                 setColorToEdit({
                   ...colorToEdit,
                   code: { hex: e.target.value }
@@ -92,13 +95,13 @@ const ColorList = ({ colors, getColors }) => {
             />
           </label>
           <div className='button-row'>
-            <button type='submit'>save</button>
+            <button onClick={e => saveEdit(e)}>save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
         </form>
       )}
       <div className='spacer' />
-     
+
     </div>
   );
 };
