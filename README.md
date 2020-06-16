@@ -27,9 +27,13 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [x] Explain what a token is used for.
-- [ ] What steps can you take in your web apps to keep your data secure?
-- [ ] Describe how web servers work.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+    a token is for auth. purpose in order to push and surpass the login form.
+- [x] What steps can you take in your web apps to keep your data secure?
+    you create a privateroute with required token to be able to pass the secure login page.
+- [x] Describe how web servers work.
+  webs servers work by running them first , then it will have a listning on port 5000, etc. Once its running, if you use axios and useEffect correctly, it will display the server's data.
+- [x] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+  they have a .post and .delete. You can find more about how to use it in your app by going to the server.js file and quickly reading the backend code in order to know how to interact with the api/servers.
 
 
 ## Project Set Up

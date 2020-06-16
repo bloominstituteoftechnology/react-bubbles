@@ -5,6 +5,7 @@ import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 import {useHistory} from 'react-router-dom';
 
+
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
   const history = useHistory();
