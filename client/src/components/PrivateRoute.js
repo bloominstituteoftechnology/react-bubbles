@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 export const PrivateRoute = ({ component: Component, ...routeProps }) => {
    return (
        <Route 
         {...routeProps}
-        render= {(props) => {
+        render= {() => {
             if (localStorage.getItem('token')) {
-                return <Component {...props} />
+                return <Component/>
             } else {
-                return <Redirect to='/login' />
+                return <Redirect to='/' />
             }
         }}
        />

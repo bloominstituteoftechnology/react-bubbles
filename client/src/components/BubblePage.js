@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import axiosWithAuth  from '../utils/axiosWithAuth';
 
 import Bubbles from './Bubbles';
 import ColorList from './ColorList';
@@ -23,7 +23,7 @@ const BubblePage = (props) => {
 
   return (
     <>
-      <ColorList props={props} colors={colorList} updateColors={setColorList} />
+      <ColorList colors={colorList} updateColors={setColorList} />
       <Bubbles colors={colorList} />
     </>
   );

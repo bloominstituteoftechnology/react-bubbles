@@ -92,7 +92,7 @@ Build a login form to authenticate your users.
 
 - [x] When `BubblePages` renders, make a GET request to fetch the color data for your bubbles.
 - [X] In `ColorList.js`, complete the `saveEdit` and `deleteColor` functions to make AJAX requests to the API to edit/delete data
-- [ ] Watch and enjoy as your app responds to updates in the data. Check out `Bubbles.js` to see how this is built.
+- [x] Watch and enjoy as your app responds to updates in the data. Check out `Bubbles.js` to see how this is built.
 
 ### API Documentation
 
@@ -110,5 +110,5 @@ Build a login form to authenticate your users.
 
 **Data Visualization**
 
-- [ ] Look at [Potion JS](https://potion.js.org/). This is the library used to display the color data
+- [x] Look at [Potion JS](https://potion.js.org/). This is the library used to display the color data
 - [ ] Play around with the data visualization happening in `Bubbles.js`. Have fun with this! Try different components from the library, or see if you can add props to change the UI a bit.

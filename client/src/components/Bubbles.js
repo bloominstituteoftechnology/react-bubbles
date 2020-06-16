@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Pack } from "@potion/layout";
-import { Svg, Circle } from "@potion/element";
+import { Cluster } from "@potion/layout";
+import { Svg, Circle, Group } from "@potion/element";
 
 const Bubbles = ({ colors }) => {
   const [bubbleData, setBubbleData] = useState([]);
@@ -14,37 +14,35 @@ const Bubbles = ({ colors }) => {
 
   return (
     <div className="bubble-wrap">
-      <p>bubbles</p>
+      <p>Bubbles</p>
       <Svg width={400} height={400}>
-        <Pack
-          data={{
-            children: bubbleData
-          }}
-          sum={datum => datum.value}
-          size={[400, 400]}
-          includeRoot={false}
-          nodeEnter={d => ({ ...d, r: 0 })}
-          animate
-        >
-          {nodes =>
-            nodes
-              .map(({ x, y, r, key }, i) => {
-                if (i < colors.length) {
+        <Group transform={{ translate: [40, 80] }}>
+          <Cluster
+            data={{
+              children: bubbleData
+            }}
+            size={[400, 320]}
+            nodeEnter={d => ({ ...d, x: 200, y: 200 })}
+            animate
+          >
+            {nodes => nodes.map(({ key, x, y }, i) => {
+              if (i < colors.length) {
                   return (
-                    <Circle
-                      key={key}
-                      cx={x}
-                      cy={y}
-                      r={r}
-                      fill={colors[i].code.hex}
-                    />
-                  );
+                      <Circle
+                          key={key}
+                          cx={y}
+                          cy={x}
+                          r={10}
+                          fill={colors[i].code.hex}
+                      />
+                      );
+                    }
+                  return null;
+                  })
+                  .filter(v => v)
                 }
-                return null;
-              })
-              .filter(v => v)
-          }
-        </Pack>
+              </Cluster>
+        </Group>
       </Svg>
     </div>
   );

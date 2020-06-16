@@ -1,15 +1,33 @@
-import React from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import React, { Component } from 'react';
+import axiosWithAuth from '../utils/axiosWithAuth';
+import '../index.css';
 
-class Login extends React.Component {
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
-
+class Login extends Component {
   state = {
     credentials: {
-      username:'',
-      password:''
+      username: '',
+      password: ''
     }
+  };
+
+  componentDidMount() {
+    localStorage.clear();
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    axiosWithAuth()
+      .post('/api/login', this.state.credentials)
+      .then(response => {
+        console.log(response.data);
+        localStorage.setItem('token', response.data.payload);
+
+        this.props.history.push('/BubblePage');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   handleChange = e => {
@@ -19,45 +37,36 @@ class Login extends React.Component {
         [e.target.name]: e.target.value
       }
     });
+    // console.log(this.state.credentials.username);
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  render() {
+    return (
+      <div className='formBody'>
+        <h1 className=''>Login To See Bubbles!</h1>
+        <form className='formArrange' onSubmit={this.handleSubmit}>
+          <input
+            className='input'
+            type='text'
+            name='username'
+            value={this.state.credentials.username}
+            onChange={this.handleChange}
+            placeholder='UserName:'
+          />
+          <input
+            className='input'
+            type='text'
+            name='password'
+            value={this.state.credentials.password}
+            onChange={this.handleChange}
+            placeholder='Password:'
+          />
 
-    axiosWithAuth()
-    .post('/api/login', this.state.credentials)
-    .then(res => {
-      localStorage.setItem('token', res.data.payload);
-      this.props.history.push('/protected');
-      console.log(res)
-    })
-    .catch(err => 
-      console.error('Lexi:Login.js login: err.message', err.message)
-      );
-    };
-
-    render() {
-      return(
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type='text'
-              name='usename'
-              placeholder='Username'
-              onChange={this.handleChange}
-            />
-            <input 
-              type='text'
-              name='password'
-              placeholder='Password'
-              onChange={this.handleChange}
-            />
-            <button>Login</button>
-          </form>
-        </div>
-      );
-    }
-
-};
+          <button className='button'>Log In</button>
+        </form>
+      </div>
+    );
+  }
+}
 
 export default Login;
