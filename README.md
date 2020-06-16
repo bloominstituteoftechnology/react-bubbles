@@ -31,7 +31,7 @@ A token is stored in client-side local or session storage.  The server reads the
 
 
 - [ x] What steps can you take in your web apps to keep your data secure?
-Build a seperated protected route component that requires a token to enter the component(s). Build a utility axios file with a authorization header that requires a token to get or change data from the server. 
+Build a seperated protected route component that requires a token to enter the component(s) that the route is attached to. Build a utility axios file with a authorization header that requires a token to add, get, or change data from the server. 
 
 
 - [ x] Describe how web servers work.
