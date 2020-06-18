@@ -10,7 +10,7 @@ const initialColor = {
 
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  console.log(updateColors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -32,8 +32,14 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
 .then(res => {
 
-console.log(res);
-setColorToEdit(res.data)
+console.log("Colors", colors);
+
+const colorMap = colors.map(col => {
+  if(col.id === colorToEdit.id){
+    return res.data;
+  }else {return col;}
+})
+updateColors(colorMap)
 
 })
 .catch(err => console.error("ERROR", err.message))
@@ -50,7 +56,11 @@ setColorToEdit(res.data)
 .then(res => {
  
   console.log(res);
-  setColorToEdit(res.data);
+
+ const colorFilter = colors.filter((col) => {
+   return col.id !== color.id;
+  })
+  updateColors(colorFilter);
  
 })
 .catch(err => console.error("ERROR", err.message))
