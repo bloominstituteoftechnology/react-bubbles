@@ -14,7 +14,7 @@ function App() {
       <div className="App">
         {/* <Link to="/protected">protected contect</Link> */}
         <Route exact path="/" component={Login} />
-        <PrivateRoute path="/bubblepage" component={BubblePage}/>
+        <Route path="/bubblepage" component={BubblePage}/>
       </div>
     </Router>
   );

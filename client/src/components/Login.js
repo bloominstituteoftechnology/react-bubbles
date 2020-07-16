@@ -40,6 +40,10 @@ class Login extends Component {
     // console.log(this.state.credentials.username);
   };
 
+  redirectToBubbles = () => {
+    this.history.push('/login'); 
+};
+
   render() {
     return (
       <div className='formBody'>
@@ -62,7 +66,7 @@ class Login extends Component {
             placeholder='Password:'
           />
 
-          <button className='button'>Log In</button>
+          <button onclick={this.redirectToBubbles}>Log In</button>
         </form>
       </div>
     );
