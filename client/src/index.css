@@ -1,0 +1,32 @@
+.formBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 72px;
+    background: -webkit-linear-gradient(109.6deg,  rgba(255,24,134,1) 11.2%, rgba(252,232,68,1) 52%, rgba(53,178,239,1) 100.2%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: bounceIn 2s;
+    animation-iteration-count: 3;
+  }
+
+  @keyframes bounceIn {
+    0% {
+      transform: scale(0.1);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+ 
