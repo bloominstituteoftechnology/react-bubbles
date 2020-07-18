@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../axiosWithAuth';
 
-const AddColors = () => {
+const AddColors = props => {
+  const { updateColors } = props;
   const [formState, setFormState] = useState({
     code: {
       hex: '',
@@ -28,7 +29,7 @@ const AddColors = () => {
 
     axiosWithAuth()
       .post(`colors`, formState)
-      .then(res => console.log(res))
+      .then(res => updateColors(res.data))
       .catch(err => console.log(err));
   };
 
