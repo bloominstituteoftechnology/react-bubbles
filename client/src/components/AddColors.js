@@ -3,16 +3,24 @@ import { axiosWithAuth } from '../axiosWithAuth';
 
 const AddColors = () => {
   const [formState, setFormState] = useState({
-    code: '',
+    code: {
+      hex: '',
+    },
     color: '',
   });
 
   const handleChange = e => {
     e.preventDefault();
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    });
+    const code = { hex: e.target.value };
+    [e.target.name] === 'code'
+      ? setFormState({
+          code,
+          ...formState,
+        })
+      : setFormState({
+          ...formState,
+          [e.target.name]: e.target.value,
+        });
   };
 
   const handleSubmit = e => {
@@ -42,7 +50,7 @@ const AddColors = () => {
           <input
             type="text"
             name="code"
-            value={formState.code}
+            value={formState.code.hex}
             onChange={handleChange}
           />
         </label>
