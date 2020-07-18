@@ -31,6 +31,13 @@ const AddColors = props => {
       .post(`colors`, formState)
       .then(res => updateColors(res.data))
       .catch(err => console.log(err));
+
+    setFormState({
+      code: {
+        hex: '',
+      },
+      color: '',
+    });
   };
 
   return (

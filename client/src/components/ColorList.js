@@ -27,7 +27,11 @@ const ColorList = ({ colors, updateColors }) => {
     const id = colorToEdit.id;
     axiosWithAuth()
       .put(`colors/${id}`, colorToEdit)
-      .then(res => updateColors(res.data));
+      .then(() => {
+        axiosWithAuth()
+          .get(`colors`)
+          .then(res => updateColors(res.data));
+      });
   };
 
   const deleteColor = color => {
