@@ -17,7 +17,7 @@ const ColorList = ({ colors, updateColors, fetchColors }) => {
     setColorToEdit(color);
   };
 
-  const saveEdit = e => {
+  const addColor = e => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
@@ -27,6 +27,29 @@ const ColorList = ({ colors, updateColors, fetchColors }) => {
       .then(res => {
         setEditing(false)
         updateColors(res.data)
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+  };
+
+  const saveEdit = e => {
+    e.preventDefault();
+    // Make a put request to save your updated color
+    // think about where will you get the id from...
+    // where is is saved right now?
+    console.log(colorToEdit.id)
+    axiosWithAuth().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => {
+        setEditing(false)
+        let newColors = colors.map(color => {
+          if (color.id === colorToEdit.id) {
+            return colorToEdit
+          }
+          return color
+        })
+        updateColors(newColors)
+        // updateColors(res.data)
+        // deleteColor(colorToEdit)
         console.log(res)
       })
       .catch(err => console.log(err))
