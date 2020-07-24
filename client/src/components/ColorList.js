@@ -8,7 +8,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors, fetchColors }) => {
-  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -17,27 +16,28 @@ const ColorList = ({ colors, updateColors, fetchColors }) => {
     setColorToEdit(color);
   };
 
-  const addColor = e => {
-    e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
-    console.log(colorToEdit.id)
-    axiosWithAuth().post('/api/colors', colorToEdit)
-      .then(res => {
-        setEditing(false)
-        updateColors(res.data)
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-  };
+  // const addColor = e => {
+  //   e.preventDefault();
+
+  //   const newID = colors[colors.length-1].id+1
+  //   setColorToEdit({
+  //     ...colorToEdit,
+  //     id: newID
+  //   })
+  //   axiosWithAuth().post('/api/colors', colorToEdit)
+  //     .then(res => {
+  //       setEditing(false)
+  //       updateColors(res.data)
+  //       console.log(res)
+  //     })
+  //     .catch(err => console.log(err))
+  // };
 
   const saveEdit = e => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-    console.log(colorToEdit.id)
     axiosWithAuth().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         setEditing(false)
@@ -111,6 +111,7 @@ const ColorList = ({ colors, updateColors, fetchColors }) => {
           </label>
           <div className="button-row">
             <button type="submit">save</button>
+            {/* <button onChange={addColor}>add as new color</button> */}
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
         </form>
