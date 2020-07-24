@@ -1,0 +1,11 @@
+.loginDiv{
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    background-image: url("./Colorful-Bubble-Wallpaper.jpg");
+}
+.formDiv{
+   align-items: center;
+   padding: 105px;
+   
+}
