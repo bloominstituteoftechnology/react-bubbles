@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {axiosWithAuth} from "../Utils/Auth"
+import { useParams } from "react-router-dom";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({colors, updateColors }) => {
+  
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-
+console.log(colorToEdit ,'colorToEdit')
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -18,12 +21,35 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
+    axiosWithAuth()
+    .put(`/colors/${colorToEdit.id}`, editColor)
+    .then(res => {
+      console.log("we got the color, lets change it!",  res);
+      updateColors(colors.map(color => (color.id === colorToEdit.id ? res.data : color))
+       )
+       setEditing(false)     
+      
+    })
+   
+    .catch(err => {
+      console.log("Err");
+    });
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
   };
 
   const deleteColor = color => {
+    axios
+    .delete(`http://localhost:5000/api/colors`)
+    .then(res => {
+      console.log("DELETED!", res);
+      this.props.history.push("/");
+    })
+    .catch(err => {
+      console.log("Delete Spell Missed!", err);
+    });
+
     // make a delete request to delete this color
   };
 
@@ -45,7 +71,7 @@ const ColorList = ({ colors, updateColors }) => {
             </span>
             <div
               className="color-box"
-              style={{ backgroundColor: color.code.hex }}
+               style={{ backgroundColor: color.code.hex }}
             />
           </li>
         ))}
